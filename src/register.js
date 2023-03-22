@@ -24,7 +24,7 @@ function Register() {
 
                                 </div>
                                 <div>
-                                    <p className="mb-0">Back to login? <a className="text-white-50 fw-bold" href="http://localhost:3000">Login</a>
+                                    <p className="mb-0">Back to login page? <a className="text-white-50 fw-bold" href="http://localhost:3000">Login</a>
                                     </p>
                                 </div>
                             </div>
