@@ -1,8 +1,9 @@
 import React from 'react';
+import background from './image/login_background.jpg';
 
 function Login() {
     return (
-        <section className="vh-100 gradient-custom">
+        <section className="vh-100 gradient-custom" style={{ backgroundImage: `url(${background})` }}>
             <div className="container py-5 h-100">
                 <div className="row d-flex justify-content-center align-items-center h-100">
                     <div className="col-12 col-md-8 col-lg-6 col-xl-5">
@@ -21,11 +22,6 @@ function Login() {
                                     </div>
                                     <p className="small mb-5 pb-lg-2"><a className="text-white-50" href="#!">Forgot password?</a></p>
                                     <button className="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
-                                    <div className="d-flex justify-content-center text-center mt-4 pt-1">
-                                        <a href="#!" className="text-white"><i className="fab fa-facebook-f fa-lg" /></a>
-                                        <a href="#!" className="text-white"><i className="fab fa-twitter fa-lg mx-4 px-2" /></a>
-                                        <a href="#!" className="text-white"><i className="fab fa-google fa-lg" /></a>
-                                    </div>
                                 </div>
                                 <div>
                                     <p className="mb-0">Don't have an account? <a href="#!" className="text-white-50 fw-bold">Sign Up</a>
