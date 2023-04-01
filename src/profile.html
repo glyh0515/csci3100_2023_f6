@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .profile-container {
+      display: flex;
+      width: 80%;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .left-column {
+      width: 30%;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+
+    .left-column h1 {
+      margin-top: 0;
+    }
+
+    .main-content {
+      width: 70%;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .main-content h2 {
+      margin-top: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .dropdown-btn {
+      padding: 6px 12px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+
+    ul {
+      padding: 0;
+    }
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      list-style-type: none;
+      margin-bottom: 10px;
+    } 
+
+    .course-item {
+        margin-right: 10px;
+    }
+  </style>
+  <title>Profile Page</title>
+</head>
+<body>
+  <div class="profile-container">
+    <div class="left-column">
+      <h1>PROFILE</h1>
+      <img src="https://via.placeholder.com/150" alt="Profile Picture">
+      <p>Name: Chan Tai Man</p>
+      <p>Email: example@example.com</p>
+      <p>SID: 123456789</p>
+      <p>Year: 2</p>
+      <p>Major: Computer Science</p>
+    </div>
+    <div class="main-content">
+      <h2>Enrolled Courses</h2>
+      <li><span class="course-item">Course Code</span><span class="course-item">Course Name</span><span class="course-item"></span></li>
+      <ul>
+        <li><span class="course-item">CSCI3100</span><span>Software Engineering</span><button class="dropdown-btn">Drop</button></li>
+        <li><span class="course-item">Course 2</span><span>Coursename</span><button class="dropdown-btn">Drop</button></li>
+        <li><span class="course-item">Course 2</span><span>Coursename</span><button class="dropdown-btn">Drop</button></li>
+        <li><span class="course-item">Course 2</span><span>Coursename</span><button class="dropdown-btn">Drop</button></li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>
