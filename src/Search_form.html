@@ -1,0 +1,116 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <style>
+        .searchform{
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            float:left;
+            background-color: #94452c;
+            width:250px;
+            height: 100%;
+            border: #94452c;
+            font-size: 20px;
+            color: #551805;
+            position: fixed;
+            text-align: left;
+            padding: 20px;
+            top: 0;
+            left: 0;
+        }
+        input[type=text] {
+            
+            padding: 10px;
+            font-size: 17px;
+            border: 1px solid #b87742;
+            float: center;
+            width: 80%;
+            height: 40px;
+            background: #b87742;
+            color: #94452c;
+            border-radius: 20px;
+        }
+        button {
+            border-radius: 30px;
+            float: right;
+            width: 20%;
+            height:40px;
+            padding: 11px;
+            background: #b87742;
+            color: rgb(158, 57, 10);
+            font-size: 17px;
+            border: 1px solid #b87742;
+            border-left: none;
+            cursor: pointer;
+
+        }
+        button:hover {
+            background: #551805;
+        }
+        ::placeholder{
+            color: #551805;
+        }
+
+        input[type='checkbox'] {
+            accent-color: #b87742;       
+        }
+    </style>
+    </head>
+    <body> 
+        <div class="Searchform">
+            <form id="search" action="">
+                <h1>Search</h1>               
+                <input type="text" placeholder="Course code / name" name="search">
+                <button type="submit"><i class="fa fa-search" ></i></button>
+
+                <p>Class Status</p>
+                <label>
+                <input  type="checkbox" checked="checked" name="open" style="margin-bottom:15px"> Open Classes
+                </label><br>
+                <label>
+                    <input type="checkbox" checked="checked" name="waitlist" style="margin-bottom:15px"> Waitlist Class
+                </label><br>                
+                <p>Class Day</p>               
+                <label>
+                    <input type="checkbox" checked="checked" name="Mon" style="margin-bottom:15px"> Mon
+                </label><br>
+                <label>
+                    <input type="checkbox" checked="checked" name="Tue" style="margin-bottom:15px"> Tue
+                </label><br>
+                <label>
+                    <input type="checkbox" checked="checked" name="Wed" style="margin-bottom:15px"> Wed
+                </label><br>
+                <label>
+                    <input type="checkbox" checked="checked" name="Thur" style="margin-bottom:15px"> Thur
+                </label><br>
+                <label>
+                    <input type="checkbox" checked="checked" name="Fri" style="margin-bottom:15px"> Fri
+                </label><br>
+                <label>
+                    <input type="checkbox" checked="checked" name="Sat" style="margin-bottom:15px"> Sat
+                </label><br>
+                <label>
+                    <input type="checkbox" checked="checked" name="Sat" style="margin-bottom:15px"> Sat
+                </label><br>
+                <p>Units</p>
+                <label>
+                <input type="checkbox" checked="checked" name="open" style="margin-bottom:15px" > 1 - 2
+                </label><br>
+                <label>
+                    <input type="checkbox" checked="checked" name="waitlist" style="margin-bottom:15px"> 3 - 4
+                </label><br>                
+                <label>
+                    <input type="checkbox" checked="checked" name="waitlist" style="margin-bottom:15px"> 4 - 6
+                </label><br> 
+            </form>
+        </div>    
+            
+          
+
+
+
+          <script>
+
+          </script>
+    </body>
+</html>
