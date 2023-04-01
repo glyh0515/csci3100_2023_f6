@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            /* The side navigation menu */
+            .sidenav {
+                height: 100%; /* 100% Full-height */
+                width: 0; /* 0 width - change this with JavaScript */
+                position: fixed; /* Stay in place */
+                z-index: 1; /* Stay on top */
+                top: 0; /* Stay at the top */
+                left: 0;
+                background-color: #bd4c4c; /* Black*/
+                overflow-x: hidden; /* Disable horizontal scroll */
+                padding-top: 50px; /* Place content 60px from the top */
+                transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+            }
+
+            /* The navigation menu links */
+            .sidenav a {
+                padding: 8px 8px 8px 32px;
+                text-decoration: none;
+                font-size: 25px;
+                color: #990d0d;
+                display: block;
+                transition: 0.3s;
+            }
+
+            /* When you mouse over the navigation links, change their color */
+            .sidenav a:hover {
+                 color: #f1f1f1;
+            }
+
+            /* Position and style the close button (top right corner) */
+            .sidenav .closebtn {
+                position: absolute;
+                top: 0;
+                right: 10px;
+                font-size: 36px;
+                margin-left: 50px;
+            }
+
+            /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+            #main {
+                transition: margin-left .5s;
+                padding: 20px;
+            }
+
+            /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+            @media screen and (max-height: 450px) {
+                .sidenav {padding-top: 15px;}
+                .sidenav a {font-size: 18px;}
+            }
+
+            .topnav {
+                text-align: center;
+                background-color: none;
+                color: #bd4c4c;
+                overflow: hidden;
+            }
+
+            .topnav a.split {
+                float: right;
+                overflow: hidden;
+            
+            }
+        </style>
+    </head>
+
+    <body>
+        <!-- sidebar start-->
+        <div id="admin_nav" class="sidenav"> 
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <a href="#">Profile</a>
+            <a href="#">Create Admin</a>
+            <a href="#">View All Users</a>
+            <a href="#">View All Courses</a>
+            <a href="#">Create Course Record</a>
+        </div>
+        <!-- sidebar end-->
+
+        <!-- top bar start-->
+        <div class="topnav"> 
+        <span onclick="openNav()" style="cursor: pointer; float: left;" >&#9776;</span> <!--open side bar-->
+        CUSUCS
+        <span onclick="" style="float: right;cursor: pointer;">Logout</span>
+        
+        </div>
+        <!-- top bar end-->         
+          <script> 
+            function openNav() {
+                document.getElementById("admin_nav").style.width = "250px";
+                document.getElementById("main").style.marginLeft = "250px";
+                }
+
+                /* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
+            function closeNav() {
+                document.getElementById("admin_nav").style.width = "0";
+                document.getElementById("main").style.marginLeft = "0";
+                }
+          </script>
+    </body>
+</html>
