@@ -2,7 +2,7 @@ import React from 'react';
 
 function Register() {
     return (
-        <section>
+        <form>
             <h2>Register</h2>
             <p>Please enter your email and password!</p>
             <div>
@@ -16,7 +16,7 @@ function Register() {
             <button type="submit">Register</button>
             <p>Back to main page?<a href="http://localhost:3000">Click here</a>
             </p>
-        </section>
+        </form>
     );
 }
 
