@@ -10,7 +10,7 @@ function DropButton() {
 
   return (
     <div className="dropdown">
-      <button className="dropbtn" onClick={toggleDropdown}>2022-2023Term1</button>
+      <button className="dropbtn" onClick={toggleDropdown}>2022-2023Term1&#9660;</button>
       {dropdownVisible && (
         <div className="dropdown-content">
           <a href="#">2022-2023Term2</a>
