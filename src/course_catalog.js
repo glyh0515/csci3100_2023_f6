@@ -1,0 +1,15 @@
+import React from 'react';
+import DropButton from './DropButton';
+import Course_Catalog_table from './course_catalog_table';
+
+function Course_Catalog() {
+    return (
+        <div>
+          <DropButton /> 
+          <h1>RECENTLY VIEWED</h1>
+          <Course_Catalog_table />
+        </div>
+    );
+}
+
+export default Course_Catalog;
