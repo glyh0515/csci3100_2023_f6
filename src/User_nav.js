@@ -1,5 +1,7 @@
 import React from 'react';
-import symbol from 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css';
+import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css';
+import 'nav';
+
 
 function User_nav() {
     return (
