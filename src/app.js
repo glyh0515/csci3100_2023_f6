@@ -7,6 +7,9 @@ import Course_Catalog_Index from './course_catalog_index'
 import CreateAdmin from './create_admin'
 import CreateCourse from './create_course'
 import All_Course from './all_course'
+import WeeklyTimetable from './WeeklyTimetable';
+import User_nav from './User_nav';
+import Admin_nav from './Admin_nav';
 
 function App() {
   return (
@@ -21,6 +24,10 @@ function App() {
         <Route path="/create_course" element={<CreateCourse />} />
         <Route path="/all_course" element={<All_Course />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/all_course" element={<All_Course />} /> 
+        <Route path="/weeklytimetable" element={<WeeklyTimetable />} />
+        <Route path="/user_nav" element={<User_nav />} />
+        <Route path="/admin_nav" element={<Admin_nav />} />
       </Routes>
     </BrowserRouter>
   );
