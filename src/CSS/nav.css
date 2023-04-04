@@ -32,7 +32,8 @@
     top: 0;
     right: 10px;
     font-size: 36px;
-    margin-left: 50px;
+    margin-left: 20px;
+    float: left;
 }
 
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
@@ -52,7 +53,11 @@
     background-color: none;
     color: #bd4c4c;
     overflow: hidden;
+    font-size: 24px;
+    
 }
+
+
 
 .topnav a.split {
     float: right;

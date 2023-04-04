@@ -1,32 +1,62 @@
 import React from 'react';
-import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css';
+import { NavLink } from 'react-router-dom';
 import './CSS/nav.css';
 
 
-function User_nav() {
-    return (
-        <div>
-    
-            <div id="user_nav" class="sidenav">     //side navigation bar
-                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                <a href="#">Profile</a>
-                <a href="#">Search</a>
-                <a href="#">Enroll</a>
-                <a href="#">Swap</a>
-                <a href="#">Timetable</a>
-            </div>
-    
+function User_nav() { 
+    const openNav = () => {
+        const sideNav = document.getElementById('user_nav');
+        sideNav.style.width = '250px';
+    };
 
-            
-            <div class="topnav">                    //top navigation bar 
-            <span onclick="openNav()" style="cursor: pointer; float: left;" >&#9776;</span> 
-            CUSUCS
-            <span onclick="" style="float: right;cursor: pointer;">Logout</span>
-            
-            </div>
-        
+    const closeNav = () => {
+        const sideNav = document.getElementById('user_nav');
+        sideNav.style.width = '0px';
+    };
+
+
+    const handleLogout = () => {
+        const confirmed = window.confirm('Are you sure you want to log out?');
+    if (confirmed) {
+        // handle logout logic here
+        // e.g. call API to invalidate session token, clear local storage/cookies, etc.
+        window.location.replace('/');
+    }
+    };
+
+    return (
+    <div>
+        <div id="user_nav" className="sidenav">
+            <a  className="closebtn" onClick={closeNav} style={{ cursor: 'pointer'}}>
+            x
+            </a>
+            <NavLink to="/profile" onClick={closeNav}>
+                Profile
+            </NavLink>
+            <NavLink to="/search" onClick={closeNav}>
+                Search
+            </NavLink>
+            <NavLink to="/enroll" onClick={closeNav}>
+                Enroll
+            </NavLink>
+            <NavLink to="/swap" onClick={closeNav}>
+                Swap
+            </NavLink>
+            <NavLink to="/WeeklyTimetable" onClick={closeNav}>
+                Timetable
+            </NavLink>
         </div>
-           
+
+        <div className="topnav">
+            <span onClick={openNav} style={{ cursor: 'pointer', float: 'left' }}>
+            &#9776;
+            </span>
+            CUSUCS
+            <span onClick={handleLogout} style={{ float: 'right', cursor: 'pointer' }}>
+            Logout
+            </span>
+        </div>
+    </div>
     );
 }
 export default User_nav;
