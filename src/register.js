@@ -6,12 +6,13 @@ function Register() {
             <h2>Register</h2>
             <p>Please enter your email and password!</p>
             <div>
-                <label>Email</label>
-                <input type="email" />
+                <input type="email" placeholder="Enter the email"/>
             </div>
             <div>
-                <label>Password</label>
-                <input type="password" />
+                <input type="password" placeholder="Enter the password"/>
+            </div>
+            <div>
+                <input type="password" placeholder="Confirm the password"/>
             </div>
             <button type="submit">Register</button>
             <p>Back to main page?<a href="http://localhost:3000">Click here</a>
