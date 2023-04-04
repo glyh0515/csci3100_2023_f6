@@ -25,6 +25,7 @@ function App() {
         <Route path="/weeklytimetable" element={<WeeklyTimetable />} />
         <Route path="/user_nav" element={<User_nav />} />
         <Route path="/admin_nav" element={<Admin_nav />} />
+        <Route path="/all_course" element={<All_Course />} />
       </Routes>
     </BrowserRouter>
   );
