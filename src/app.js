@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from './login'
-import Profile from './profile'
 import Register from './register'
 import Course_Catalog_Index from './course_catalog_index'
 import CreateAdmin from './create_admin'
@@ -20,7 +19,6 @@ function App() {
         <Route path="/create_admin" element={<CreateAdmin />} />
         <Route path="/create_course" element={<CreateCourse />} />
         <Route path="/all_course" element={<All_Course />} />
-        <Route path="/profile" element={<Profile />} />
       </Routes>
     </BrowserRouter>
   );
