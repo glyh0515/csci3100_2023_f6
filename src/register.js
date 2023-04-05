@@ -1,6 +1,15 @@
 import React from 'react';
+import { useNavigate} from 'react-router-dom';
 
 function Register() {
+    const navigate = useNavigate();
+    
+    const handleRegister = () => {
+        //perform register logic here
+
+        navigate('/profile');
+    }
+
     return (
         <form>
             <h2>Register</h2>
@@ -26,7 +35,7 @@ function Register() {
             <div>
                 Confirm password: <input type="password" placeholder="Confirm the password"/>
             </div>
-            <button type="submit">Register</button>
+            <button type="submit" onClick={handleRegister}>Register</button>
             <p>Back to Login page?<a href="http://localhost:3000">Click here</a>
             </p>
         </form>
