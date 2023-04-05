@@ -1,0 +1,49 @@
+.profile-page {
+  display: flex;
+  margin: 1rem;
+}
+
+.left-column {
+  flex: 1;
+  margin-right: 1rem;
+}
+
+.profile-picture {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.personal-info {
+  list-style: none;
+  padding: 0;
+}
+
+.main-content {
+  flex: 2;
+}
+
+.course-list {
+  list-style: none;
+  padding: 0;
+}
+
+.course-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.course-code,
+.course-name {
+  margin-right: 1rem;
+}
+
+.drop-course-btn {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+}

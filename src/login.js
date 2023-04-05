@@ -11,8 +11,8 @@ function Login() {
             <div>
                 Password: <input type="password" placeholder="Enter your password"/>
             </div>
-            <button type="submit">Login</button>
-            <p>Don't have an account?<a href="http://localhost:3000/register">Click here</a>
+            <button type="submit"><a href="/profile">Login</a></button>
+            <p>Don't have an account?<a href="/register">Click here</a>
             </p>
         </form>
     );
