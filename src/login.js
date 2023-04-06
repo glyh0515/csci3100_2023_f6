@@ -1,6 +1,8 @@
 import React from 'react';
 import './CSS/Login_SignUp.css';
 import { useNavigate} from 'react-router-dom';
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
 
 function Login() {
     const navigate = useNavigate();
@@ -12,19 +14,25 @@ function Login() {
     }
 
     return (
-        <div style={{backgroundColor:'#C7B9B4', textAlign:'left'}}>                    
+        <div style={{textAlign:'left'}}>                    
+            <h3>
+                CUSUCS
+            </h3>
+            <Box sx={{ 
+              width: 300,
+              height: 300,
+              backgroundColor: 'primary.main',
+            }}
+            />
             <form>
             <h2>Login</h2>
-            <p>Please enter your email and password!</p>
-                <div>
-                    Email: <input type="email" placeholder="Enter your email"/>
-                </div>
-                <div>
-                    Password: <input type="password" placeholder="Enter your password"/>
-                </div>
-                <button type="submit" onClick={handlelogin}>Login</button>
-                <p>Don't have an account?<a href="/register">Click here</a>
-                </p>
+               <div style={{height:'10px'}}></div>
+               <TextField  id="outlined-basic" label="Email" variant="outlined" />
+               <div style={{height:'10px'}}></div>
+               <TextField  id="outlined-basic" label="Password" variant="outlined" />
+               <button type="submit" onClick={handlelogin}>Login</button>
+               <p>Don't have an account?<a href="/register">Click here</a>
+               </p>
             </form>
         </div>
     );
