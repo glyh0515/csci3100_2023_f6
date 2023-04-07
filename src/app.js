@@ -8,7 +8,7 @@ import Course_Catalog_Index from './course_catalog_index'
 import CreateAdmin from './create_admin'
 import CreateCourse from './create_course'
 import All_Course from './all_course'
-import WeeklyTimetable from './WeeklyTimetable';
+import WeeklyTimetable from './component/WeeklyTimetable';
 import User_nav from './User_nav';
 import Admin_nav from './Admin_nav';
 import Swap from './swap';

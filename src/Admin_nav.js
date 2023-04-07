@@ -1,6 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './CSS/nav.css';
+import { AiOutlineLogout } from 'react-icons/ai';
+import IconButton from '@mui/material/IconButton';
 
 
 function Admin_nav() { 
@@ -52,9 +54,9 @@ function Admin_nav() {
             &#9776;
             </span>
             CUSUCS
-            <span onClick={handleLogout} style={{ float: 'right', cursor: 'pointer' }}>
-            Logout
-            </span>
+            <IconButton onClick={handleLogout} style={{ float: 'right', cursor: 'pointer' }}>
+                <AiOutlineLogout color="#bd4c4c"/>
+            </IconButton>
         </div>
     </div>
     );

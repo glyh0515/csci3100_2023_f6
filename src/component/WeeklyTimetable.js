@@ -1,5 +1,5 @@
 import React from 'react';
-import './CSS/Timetable.css';
+import '../CSS/Timetable.css';
 const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 const WeeklyTimetable = () => {
