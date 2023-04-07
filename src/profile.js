@@ -26,7 +26,7 @@ const ProfilePage = () => {
       <User_nav /> 
       <div className="profile-page">
         <div className="left-column">
-          <h3>Profile</h3>
+          <h4>Profile</h4>
           <img
             className="profile-picture"
             src="https://via.placeholder.com/150"
@@ -42,7 +42,7 @@ const ProfilePage = () => {
           </ul>
         </div>
         <div className="main-content">
-          <h3>Enrolled Courses</h3>
+          <h4>Enrolled Courses</h4>
           <ul className="course-list">
             {courses.map((course, index) => (
               <li key={course.code} className="course-item">

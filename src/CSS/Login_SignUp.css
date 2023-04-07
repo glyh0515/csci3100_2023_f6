@@ -22,7 +22,7 @@ h2{
     font-style: normal;
     font-weight: 400;
     font-size: 36px;
-    line-height: 65px;
+    line-height: 55px;
     /* identical to box height */
     margin: auto;
 
@@ -53,3 +53,15 @@ h3{
 
     color: #34241D;
 }
+
+a{
+    color: #34241D;
+}
+
+.center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 40vh;
+    }
