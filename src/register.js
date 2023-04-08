@@ -21,13 +21,13 @@ function Register() {
           width: 400,
           height: 700,
           backgroundColor: '#d7cdc3',
-          borderRadius: '10%',
+          borderRadius: '30px',
           position: 'absolute',
           top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
         }}
-        />
+        >
         <form class="center">
             <h2>Register</h2>
             <p>Please enter your personal information!</p>
@@ -44,6 +44,7 @@ function Register() {
             Register</Button>
             <p>Back to Login page? <a href="/">Click here</a></p>
         </form>
+        </Box>
       </div>
     );
 }

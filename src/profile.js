@@ -1,6 +1,17 @@
 import React, { useState } from 'react';
 import User_nav from './User_nav'; // import the User_nav component
 import './CSS/ProfilePage.css';
+import {
+    Avatar,
+    Box,
+    Button,
+    Card,
+    CardContent,
+    List,
+    ListItem,
+    ListItemText,
+    Typography,
+} from '@mui/material';
 
 const ProfilePage = () => {
   const [profile, setProfile] = useState({
@@ -21,46 +32,72 @@ const ProfilePage = () => {
     setCourses(courses.filter((_, index) => index !== courseIndex));
   };
 
-  return (
+    return (
     <div>
-      <User_nav /> 
-      <div className="profile-page">
-        <div className="left-column">
-          <h4>Profile</h4>
-          <img
-            className="profile-picture"
-            src="https://via.placeholder.com/150"
-            alt="Profile"
-          />
-          <h4>Personal Information</h4> 
-          <ul className="personal-info">
-            <li>Name: {profile.name}</li>
-            <li>Email: {profile.email}</li>
-            <li>Student ID: {profile.sid}</li>
-            <li>Major: {profile.major}</li>
-            <li>Year: {profile.year}</li>
-          </ul>
-        </div>
-        <div className="main-content">
-          <h4>Enrolled Courses</h4>
-          <ul className="course-list">
+      <User_nav />
+      <Box className="profile-page" sx={{ display: 'flex', margin: '1rem' }}>
+        <Card className="left-column" sx={{ marginRight: '1rem' }}>
+          <CardContent>
+            <Typography variant="h4">Profile</Typography>
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                marginBottom: '1rem',
+              }}
+            >
+              <Avatar
+                className="profile-picture"
+                src="https://via.placeholder.com/150"
+                alt="Profile"
+                sx={{ width: '150px', height: '150px' }}
+              />
+            </Box>
+            <Typography variant="h4">Personal Information</Typography>
+            <List className="personal-info">
+              <ListItem>
+                <ListItemText primary={`Name: ${profile.name}`} />
+              </ListItem>
+              <ListItem>
+                <ListItemText primary={`Email: ${profile.email}`} />
+              </ListItem>
+              <ListItem>
+                <ListItemText primary={`Student ID: ${profile.sid}`} />
+              </ListItem>
+              <ListItem>
+                <ListItemText primary={`Major: ${profile.major}`} />
+              </ListItem>
+              <ListItem>
+                <ListItemText primary={`Year: ${profile.year}`} />
+              </ListItem>
+            </List>
+          </CardContent>
+        </Card>
+        <Box className="main-content" sx={{ flex: 2 }}>
+          <Typography variant="h4">Enrolled Courses</Typography>
+          <List className="course-list">
             {courses.map((course, index) => (
-              <li key={course.code} className="course-item">
-                <span className="course-code">{course.code}</span>
-                <span className="course-name">{course.name}</span>
-                <button
-                  className="drop-course-btn"
+              <ListItem key={course.code} className="course-item">
+                <ListItemText
+                  primary={course.code}
+                  secondary={course.name}
+                  sx={{ marginRight: '1rem' }}
+                />
+                <Button
+                  variant="contained"
+                  color="error"
                   onClick={() => handleDropCourse(index)}
                 >
                   Drop
-                </button>
-              </li>
+                </Button>
+              </ListItem>
             ))}
-          </ul>
-        </div>
-      </div>
+          </List>
+        </Box>
+      </Box>
     </div>
   );
 };
-
+  
 export default ProfilePage;
