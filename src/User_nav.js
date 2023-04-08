@@ -1,14 +1,17 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './CSS/nav.css';
-import { AiOutlineLogout } from 'react-icons/ai';
+import { AiOutlineExport,AiOutlineMenu,AiOutlineCaretLeft,  //icon for top nav
+    AiOutlineCalendar,AiOutlineSwap,AiOutlineFileSearch,    // icon for sidenav
+    AiOutlinePlusSquare,AiOutlineUser 
+    } from 'react-icons/ai';
 import IconButton from '@mui/material/IconButton';
 
 
 function User_nav() { 
     const openNav = () => {
         const sideNav = document.getElementById('user_nav');
-        sideNav.style.width = '250px';
+        sideNav.style.width = '200px';
     };
 
     const closeNav = () => {
@@ -29,33 +32,33 @@ function User_nav() {
     return (
     <div>
         <div id="user_nav" className="sidenav">
-            <a  className="closebtn" onClick={closeNav} style={{ cursor: 'pointer'}}>
-            x
-            </a>
+            <a onClick={closeNav} className='closebtn' style={{ float: 'right', textAlign:'right' }}>
+                <AiOutlineCaretLeft/>
+            </a>           
             <NavLink to="/profile" onClick={closeNav}>
-                Profile
+                <AiOutlineUser/> Profile 
             </NavLink>
             <NavLink to="/search" onClick={closeNav}>
-                Search
+                <AiOutlineFileSearch/> Search
             </NavLink>
             <NavLink to="/enroll" onClick={closeNav}>
-                Enroll
+                <AiOutlinePlusSquare/> Enroll
             </NavLink>
             <NavLink to="/swap" onClick={closeNav}>
-                Swap
+                <AiOutlineSwap/> Swap
             </NavLink>
             <NavLink to="/WeeklyTimetable" onClick={closeNav}>
-                Timetable
+                <AiOutlineCalendar/> Timetable
             </NavLink>
         </div>
 
         <div className="topnav">
-            <span onClick={openNav} style={{ cursor: 'pointer', float: 'left' }}>
-            &#9776;
-            </span>
-            CUSUCS
-            <IconButton onClick={handleLogout} style={{ float: 'right', cursor: 'pointer' }}>
-                <AiOutlineLogout color="#bd4c4c"/>
+            <IconButton onClick={openNav} className='topnav_button'  style={{ float: 'left' }}>
+                <AiOutlineMenu color="#bd4c4c"/>
+            </IconButton>
+            <span className='topnav_button'>CUSUCS</span>
+            <IconButton onClick={handleLogout} className='topnav_button' style={{ float: 'right'}}>
+                <AiOutlineExport color="#bd4c4c"/>
             </IconButton>
         </div>
     </div>

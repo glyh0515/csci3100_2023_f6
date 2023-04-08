@@ -1,10 +1,12 @@
 import React from 'react';
 import '../CSS/Timetable.css';
+import User_nav from '../User_nav'; // import the User_nav component
 const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 const WeeklyTimetable = () => {
   return (
     <div className="timetable-container">
+      <User_nav />
       <table className="timetable">
         <thead>
           <tr>

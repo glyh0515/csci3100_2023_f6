@@ -15,10 +15,11 @@
 .sidenav a {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
-    font-size: 25px;
+    font-size: 20px;
     color: #990d0d;
     display: block;
     transition: 0.3s;
+    min-width: 280px;
 }
 
 /* When you mouse over the navigation links, change their color */
@@ -33,7 +34,10 @@
     right: 10px;
     font-size: 36px;
     margin-left: 20px;
-    float: left;
+    border-radius: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+
 }
 
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
@@ -58,9 +62,10 @@
 }
 
 
-
-.topnav a.split {
-    float: right;
-    overflow: hidden;
-
+.topnav_button {
+    cursor: 'pointer';
+    max-width: 50px;
+    border-radius: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
