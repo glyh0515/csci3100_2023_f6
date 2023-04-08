@@ -24,13 +24,13 @@ function Login() {
               width: 400,
               height: 400,
               backgroundColor: '#d7cdc3',
-              borderRadius: '30%',
+              borderRadius: '30px',
               position: 'absolute',
               top: '50%',
               left: '50%',
               transform: 'translate(-50%, -50%)',
             }}
-            />
+            >
             <form class="center">
             <h2>Login</h2>
                <TextField  id="outlined-basic" label="Email" variant="outlined" margin="dense" />
@@ -41,6 +41,7 @@ function Login() {
                Login</Button>
                <p>Don't have an account? <a href="/register">Register</a></p>
             </form>
+            </Box>
         </div>
     );
 }
