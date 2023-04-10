@@ -37,38 +37,42 @@ db.on('error', console.error.bind(console, 'connection error:'));
 // Upon opening the database successfully
 db.once('open', function () {
   console.log("Connection is open...");
-  // Define a schema for a sample model
-  const studentSchema = new mongoose.Schema({
-    StudentID: String,
+  // Define schemas for sample models
+  let StudentSchema = new mongoose.Schema();
+  let AdminSchema = new mongoose.Schema();
+  let CourseSchema = new mongoose.Schema();
+  StudentSchema = new mongoose.Schema({
+    StudentID: {type: String, unique: true},
     Name: String,
     Email: String,
     Password: String,
     Major: String,
-    RemainCredit: Number,
-    AdmissionYear: String,
-    EnrolledCourse: list <course>,
+    Year: Number,
+    EnrolledCourse: [CourseSchema],
   });
-  const adminSchema = new mongoose.Schema({
-    AdminID: String,
+  AdminSchema = new mongoose.Schema({
+    AdminID: {type: String, unique: true},
     Name: String,
     Email: String,
     Password: String,
   });
-  const courseSchema = new mongoose.Schema({
+  CourseSchema = new mongoose.Schema({
+    ClassNumber: {type: String, unique: true},
     CourseID: String,
     CourseName: String,
     Timeslot: String,
     Date: String,
     Venue: String,
     Department: String,
-    CourseOutline: String,
     Units: Number,
-    EnrolledSturent: list<Student>,
+    EnrolledSturent: [StudentSchema],
     Vacancy: Number,
   });
-  // Create a model based on the schema
-  const Sample = mongoose.model('Sample', sampleSchema);
-  
+  // Create models based on the schema
+  const Student = mongoose.model('Student', StudentSchema);
+  const Admin = mongoose.model('Admin', AdminSchema);
+  const Course = mongoose.model('Course', CourseSchema);
+
   // This module is for parsing the content in a request body (installed with npm)
   const bodyParser = require('body-parser');
   // Use parser to obtain the content in the body of a request
@@ -84,9 +88,13 @@ db.once('open', function () {
 
   // Define a route that creates a new sample document
   app.get('/create-sample', (req, res) => {
-    Sample.create({
-      name: "John Doe",
-      age: 30
+    Student.create({
+      StudentID: 1155000000,
+      Name: "Hi",
+      Email: "hi@test.com",
+      Password: "abcd1234",
+      Major: "Loser",
+      Year: 2
     })
     res.send("Document created!");
   });
