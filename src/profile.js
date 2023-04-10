@@ -36,9 +36,9 @@ const ProfilePage = () => {
     <div>
       <User_nav />
       <Box className="profile-page" sx={{ display: 'flex', margin: '1rem' }}>
-        <Card className="left-column" sx={{ marginRight: '1rem' }}>
+        <Card className="left-column" sx={{ marginRight: '1rem' ,backgroundColor: 'blanchedalmond' }}>
           <CardContent>
-            <Typography variant="h4">Profile</Typography>
+            <Typography className='profile-header' >Profile</Typography>
             <Box
               sx={{
                 display: 'flex',
@@ -54,28 +54,28 @@ const ProfilePage = () => {
                 sx={{ width: '150px', height: '150px' }}
               />
             </Box>
-            <Typography variant="h4">Personal Information</Typography>
+            <Typography className='profile-header'>Personal Information</Typography>
             <List className="personal-info">
               <ListItem>
-                <ListItemText primary={`Name: ${profile.name}`} />
+                <ListItemText className='personal-info-item' primary={`Name: ${profile.name}`} />
               </ListItem>
               <ListItem>
-                <ListItemText primary={`Email: ${profile.email}`} />
+                <ListItemText className='personal-info-item' primary={`Email: ${profile.email}`} />
               </ListItem>
               <ListItem>
-                <ListItemText primary={`Student ID: ${profile.sid}`} />
+                <ListItemText className='personal-info-item' primary={`Student ID: ${profile.sid}`} />
               </ListItem>
               <ListItem>
-                <ListItemText primary={`Major: ${profile.major}`} />
+                <ListItemText className='personal-info-item' primary={`Major: ${profile.major}`} />
               </ListItem>
               <ListItem>
-                <ListItemText primary={`Year: ${profile.year}`} />
+                <ListItemText className='personal-info-item' primary={`Year: ${profile.year}`} />
               </ListItem>
             </List>
           </CardContent>
         </Card>
         <Box className="main-content" sx={{ flex: 2 }}>
-          <Typography variant="h4">Enrolled Courses</Typography>
+          <Typography className='header' >Enrolled Courses</Typography>
           <List className="course-list">
             {courses.map((course, index) => (
               <ListItem key={course.code} className="course-item">
@@ -87,6 +87,7 @@ const ProfilePage = () => {
                 <Button
                   variant="contained"
                   color="error"
+                  className='drop-course-btn'
                   onClick={() => handleDropCourse(index)}
                 >
                   Drop

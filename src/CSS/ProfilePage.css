@@ -1,11 +1,18 @@
 .profile-page {
   display: flex;
   margin: 1rem;
+  color: #bd4c4c;
+
+  
 }
 
 .left-column {
   flex: 1;
   margin-right: 1rem;
+  float: left;
+  text-align: left;
+  background-color: blanchedalmond;
+  color: #bd4c4c;
 }
 
 .profile-picture {
@@ -16,8 +23,15 @@
 }
 
 .personal-info {
+  font-size: 18px;
   list-style: none;
   padding: 0;
+  background-color: blanchedalmond;
+  color: #bd4c4c;
+}
+
+.personal-info-item {
+  font-size: 18px;
 }
 
 .main-content {
@@ -33,6 +47,7 @@
   display: flex;
   align-items: center;
   margin-bottom: 0.5rem;
+  min-width: 400px;
 }
 
 .course-code,
@@ -41,9 +56,21 @@
 }
 
 .drop-course-btn {
-  background-color: red;
+  background-color: brown;
+  width: 100px;
   color: white;
   border: none;
   padding: 0.25rem 0.5rem;
   cursor: pointer;
+}
+
+.profile-header{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  text-align: center;
+  background-color: blanchedalmond;
+  border-radius: 5px;
+  color: #bd4c4c;
 }

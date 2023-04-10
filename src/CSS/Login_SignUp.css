@@ -11,12 +11,12 @@ form {
 h2{
     position: relative;
     width: 148px;
-    height: 50px;
+    height: 40px;
     text-align: center;
-    font-family: 'Abril Fatface';
+    font-family: 'Arial';
     font-style: normal;
     font-weight: 400;
-    font-size: 36px;
+    font-size: 32px;
     line-height: 55px;
     /* identical to box height */
     margin: auto;
@@ -25,7 +25,7 @@ h2{
 }
 
 button{
-    width: 183px;
+    width: 150px;
     height: 48px;
     text-align: center;
     color: #34241D ;
@@ -60,3 +60,9 @@ a{
     align-items: center;
     height: 100%;
     }
+.alert_msg{
+    color: red;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    visibility: collapse;
+}
