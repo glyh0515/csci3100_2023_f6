@@ -63,9 +63,8 @@ db.once('open', function () {
     Sample.create({
       name: "John Doe",
       age: 30
-    });
+    })
     res.send("Document created!");
-    console.log("Document created!");
   });
 
   app.all('/*', (req, res) => {
