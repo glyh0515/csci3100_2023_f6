@@ -38,9 +38,33 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
   console.log("Connection is open...");
   // Define a schema for a sample model
-  const sampleSchema = new mongoose.Schema({
-    name: String,
-    age: Number,
+  const studentSchema = new mongoose.Schema({
+    StudentID: String,
+    Name: String,
+    Email: String,
+    Password: String,
+    Major: String,
+    RemainCredit: Number,
+    AdmissionYear: String,
+    EnrolledCourse: list <course>,
+  });
+  const adminSchema = new mongoose.Schema({
+    AdminID: String,
+    Name: String,
+    Email: String,
+    Password: String,
+  });
+  const courseSchema = new mongoose.Schema({
+    CourseID: String,
+    CourseName: String,
+    Timeslot: String,
+    Date: String,
+    Venue: String,
+    Department: String,
+    CourseOutline: String,
+    Units: Number,
+    EnrolledSturent: list<Student>,
+    Vacancy: Number,
   });
   // Create a model based on the schema
   const Sample = mongoose.model('Sample', sampleSchema);
