@@ -88,10 +88,11 @@ const handleRegister = (e) => {
         <h3>CUSUCS</h3>
         <Box sx={{
           width: 600,
-          minHeight: 500,
+          maxHeight:500,
+          minHeight: 400,
           backgroundColor: '#d7cdc3',
-          borderRadius: '30px',
-          position: 'absolute',
+          borderRadius: '20px',
+          position: 'fixed',
           top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
@@ -104,6 +105,7 @@ const handleRegister = (e) => {
               <Box sx={{ width: '50%', display: 'inline-block', padding: 2 }}>
                 {inputFields.slice(0, 4).map((field) => (
                   <TextField
+                    size='small'
                     key={field.id}
                     id={field.id}
                     label={field.label}
@@ -120,6 +122,7 @@ const handleRegister = (e) => {
               <Box sx={{ width: '50%', display: 'inline-block', padding: 2 }}>
                 {inputFields.slice(4).map((field) => (
                   <TextField
+                    size='small'
                     key={field.id}
                     id={field.id}
                     label={field.label}
@@ -134,11 +137,11 @@ const handleRegister = (e) => {
                 ))}
               </Box>
             </Box>
-            <Button type="submit" variant="contained" endIcon={<AiOutlineSend />} 
-            style={{backgroundColor:'#c7b9b4', color:'black', width:'50%', height:'50px', marginTop:'10px', borderRadius:'10px', marginBottom:'10px'
-            }}>
+            <Button className='login_button' type="submit" variant="contained" endIcon={<AiOutlineSend />} 
+            style={{ fontSize:'12px' , backgroundColor:'#c7b9b4', color:'black', width:'150px', height:'40px', borderRadius:'10px', marginBottom:'10px'
+          }}>
             Register</Button>
-            <p>Back to Login page? <a href="/">Click here</a></p>
+            <p style={{fontSize:'12px'}}>Back to Login page? <a href="/">Click here</a></p>
         </form>
         </Box>
       </div>

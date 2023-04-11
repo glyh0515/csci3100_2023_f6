@@ -10,6 +10,7 @@ function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [isValid, setIsValid] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
     const navigate = useNavigate();
 
     function handlelogin(e) {
@@ -22,7 +23,8 @@ function Login() {
                 navigate('/profile'); // direct to profile
         }else{
             setIsValid(false);  // Do something if login is unsuccessful
-            alert_msg.style.visibility = 'visible';               
+            setErrorMessage("Invalid username or password."); // Set error message
+   
         }           
     }
 
@@ -36,33 +38,37 @@ function Login() {
       
     return (
         <div style={{textAlign:'left'}}>                    
-            <h3>
+            <h3 style={{ position: 'fixed',
+                        top: '0',
+                        width: '100%'}}>
                 CUSUCS
             </h3>
             <Box sx={{ 
-              width: 400,
-              height: 400,
+              width: 350,
+              height: 300,
               backgroundColor: '#d7cdc3',
-              borderRadius: '30px',
-              position: 'absolute',
-              top: '50%',
+              borderRadius: '20px',
+              position: 'fixed',
+              top: '250px',
               left: '50%',
               transform: 'translate(-50%, -50%)',
             }}
-            >
+            ><h2>Login</h2>
             <form class="center">
-            <h2>Login</h2>
-                
-               <TextField  id="outlined-basic" label="Email" type='email' variant="outlined" placeholder='SID@link.cuhk.edu.hk' value={email}
-                            pattern="1155[\d]{6}@link.cuhk.edu.hk" margin="dense" onChange={handleEmailChange} />
-               <TextField  id="outlined-basic" label="Password" type='password' value={password} variant="outlined" margin="dense" onChange={handlePasswordChange} />
-               <div id='alert_msg' className='alert_msg'>{isValid ? <p>Login Successful</p> : <p>incorrect username or password</p>}</div>
-               <Button type="submit" onClick={handlelogin} variant="contained" endIcon={<AiOutlineSend />}
-                style={{backgroundColor:'#c7b9b4', color:'black', width:'50%', height:'50px', marginTop:'10px', borderRadius:'10px', marginBottom:'10px'
+                           
+               <TextField 
+                    size='small'
+                    id="outlined-basic" label="Email" type='email' variant="outlined" placeholder='SID@link.cuhk.edu.hk' value={email}
+                    pattern="1155[\d]{6}@link.cuhk.edu.hk" margin="dense" onChange={handleEmailChange} />
+               <TextField size='small'  id="outlined-basic" label="Password" type='password' value={password} variant="outlined" margin="dense" onChange={handlePasswordChange} />
+               
+               <Button className='login_button' type="submit" onClick={handlelogin} variant="contained" endIcon={<AiOutlineSend />}
+                style={{ fontSize:'12px' , backgroundColor:'#c7b9b4', color:'black', width:'120px', height:'40px', marginTop:'10px', borderRadius:'10px', marginBottom:'10px'
                 }}>
                Login
                </Button>
-               <p>Don't have an account? <a href="/register">Register</a></p>
+               {errorMessage && <p style={{ color: 'red', fontSize:'12px' }}>{errorMessage}</p>} {/* Display error message */}
+               <p style={{fontSize:'12px'}}>Don't have an account? <a href="/register">Register</a></p>
             </form>
             </Box>
         </div>

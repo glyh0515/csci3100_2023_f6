@@ -1,0 +1,81 @@
+        .searchform{
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            float:left;
+            background-color: #94452c;
+            width:250px;
+            height: 100%;
+            border: #94452c;
+            font-size: 20px;
+            color: #551805;
+            position: fixed;
+            z-index: 1; /* Stay on top */
+            overflow-x: hidden; /* Disable horizontal scroll */
+            text-align: left;
+            padding: 20px;
+            top: 0;
+            left: 0;
+            
+            
+        }
+        .SearchText {
+            
+            padding: 5px;
+            font-size: 12px;
+            border: 1px solid #b87742;
+            float: left;
+            width: 100px;
+            background: #b87742;
+            color: #94452c;
+            border-radius: 5px;
+            
+        }
+        .search-button {
+            border-radius: 1px;
+            float:left;
+            width: 50px;
+            height:36px;
+            padding: 0px;
+            background: #b87742;
+            color: rgb(158, 57, 10);
+            font-size: 17px;
+            border: 1px solid #b87742;
+            border-left: none;
+            cursor: pointer;
+            
+
+        }
+        .search-button:hover {
+            background: #551805;
+        }
+        ::placeholder{
+            color: #551805;
+        }
+
+        .option {
+            font-size: 12px;
+        }
+
+        input[type='checkbox'] {
+            accent-color: #b87742;       
+        }
+        .header{
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 24px;
+        }
+
+        .Unit{
+            height: max-content;
+            display: block;
+        }
+
+        .ClassDay{
+            height: max-content;
+            display: block;
+        }
+
+        .ClassStatus{
+            height: max-content;
+            display: block;            
+        }
+
+        

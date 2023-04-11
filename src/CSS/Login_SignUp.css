@@ -1,8 +1,8 @@
 form {
-    width: 350px;
+    width: 300px;
     height: 250px;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-    border-radius: 30px;
+    border-radius: 20px;
     /*background-color: antiquewhite;*/
     margin: auto;
     padding:20px;
@@ -16,17 +16,17 @@ h2{
     font-family: 'Arial';
     font-style: normal;
     font-weight: 400;
-    font-size: 32px;
+    font-size: 24px;
     line-height: 55px;
     /* identical to box height */
     margin: auto;
-
+    padding: 10px;
     color: #34241D;
 }
 
-button{
-    width: 150px;
-    height: 48px;
+.login_button{
+    width: 100px;
+    height: 40px;
     text-align: center;
     color: #34241D ;
     background: #C7B9B4;
