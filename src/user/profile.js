@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import User_nav from './User_nav'; // import the User_nav component
-import './CSS/ProfilePage.css';
+import '../CSS/ProfilePage.css';
 import {
     Avatar,
     Box,

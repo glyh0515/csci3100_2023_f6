@@ -1,6 +1,9 @@
 import React from 'react';
 import Admin_nav from './Admin_nav';
 
+function HandleSubmit() {
+};
+
 function CreateCourse() {
   return (
     <div>
@@ -35,7 +38,7 @@ function CreateCourse() {
             <label>Instructor</label>
             <input type="instructor" />
           </div>
-          <button type="submit">Submit</button>
+          <button type="submit" onClick={HandleSubmit}>Submit</button>
         </form>
     </div>
   );

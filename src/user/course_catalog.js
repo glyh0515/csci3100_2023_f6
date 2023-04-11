@@ -1,10 +1,10 @@
 import React from 'react';
-import Course_Catalog_table from './course_catalog_table';
+import Course_Catalog_table from '../component/course_catalog_table';
 import User_nav from './User_nav';
 import Search_form from './SearchForm';
-import TermSelect from './component/TermSelectButton';
+import TermSelect from '../component/TermSelectButton';
 
-function Course_Catalog_Index() {
+function Course_Catalog() {
     return (
       <div >
         <User_nav />
@@ -25,4 +25,4 @@ function Course_Catalog_Index() {
     );
 }
 
-export default Course_Catalog_Index;
+export default Course_Catalog;

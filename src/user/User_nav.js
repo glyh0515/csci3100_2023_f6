@@ -1,22 +1,21 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import './CSS/nav.css';
+import '../CSS/nav.css';
 import { AiOutlineExport,AiOutlineMenu,AiOutlineCaretLeft,  //icon for top nav
-    AiOutlineUser,AiOutlineSolution,AiOutlineUserAdd,      // icon for sidenav
-    AiOutlineHdd,AiOutlineReconciliation
-     } from 'react-icons/ai';
+    AiOutlineCalendar,AiOutlineSwap,AiOutlineFileSearch,    // icon for sidenav
+    AiOutlinePlusSquare,AiOutlineUser 
+    } from 'react-icons/ai';
 import IconButton from '@mui/material/IconButton';
 
 
-
-function Admin_nav() { 
+function User_nav() { 
     const openNav = () => {
-        const sideNav = document.getElementById('admin_nav');
-        sideNav.style.width = '280px';
+        const sideNav = document.getElementById('user_nav');
+        sideNav.style.width = '200px';
     };
 
     const closeNav = () => {
-        const sideNav = document.getElementById('admin_nav');
+        const sideNav = document.getElementById('user_nav');
         sideNav.style.width = '0px';
     };
 
@@ -32,24 +31,24 @@ function Admin_nav() {
 
     return (
     <div>
-        <div id="admin_nav" className="sidenav">
+        <div id="user_nav" className="sidenav">
             <a onClick={closeNav} className='closebtn' style={{ float: 'right', textAlign:'right' }}>
                 <AiOutlineCaretLeft/>
-            </a> 
-            <NavLink to="/admin_profile" onClick={closeNav}>
+            </a>           
+            <NavLink to="/profile" onClick={closeNav}>
                 <AiOutlineUser/> Profile 
             </NavLink>
-            <NavLink to="/create_admin" onClick={closeNav}>
-                <AiOutlineUserAdd/>Create Admin
+            <NavLink to="/search" onClick={closeNav}>
+                <AiOutlineFileSearch/> Search
             </NavLink>
-            <NavLink to="/all_user" onClick={closeNav}>
-                <AiOutlineSolution/>View All Users
+            <NavLink to="/enroll" onClick={closeNav}>
+                <AiOutlinePlusSquare/> Enroll
             </NavLink>
-            <NavLink to="/all_course" onClick={closeNav}>
-                <AiOutlineHdd/>View All Courses
+            <NavLink to="/swap" onClick={closeNav}>
+                <AiOutlineSwap/> Swap
             </NavLink>
-            <NavLink to="/create_course" onClick={closeNav}>
-                <AiOutlineReconciliation/>Create Course Record
+            <NavLink to="/WeeklyTimetable" onClick={closeNav}>
+                <AiOutlineCalendar/> Timetable
             </NavLink>
         </div>
 
@@ -65,4 +64,4 @@ function Admin_nav() {
     </div>
     );
 }
-export default Admin_nav;
+export default User_nav;
