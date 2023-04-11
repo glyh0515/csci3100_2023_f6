@@ -79,10 +79,10 @@ const handleCreate = (e) => {
                 helperText={formData.errors[inputfield.id]}
             />
         ))}
-        <button type="submit" endIcon={<AiOutlineSend />} variant="contained" 
+        <Button type="submit" endIcon={<AiOutlineSend />} variant="contained" 
             style={{ fontSize:'12px' , backgroundColor:'#c7b9b4', color:'black', width:'150px', height:'40px', borderRadius:'10px', marginBottom:'10px'
           }}
-        >Create</button>
+        >Create</Button>
       </form>
     </div>
   );
