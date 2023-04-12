@@ -1,14 +1,14 @@
 import React from "react";
-import "./CSS/Swap_SearchResults.css";
+import "../CSS/Swap_SearchResults.css";
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
 function Swap_SearchResults(/*{ courses ,searchQuery,openClasses, waitlistClasses, classDays, unitRanges }*/) {
   // Filter the courses based on the search query and filters
-  const [view, setView] = React.useState('none');
+  const [selected, setSelected] = React.useState('none');
   
-    const handleChange = (event, nextView) => {
-      setView(nextView);
+    const handleChange = (event, nextSelected) => {
+      setSelected(nextSelected);
     };
   let courses = [
     {
@@ -99,7 +99,7 @@ function Swap_SearchResults(/*{ courses ,searchQuery,openClasses, waitlistClasse
       <ToggleButtonGroup
             className='list-item'
             orientation="vertical"
-            value={view}
+            value={selected}
             exclusive
             onChange={handleChange}
             >

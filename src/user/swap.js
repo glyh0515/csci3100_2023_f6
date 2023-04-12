@@ -3,7 +3,7 @@ import User_nav from './User_nav';
 import EnrolledCourse from './Swap_EnrolledCourse';
 import SearchResult from './Swap_SearchResult';
 import SearchForm from './SearchForm';
-import './CSS/Swap.css'
+import '../CSS/Swap.css';
 
 const Swap = () => {
   const [enrolledCourse, setEnrolledCourse] = useState('');

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import "./CSS/Swap_EnrolledCourse.css";
-import Select from '@mui/material/Select';
+import "../CSS/Swap_EnrolledCourse.css";
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
@@ -11,10 +10,10 @@ function Swap_EnrolledCourse() {
     { id: 2, name: "History 201" },
     { id: 3, name: "Biology 301" },
   ];
-    const [view, setView] = React.useState('none');
+    const [selected, setSelected] = React.useState('none');
   
-    const handleChange = (event, nextView) => {
-      setView(nextView);
+    const handleChange = (event, nextSelected) => {
+      setSelected(nextSelected);
     };
 
  /* useEffect(() => {
@@ -31,7 +30,7 @@ function Swap_EnrolledCourse() {
         <ToggleButtonGroup
             className='dropdown-list'
             orientation="vertical"
-            value={view}
+            value={selected}
             exclusive
             onChange={handleChange}
             >
