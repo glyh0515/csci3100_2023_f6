@@ -2,7 +2,6 @@ import React from 'react';
 import Course_Catalog_table from '../component/course_catalog_table';
 import User_nav from './User_nav';
 import Search_form from './SearchForm';
-import TermSelect from '../component/TermSelectButton';
 import '../CSS/Course_catalog.css';
 
 function Course_Catalog() {

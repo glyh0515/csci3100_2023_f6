@@ -4,7 +4,6 @@ import '../CSS/ProfilePage.css';
 import {
     Avatar,
     Box,
-    Button,
     Card,
     CardContent,
     List,

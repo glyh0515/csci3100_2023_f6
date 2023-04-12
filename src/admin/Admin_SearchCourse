@@ -1,0 +1,40 @@
+import React, { useState } from "react";
+import '../CSS/Search_form.css';
+import {AiOutlineSearch} from 'react-icons/ai';
+import TextField from '@mui/material/TextField';
+
+
+function AdminSearch() {
+  const [searchValue, setSearchValue] = useState("");
+
+    const handleSearchValueChange = (event) => {
+      setSearchValue(event.target.value);
+    };
+
+ 
+  return (
+  <div >
+    
+    <form id="admin_search" className="searchform" action="">
+      <p>Search</p>
+        <div className="searchbar">
+        <TextField                   
+            id="admin_search_text" 
+            color='warning'
+            size="small"
+            className="SearchText"
+            type="text"            
+            label="Course Code / Course Name"
+            name="search" 
+            value={searchValue}
+            onChange={handleSearchValueChange}
+          />
+        <button type="submit" className="search-button">
+          <AiOutlineSearch />
+        </button>
+      </div>
+    </form>
+  </div>
+  );
+}
+export default AdminSearch;

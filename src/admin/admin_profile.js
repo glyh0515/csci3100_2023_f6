@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Admin_nav from './Admin_nav';
+import '../CSS/ProfilePage.css';
 import {
     Avatar,
     Box,
@@ -21,9 +22,10 @@ const AdminProfilePage = () => {
     return(
     <div>
       <Admin_nav />
-      <Card className="left-column" sx={{ marginRight: '1rem' ,backgroundColor: 'blanchedalmond' }}>
+      <Box className="profile-page" sx={{ display: 'flex', margin: '1rem' }}>
+        <Card className="left-column" sx={{ marginRight: '1rem' ,backgroundColor: '#d7cdc3', maxWidth:400,minWidth:350 }}>
           <CardContent>
-            <Typography className='profile-header' >Profile</Typography>
+            <Typography className='profile-header'  sx={{fontSize: 24}} >Profile</Typography>
             <Box
               sx={{
                 display: 'flex',
@@ -48,11 +50,13 @@ const AdminProfilePage = () => {
                 <ListItemText className='personal-info-item' primary={`Email: ${adminprofile.email}`} />
               </ListItem>
               <ListItem>
-                <ListItemText className='personal-info-item' primary={`Student ID: ${adminprofile.sid}`} />
+                <ListItemText className='personal-info-item' primary={`Admin ID: ${adminprofile.sid}`} />
               </ListItem>
             </List>
           </CardContent>
         </Card> 
+      </Box>
+      
     </div>
     );
 };
