@@ -16,6 +16,7 @@ function Swap_SearchResults(/*{ courses ,searchQuery,openClasses, waitlistClasse
       code: "MATH101",
       name: "Calculus I",
       venue: "Room 101",
+      time:' Mon 12:30pm-2:30pm',
       department: "Mathematics",
       instructor: "John Doe",
       units: 4,
@@ -28,6 +29,7 @@ function Swap_SearchResults(/*{ courses ,searchQuery,openClasses, waitlistClasse
       code: "PHYS101",
       name: "Physics I",
       venue: "Room 201",
+      time:' Thur 12:30pm-2:30pm',
       department: "Physics",
       instructor: "Jane Doe",
       units: 4,
@@ -40,6 +42,7 @@ function Swap_SearchResults(/*{ courses ,searchQuery,openClasses, waitlistClasse
       code: "ENGL101",
       name: "English Composition",
       venue: "Room 301",
+      time:' Tue 1:30pm-3:30pm',
       department: "English",
       instructor: "James Smith",
       units: 3,
@@ -111,6 +114,7 @@ function Swap_SearchResults(/*{ courses ,searchQuery,openClasses, waitlistClasse
                 <div className="course-code">{course.code}</div>
                 <div className="course-name">{course.name}</div>
                 <div className="venue">{course.venue}</div>
+                <div className="time">{course.time}</div>
                 <div className="department">{course.department}</div>
                 <div className="instructor">{course.instructor}</div>
                 <div className="course-units">{course.units} Units</div>

@@ -11,81 +11,124 @@ const columns = [
     accessor: 'name',
   },
   {
-    Header: 'Instructor',
-    accessor: 'instructor',
+    Header: 'Venue',
+    accessor: 'venue',
   },
+  {
+    Header: 'Time',
+    accessor: 'time',
+  },
+
   {
     Header: 'Department',
     accessor: 'department',
   },
+  {
+    Header: 'Instructor',
+    accessor: 'instructor',
+  },
+  {
+    Header: 'Units',
+    accessor: 'units',
+  },
+  {
+    Header: 'Status',
+    accessor: 'status',
+  },
+  {
+    Header: 'Vacancy',
+    accessor: 'vacancy',
+  },
+  
 ];
 
 const data = [
   {
     id: 'CSCI3100',
     name: 'Software Engineering',
-    instructor: 'Micheal Lyu',
+    venue: 'LSK LT1', 
+    time:' Mon 12:30pm-2:30pm', 
     department: 'Computer Science',
+    instructor: 'Micheal Lyu',
+    units: '3',
+    status: 'open',
+    vacancy: '50',
   },
   {
     id: 'MATH101',
     name: 'Calculus I',
-    instructor: 'Jane Smith',
+    venue: 'YIA LT5',
+    time:' Tue 12:30pm-2:30pm',
     department: 'Mathematics',
+    instructor: 'Jane Smith',
+    units: '2',
+    status: 'close',
+    vacancy: '0',
   },
   // Add more courses as needed
 ];
+
+const handleViewCourse = (courseIndex) => {
+  console.log("View",courseIndex)
+};
+
+const handleEnrollCourse = (courseIndex) => {
+  console.log("Enroll",courseIndex)
+};
 
 const CourseCatalog = () => {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({ columns, data });
 
   return (
-    <table {...getTableProps()} style={{  borderRadius: '10px', overflow: 'hidden' }}>
-      <thead>
-        {headerGroups.map((headerGroup) => (
-          <tr {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map((column, columnIndex) => (
-              <th
-                {...column.getHeaderProps()}
-                style={{
-                  background: '#b87742',
-                  color: 'white',
-                  fontWeight: 'bold',
-                  borderTopLeftRadius: columnIndex === 0 ? '10px' : undefined,
-                  borderTopRightRadius: columnIndex === headerGroup.headers.length - 1 ? '10px' : undefined,
-                }}
-              >
-                {column.render('Header')}
-              </th>
-            ))}
-          </tr>
-        ))}
-      </thead>
-      <tbody {...getTableBodyProps()}>
-        {rows.map((row, rowIndex) => {
-          prepareRow(row);
-          return (
-            <tr {...row.getRowProps()}>
-              {row.cells.map((cell, cellIndex) => {
-                return (
-                  <td
-                    {...cell.getCellProps()}
-                    style={{
-                      padding: '10px',
-                      background: '#d49b6f',
-                      borderBottomLeftRadius: rowIndex === rows.length - 1 && cellIndex === 0 ? '10px' : undefined,
-                      borderBottomRightRadius: rowIndex === rows.length - 1 && cellIndex === row.cells.length - 1 ? '10px' : undefined,
-                    }}
-                  >
-                    {cell.render('Cell')}
-                  </td>
-                );
-              })}
+    <div className='course-catalog-table-container'>
+      <table className='course-catalog-table' {...getTableProps()}>
+        <thead>
+          {headerGroups.map((headerGroup) => (
+            <tr {...headerGroup.getHeaderGroupProps()}>
+              {headerGroup.headers.map((column, columnIndex) => (
+                <th
+                  {...column.getHeaderProps()}              
+                >
+                  {column.render('Header')}
+                </th>
+              ))}
             </tr>
-          );
-        })}
-      </tbody>
-    </table>
+          ))}
+        </thead>
+        <tbody {...getTableBodyProps()}>
+          {rows.map((row, rowIndex) => {
+            prepareRow(row);
+            return (
+              <tr {...row.getRowProps()}>
+                {row.cells.map((cell, cellIndex) => {
+                  return (
+                    <td
+                      {...cell.getCellProps()}                    
+                    >
+                      {cell.render('Cell')}
+                    </td>
+                  );
+                })}
+                <td style={{border:'none', width:150}}>
+                <button
+                  className='course-action-btn'
+                  onClick={() => handleViewCourse(rowIndex)}
+                >
+                  View Course
+                </button>
+                <button
+                  className='course-action-btn'
+                  onClick={() => handleEnrollCourse(rowIndex)}
+                >
+                  Enroll
+                </button>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
   );
 };
 
