@@ -88,9 +88,9 @@ db.once('open', function () {
   }));
 
   // Define a route that creates a new sample document
-  app.post('/create-sample', (req, res) => {
+  app.get('/create-sample', (req, res) => {
     Student.create({
-      StudentID: 1155000000,
+      StudentID: "1155000000",
       Name: "Hi",
       Email: "hi@test.com",
       Password: "abcd1234",
@@ -100,76 +100,88 @@ db.once('open', function () {
     res.send("Document created!");
   });
 
+  app.get('/enrolled-course')
+
+  app.post('/login', async (req, res) => {
+    try {
+      // Check if user exists in the database
+      const student = await Student.findOne({ Email: req.body.email });
+      if (!student) {
+        return res.status(400).send('Invalid email.');
+      }
+      // Check if the provided password is valid
+      const validPassword = await bcrypt.compare(req.body.password, student.Password);
+      if (!validPassword) {
+        return res.status(400).send('Invalid password.');
+      }
+      const token = jwt.sign({ _id: student._id }, process.env.TOKEN_SECRET);
+      res.header('x-auth-token', token);
+
+      // Redirect to the profile page on successful login
+      res.redirect("http://localhost:3000/profile");
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal server error.');
+    }
+  });
+
   // Posting a register request for student
   app.post('/register', async (req, res) => {
-      //hash the password
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(req.body.password, salt);
-    try{
-    await Student.create({
-      StudentID: req.body['sid'],
-      Name: req.body['name'],
-      Email: req.body['email'],
-      Password: hashedPassword,
-      Major: req.body['major'],
-      Year: req.body['year']
-    });
+    //hash the password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(req.body.password, salt);
+    try {
+      await Student.create({
+        StudentID: req.body['sid'],
+        Name: req.body['name'],
+        Email: req.body['email'],
+        Password: hashedPassword,
+        Major: req.body['major'],
+        Year: req.body['year']
+      });
       res.status(200).json({ message: 'Student registered successfully' });
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'Error registering the student' });
     }
-
   });
 
-  app.post('/delete_user/:studentID', (req, res) => {
-    Student.findOneAndDelete({
-      StudentID: req.params['studentID']
-    })
+  app.post('/delete-user/:userID', async (req, res) => {
+    try {
+      await Student.findOneandDelete({StudentID: req.params['studentId']});
+      res.status(200).json({ message: 'Student deleted successfully' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Error deleting the student' });
+    }
   });
 
-  app.post('/delete_admin/:adminID', (req, res) => {
-    Admin.findOneAndDelete({
-      AdminID: req.params['adminID']
-    })
+  app.post('/delete-admin/:adminID', async (req, res) => {
+    try {
+      await Admin.findOneandDelete({StudentID: req.params['adminId']});
+      res.status(200).json({ message: 'Admin deleted successfully' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Error deleting the admin' });
+    }
   });
 
-  app.post('/delete_course/:courseID', (req, res) => {
-    Course.findOneAndDelete({
-      CourseID: req.params['courseID']
-    })
+  app.post('/delete-course/:courseID', async (req, res) => {
+    try {
+      await Admin.findOneandDelete({StudentID: req.params['courseId']});
+      res.status(200).json({ message: 'Coursedeleted successfully' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Error deleting the course' });
+    }
   });
-  
+
   app.get('/', (req, res) => {
     res.redirect("http://localhost:3000/login");
   });
-
-app.post('/login', async (req, res) => {
-  try {
-    // Check if user exists in the database
-    const student = await Student.findOne({ Email: req.body.email });
-    if (!student) {
-      return res.status(400).send('Invalid email.');
-    }
-    // Check if the provided password is valid
-    const validPassword = await bcrypt.compare(req.body.password, student.Password); 
-    if (!validPassword) {
-      return res.status(400).send('Invalid password.');
-    }
-    const token = jwt.sign({ _id: student._id }, process.env.TOKEN_SECRET);
-    res.header('x-auth-token', token);
-
-    // Redirect to the profile page on successful login
-    res.redirect("http://localhost:3000/profile");
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Internal server error.');
-  }
 });
 
-});
 
-        
 
 // Start the server
 const server = app.listen(8080);
