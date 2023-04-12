@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../CSS/ProfilePage.css';
 import {
   Box,
@@ -10,28 +10,56 @@ import {
 
 const All_user = () => { 
 
-  const [students, setStudents] = useState([
-    { SID: '1234', name: 'Harry' , email:'asdsadsad@asdsadasd.com' },
-    { SID: '1222', name: 'fuck me', email:'asdsadsad@asdsadasd.com' },
-    { SID: '1111', name: 'fuck you', email:'asdsadsad@asdsadasd.com' },
-    { SID: '3333', name: 'Suck my dick', email:'asdsadsad@asdsadasd.com' },
-  ]);
+  const [students, setStudents] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:8080/all-user')
+      .then(response => response.json())
+      .then(data => setStudents(data))
+      .catch(error => console.error(error));
+  }, []);
   
-  const handleDeleteStudent = (studentIndex) => {
-    setStudents(students.filter((_, index) => index !== studentIndex));
-    console.log('Delete student',studentIndex);
+  const handleDeleteStudent = async (studentIndex, studentID) => {
+    try {
+      await fetch(`http://localhost:8080/user/${studentID}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ index: studentIndex })
+      });
+      
+      setStudents(students.filter((_, index) => index !== studentIndex));
+      console.log('Delete', studentIndex);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  const [admins, setAdmins] = useState([
-    { ID: '4444', name: 'Admin' , email:'asdsadsad@asdsadasd.com' },
-    { ID: '5555', name: 'Admin1', email:'asdsadsad@asdsadasd.com' },
-    { ID: '6666', name: 'Admin2', email:'asdsadsad@asdsadasd.com' },
-    { ID: '7777', name: 'Admin3', email:'asdsadsad@asdsadasd.com' },
-  ]);
+  const [admins, setAdmins] = useState([]);
 
-  const handleDeleteAdmin = (adminIndex) => {
-    setAdmins(admins.filter((_, index) => index !== adminIndex));
-    console.log('Delete admin',adminIndex);
+  useEffect(() => {
+    fetch('http://localhost:8080/all-admin')
+      .then(response => response.json())
+      .then(data => setAdmins(data))
+      .catch(error => console.error(error));
+  }, []);
+
+  const handleDeleteAdmin = async (adminIndex, adminID) => {
+    try {
+      await fetch(`http://localhost:8080/admin/${adminID}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ index: adminIndex })
+      });
+      
+      setAdmins(admins.filter((_, index) => index !== adminIndex));
+      console.log('Delete', adminIndex);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -42,13 +70,13 @@ const All_user = () => {
           {students.map((student, index) => (
             <ListItem key={index} className="student-item">
               <ListItemText
-                primary={student.SID}
-                secondary={student.name}
+                primary={student.StudentID}
+                secondary={student.Name}
                 sx={{ marginRight: '1rem' }}
               />
               <button
                 className='Delete-student-btn'
-                onClick={() => handleDeleteStudent(index)}
+                onClick={() => handleDeleteStudent(index, student.StudentID)}
               >
                 Delete Student
               </button>
@@ -60,13 +88,13 @@ const All_user = () => {
           {admins.map((admin, index) => (
             <ListItem key={index} className="admin-item">
               <ListItemText
-                primary={admin.ID}
-                secondary={admin.name}
+                primary={admin.AdminID}
+                secondary={admin.Name}
                 sx={{ marginRight: '1rem' }}
               />
               <button
                 className='Delete-admin-btn'
-                onClick={() => handleDeleteAdmin(index)}
+                onClick={() => handleDeleteAdmin(index, admin.AdminID)}
               >
                 Delete Admin
               </button>
