@@ -32,11 +32,11 @@
     "xss-clean": "^0.1.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "set PUBLIC_URL=login&&react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "dev": "concurrently --names \"CLIENT,SERVER\" \"react-scripts start\" \"nodemon server.js\""
+    "dev": "concurrently --names \"CLIENT,SERVER\" \"npm start\" \"nodemon server.js\""
   },
   "eslintConfig": {
     "extends": [

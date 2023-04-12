@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import './CSS/nav.css';
+import '../CSS/nav.css';
 import { AiOutlineExport,AiOutlineMenu,AiOutlineCaretLeft,  //icon for top nav
     AiOutlineCalendar,AiOutlineSwap,AiOutlineFileSearch,    // icon for sidenav
     AiOutlinePlusSquare,AiOutlineUser 

@@ -1,6 +1,6 @@
 import React from 'react';
 import '../CSS/Timetable.css';
-import User_nav from '../User_nav'; // import the User_nav component
+import User_nav from '../user/User_nav'; // import the User_nav component
 //import selected_course from 'path/to/selected_course/database'; // import the selected_course database
 
 const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];

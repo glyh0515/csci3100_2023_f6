@@ -6,7 +6,8 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const cors = require('cors');
-const methodOverride = require('method-override')
+const methodOverride = require('method-override');
+const bodyParser = require('body-parser');
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.use(helmet());
 app.use(mongoSanitize());
 app.use(xss());
 app.use(hpp());
+app.use(express.json());
 
 // Connect to MongoDB
 mongoose.connect('mongodb+srv://csci3100_2023_f6:La39HykFMfj2xPK5@cluster0.05afckq.mongodb.net/test', {
@@ -38,26 +40,23 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
   console.log("Connection is open...");
   // Define schemas for sample models
-  let StudentSchema = new mongoose.Schema();
-  let AdminSchema = new mongoose.Schema();
-  let CourseSchema = new mongoose.Schema();
-  StudentSchema = new mongoose.Schema({
-    StudentID: {type: String, unique: true},
+  const StudentSchema = mongoose.Schema({
+    StudentID: { type: String, unique: true },
     Name: String,
     Email: String,
     Password: String,
     Major: String,
     Year: Number,
-    EnrolledCourse: [CourseSchema],
+    EnrolledCourse: { type: mongoose.Schema.Types.ObjectId, ref: 'Course' },
   });
-  AdminSchema = new mongoose.Schema({
-    AdminID: {type: String, unique: true},
+  const AdminSchema = mongoose.Schema({
+    AdminID: { type: String, unique: true },
     Name: String,
     Email: String,
     Password: String,
   });
-  CourseSchema = new mongoose.Schema({
-    ClassNumber: {type: String, unique: true},
+  const CourseSchema = mongoose.Schema({
+    ClassNumber: { type: String, unique: true },
     CourseID: String,
     CourseName: String,
     Timeslot: String,
@@ -65,16 +64,14 @@ db.once('open', function () {
     Venue: String,
     Department: String,
     Units: Number,
-    EnrolledSturent: [StudentSchema],
     Vacancy: Number,
+    EnrolledSturent: { type: mongoose.Schema.Types.ObjectId, ref: 'Student' }
   });
   // Create models based on the schema
   const Student = mongoose.model('Student', StudentSchema);
   const Admin = mongoose.model('Admin', AdminSchema);
   const Course = mongoose.model('Course', CourseSchema);
 
-  // This module is for parsing the content in a request body (installed with npm)
-  const bodyParser = require('body-parser');
   // Use parser to obtain the content in the body of a request
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(methodOverride(function (req, res) {
@@ -87,7 +84,7 @@ db.once('open', function () {
   }));
 
   // Define a route that creates a new sample document
-  app.get('/create-sample', (req, res) => {
+  app.post('/create-sample', (req, res) => {
     Student.create({
       StudentID: 1155000000,
       Name: "Hi",
@@ -99,8 +96,21 @@ db.once('open', function () {
     res.send("Document created!");
   });
 
-  app.all('/*', (req, res) => {
-    res.status(404).redirect('http://localhost:3000/');
+  // Posting a register request for student
+  app.post('/register', (req, res) => {
+    Student.create({
+      StudentID: req.body['sid'],
+      Name: req.body['name'],
+      Email: req.body['email'],
+      Password: req.body['password'],
+      Major: req.body['major'],
+      Year: req.body['year']
+    })
+    res.redirect("http://localhost:3000/login");
+  });
+  
+  app.get('/*', (req, res) => {
+    res.redirect("http://localhost:3000/login");
   });
 });
 

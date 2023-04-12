@@ -55,7 +55,7 @@ function Login() {
               transform: 'translate(-50%, -50%)',
             }}
             ><h2>Login</h2>
-            <form class="center">
+            <form className="center" action="http://localhost:8080/login" method="post">
                            
                <TextField 
                     size='small' color='warning'

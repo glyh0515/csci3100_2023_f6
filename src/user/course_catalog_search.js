@@ -1,6 +1,6 @@
 import React from 'react';
 import DropButton from './DropButton';
-import Course_Catalog_table from './course_catalog_table';
+import Course_Catalog_table from './component/course_catalog_table';
 
 function Course_Catalog_Search() {
     return (
