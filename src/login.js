@@ -9,24 +9,58 @@ import { AiOutlineSend } from 'react-icons/ai';
 function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [isValid, setIsValid] = useState(false);
+    const [isValid, setIsValid] = useState(true);
     const [errorMessage, setErrorMessage] = useState("");
+    const [emailError, setEmailError] = useState("");
+    const [passwordError, setPasswordError] = useState("");
     const navigate = useNavigate();
 
-    //function handlelogin(e) {
-        //e.preventDefault();
-    //// Check if email and password are valid
-        //const alert_msg = document.getElementById('alert_msg');
-        
-        //if(email === "1155167890@link.cuhk.edu.hk" && password === "12345678"){     // compare the value with the sever
-                //setIsValid(true);   // Do something if login is successful
-                //navigate('/profile'); // direct to profile
-        //}else{
-            //setIsValid(false);  // Do something if login is unsuccessful
-            //setErrorMessage("Invalid username or password."); // Set error message
-   
-        //}           
-    //}
+    async function handlelogin(e) {
+        e.preventDefault();
+    // Check if email and password are valid
+        setEmailError("");    
+        setPasswordError("");
+
+        if (!email) {
+          setEmailError("Email is required");
+        } else if (!/^1155\d{6}@link\.cuhk\.edu\.hk$/.test(email)) { 
+          setEmailError("Must be SID@link.cuhk.edu.hk");
+        }
+        if (!password) {
+          setPasswordError("Password is required");
+        }
+        if (!email || !password || !/^1155\d{6}@link\.cuhk\.edu\.hk$/.test(email)) {
+          return;
+        }
+      else{
+          try{
+            const response = await fetch('http://localhost:8080/login', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({email, password})
+            });
+            
+            console.log(response);
+
+            if (response.status === 400) {
+              setIsValid(false);
+              setErrorMessage("Invalid email or password");
+            } else if (response.status === 200) {
+              const token = response.headers.get('x-auth-token');
+              setIsValid(true);
+              navigate('/profile');
+            } else {
+              throw new Error('Something went wrong');
+            }
+          } catch (error) {
+            console.error(error);
+            setIsValid(false);
+            setErrorMessage("An error occurred");
+          }
+      }
+    }
 
     function handleEmailChange(e) {
         setEmail(e.target.value);
@@ -55,22 +89,22 @@ function Login() {
               transform: 'translate(-50%, -50%)',
             }}
             ><h2>Login</h2>
-            <form className="center" action="http://localhost:8080/login" method="post">
+            <form className="center" onSubmit={handlelogin}>
                            
                <TextField 
                     size='small' color='warning'
                     id="email" name="email" label="Email" type='email' variant="outlined" placeholder='SID@link.cuhk.edu.hk' value={email}
-                    pattern="1155[\d]{6}@link.cuhk.edu.hk" margin="dense" onChange={handleEmailChange} />
+                    pattern="1155[\d]{6}@link.cuhk.edu.hk" margin="dense" onChange={handleEmailChange} error={!!emailError} helperText={emailError} />
                <TextField size='small'  color='warning'
                             id="password" name="password" label="Password" type='password' value={password} 
-                            variant="outlined" margin="dense" onChange={handlePasswordChange} />
-               
+                            variant="outlined" margin="dense" onChange={handlePasswordChange}  error={!!passwordError} helperText={passwordError} />
+                {errorMessage && <p style={{ color: 'red', fontSize:'12px', marginTop: '10px' }}>{errorMessage}</p>}
+              
                <Button className='login_button' type="submit" variant="contained" endIcon={<AiOutlineSend />}
                 style={{ fontSize:'12px' , backgroundColor:'#c7b9b4', color:'black', width:'120px', height:'40px', marginTop:'10px', borderRadius:'10px', marginBottom:'10px'
                 }}>
                Login
                </Button>
-               {errorMessage && <p style={{ color: 'red', fontSize:'12px' }}>{errorMessage}</p>} {/* Display error message */}
                <p style={{fontSize:'12px'}}>Don't have an account? <a href="/register">Register</a></p>
             </form>
             </Box>
