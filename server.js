@@ -52,7 +52,7 @@ db.once('open', function () {
     Password: String,
     Major: String,
     Year: Number,
-    EnrolledCourse: { type: mongoose.Schema.Types.ObjectId, ref: 'Course' },
+    EnrolledCourse: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Course' }]
   });
   const AdminSchema = mongoose.Schema({
     AdminID: { type: String, unique: true },
@@ -69,7 +69,7 @@ db.once('open', function () {
     Department: String,
     Units: Number,
     Vacancy: Number,
-    EnrolledStudent: { type: mongoose.Schema.Types.ObjectId, ref: 'Student' }
+    EnrolledStudent: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Student' }]
   });
   // Create models based on the schema
   const User = mongoose.model('Student', UserSchema);
@@ -101,12 +101,53 @@ db.once('open', function () {
     res.send("Document created!");
   });
 
+  app.get('/all-user', async (req, res) => {
+    try {
+      const users = await User.find({});
+      res.status(200).json(users);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal server error.');
+    }
+  });
+
+  app.get('/all-admin', async (req, res) => {
+    try {
+      const admins = await Admin.find({});
+      res.status(200).json(admins);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal server error.');
+    }
+  });
+
   app.get('/all-course', async (req, res) => {
     try {
-      // Query the Course collection to get all courses
       const courses = await Course.find({});
-      // Return the courses in JSON format
       res.status(200).json(courses);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal server error.');
+    }
+  });
+
+  app.post('/login', async (req, res) => {
+    try {
+      // Check if user exists in the database
+      const user = await User.findOne({ Email: req.body.email });
+      if (!user) {
+        res.status(400).json({ message: 'Invalid email or password' });
+      }
+      // Check if the provided password is valid
+      const validPassword = await bcrypt.compare(req.body.password, user.Password);
+      if (!validPassword) {
+        res.status(400).json({ message: 'Invalid email or password' });
+      }
+      const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
+      res.header('x-auth-token', token);
+
+      // Redirect to the profile page on successful login
+      res.redirect("http://localhost:3000/profile");
     } catch (error) {
       console.error(error);
       res.status(500).send('Internal server error.');
@@ -120,19 +161,19 @@ db.once('open', function () {
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
     try {
       await User.create({
-      StudentID: req.body['studentID'],
-      Name: req.body['name'],
-      Email: req.body['email'],
-      Password: hashedPassword,
-      Major: req.body['major'],
-      Year: req.body['year'],
-    });
-    res.status(200).json({ message: 'Student registered successfully' });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Error registering the student' });
-  }
-});
+        StudentID: req.body['sid'],
+        Name: req.body['name'],
+        Email: req.body['email'],
+        Password: hashedPassword,
+        Major: req.body['major'],
+        Year: req.body['year'],
+      });
+      res.status(200).json({ message: 'Student registered successfully' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Error registering the student' });
+    }
+  });
 
   app.post('/admin/register', async (req, res) => {
     //hash the password
@@ -154,7 +195,7 @@ db.once('open', function () {
 
   app.delete('/user/:studentID', async (req, res) => {
     try {
-      await User.findOneAndDelete({StudentID: req.params['studentID']});
+      await User.findOneAndDelete({ StudentID: req.params['studentID'] });
       res.status(200).json({ message: 'Student deleted successfully' });
     } catch (error) {
       console.error(error);
@@ -164,7 +205,7 @@ db.once('open', function () {
 
   app.delete('/admin/:adminID', async (req, res) => {
     try {
-      await Admin.findOneAndDelete({AdminID: req.params['adminID']});
+      await Admin.findOneAndDelete({ AdminID: req.params['adminID'] });
       res.status(200).json({ message: 'Admin deleted successfully' });
     } catch (error) {
       console.error(error);
@@ -174,7 +215,7 @@ db.once('open', function () {
 
   app.delete('/course/:courseID', async (req, res) => {
     try {
-      await Course.findOneAndDelete({CourseID: req.params['courseID']});
+      await Course.findOneAndDelete({ CourseID: req.params['courseID'] });
       res.status(200).json({ message: 'Course deleted successfully' });
       console.log(req.params['courseID'], "deleted!");
     } catch (error) {
@@ -182,72 +223,10 @@ db.once('open', function () {
       res.status(500).json({ message: 'Error deleting the course' });
     }
   });
-
-  app.get('/', (req, res) => {
-    res.redirect("http://localhost:3000/login");
-  });
-});
-
-  app.post('/delete-user/:studentID', async (req, res) => {
-    try {
-      await Student.findOneAndDelete({StudentID: req.params['studentID']});
-      res.status(200).json({ message: 'Student deleted successfully' });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: 'Error deleting the student' });
-    }
-  });
-
-  app.post('/delete-admin/:adminID', async (req, res) => {
-    try {
-      await Admin.findOneAndDelete({AdminID: req.params['adminID']});
-      res.status(200).json({ message: 'Admin deleted successfully' });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: 'Error deleting the admin' });
-    }
-  });
-
-  app.post('/delete-course/:courseID', async (req, res) => {
-    try {
-      await Course.findOneAndDelete({CourseID: req.params['courseID']});
-      res.status(200).json({ message: 'Course deleted successfully' });
-      console.log(req.params['courseID'], "deleted!");
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: 'Error deleting the course' });
-    }
-  });
-
-  app.get('/', (req, res) => {
-    res.redirect("http://localhost:3000/login");
-  });
-
-app.post('/login', async (req, res) => {
-  try {
-    // Check if user exists in the database
-    const user = await User.findOne({ Email: req.body.email });
-    if (!user) {
-      res.status(400).json({ message: 'Invalid email or password' });
-    }
-    // Check if the provided password is valid
-    const validPassword = await bcrypt.compare(req.body.password, user.Password); 
-    if (!validPassword) {
-      res.status(400).json({ message: 'Invalid email or password' });
-    }
-    const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
-    res.header('x-auth-token', token);
-
-    // Redirect to the profile page on successful login
-    res.redirect("http://localhost:3000/profile");
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Internal server error.');
-  }
 });
 
 
-  
 
-// Start the server
-const server = app.listen(8080);
+
+  // Start the server
+  const server = app.listen(8080);
