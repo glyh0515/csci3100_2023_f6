@@ -18,8 +18,6 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/user" />
-        <Route path="/admin" />
         <Route path="/search" element={<Course_Catalog_Index />} />
         <Route path="/create_admin" element={<CreateAdmin />} />
         <Route path="/create_course" element={<CreateCourse />} />

@@ -34,7 +34,7 @@ function Register() {
       [e.target.id]: e.target.value
     });
   }
-   const validate = () => {
+  const validate = () => {
     let errors = {};
     if (!formData.name.trim()) {
       errors.name = 'Name is required';
@@ -76,33 +76,33 @@ function Register() {
         ...formData,
         errors: errors
       });
-      } else {
-        try {
-          const response = await fetch('http://localhost:8080/register', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(formData)
-          });
-          
+    } else {
+      try {
+        const response = await fetch('http://localhost:8080/user/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
+        });
 
-          if (response.status === 200) {
-            navigate('/login');
+
+        if (response.status === 200) {
+          navigate('/login');
+        } else {
+          const contentType = response.headers.get('content-type');
+          if (contentType && contentType.includes('application/json')) {
+            const errorData = await response.json();
+            console.error('Error:', errorData);
           } else {
-            const contentType = response.headers.get('content-type');
-            if (contentType && contentType.includes('application/json')) {
-              const errorData = await response.json();
-              console.error('Error:', errorData);
-            } else {
-             console.error('Error: Non-JSON response');
+            console.error('Error: Non-JSON response');
+          }
         }
+      } catch (error) {
+        console.error('Error:', error);
+      }
     }
-  } catch (error) {
-    console.error('Error:', error);
-  }
-}
-};
+  };
 
   return (
     <div style={{ textAlign: 'left' }}>

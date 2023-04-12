@@ -21,8 +21,8 @@ const CourseTable = () => {
 
   const handleDeleteCourse = async (courseIndex, courseID) => {
     try {
-      await fetch(`http://localhost:8080/delete-course/${courseID}`, {
-        method: 'POST',
+      await fetch(`http://localhost:8080/course/${courseID}`, {
+        method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'
         },

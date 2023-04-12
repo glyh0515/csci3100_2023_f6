@@ -45,7 +45,7 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
   console.log("Connection is open...");
   // Define schemas for sample models
-  const StudentSchema = mongoose.Schema({
+  const UserSchema = mongoose.Schema({
     StudentID: { type: String, unique: true },
     Name: String,
     Email: String,
@@ -71,7 +71,7 @@ db.once('open', function () {
     EnrolledStudent: { type: mongoose.Schema.Types.ObjectId, ref: 'Student' }
   });
   // Create models based on the schema
-  const Student = mongoose.model('Student', StudentSchema);
+  const User = mongoose.model('Student', UserSchema);
   const Admin = mongoose.model('Admin', AdminSchema);
   const Course = mongoose.model('Course', CourseSchema);
 
@@ -136,12 +136,12 @@ db.once('open', function () {
   });
 
   // Posting a register request for student
-  app.post('/register', async (req, res) => {
+  app.post('/user/register', async (req, res) => {
     //hash the password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
     try {
-      await Student.create({
+      await User.create({
         StudentID: req.body['sid'],
         Name: req.body['name'],
         Email: req.body['email'],
@@ -156,9 +156,27 @@ db.once('open', function () {
     }
   });
 
-  app.post('/delete-user/:studentID', async (req, res) => {
+  app.post('/admin/register', async (req, res) => {
+    //hash the password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(req.body.password, salt);
     try {
-      await Student.findOneAndDelete({StudentID: req.params['studentID']});
+      await Admin.create({
+        AdminID: req.body['adminID'],
+        Name: req.body['name'],
+        Email: req.body['email'],
+        Password: hashedPassword,
+      });
+      res.status(200).json({ message: 'Student registered successfully' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Error registering the student' });
+    }
+  });
+
+  app.delete('/user/:studentID', async (req, res) => {
+    try {
+      await User.findOneAndDelete({StudentID: req.params['studentID']});
       res.status(200).json({ message: 'Student deleted successfully' });
     } catch (error) {
       console.error(error);
@@ -166,7 +184,7 @@ db.once('open', function () {
     }
   });
 
-  app.post('/delete-admin/:adminID', async (req, res) => {
+  app.delete('/admin/:adminID', async (req, res) => {
     try {
       await Admin.findOneAndDelete({AdminID: req.params['adminID']});
       res.status(200).json({ message: 'Admin deleted successfully' });
@@ -176,7 +194,7 @@ db.once('open', function () {
     }
   });
 
-  app.post('/delete-course/:courseID', async (req, res) => {
+  app.delete('/course/:courseID', async (req, res) => {
     try {
       await Course.findOneAndDelete({CourseID: req.params['courseID']});
       res.status(200).json({ message: 'Course deleted successfully' });
