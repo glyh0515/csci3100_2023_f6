@@ -59,10 +59,10 @@ function Login() {
                            
                <TextField 
                     size='small' color='warning'
-                    id="outlined-basic" label="Email" type='email' variant="outlined" placeholder='SID@link.cuhk.edu.hk' value={email}
+                    id="email" name="email" label="Email" type='email' variant="outlined" placeholder='SID@link.cuhk.edu.hk' value={email}
                     pattern="1155[\d]{6}@link.cuhk.edu.hk" margin="dense" onChange={handleEmailChange} />
                <TextField size='small'  color='warning'
-                            id="outlined-basic" label="Password" type='password' value={password} 
+                            id="password" name="password" label="Password" type='password' value={password} 
                             variant="outlined" margin="dense" onChange={handlePasswordChange} />
                
                <Button className='login_button' type="submit" variant="contained" endIcon={<AiOutlineSend />}
