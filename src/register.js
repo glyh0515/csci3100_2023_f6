@@ -78,7 +78,7 @@ function Register() {
       });
       } else {
         try {
-          const response = fetch('http://localhost:8080/register', {
+          const response = await fetch('http://localhost:8080/register', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -86,9 +86,8 @@ function Register() {
             body: JSON.stringify(formData)
           });
           
-          console.log('Recived response: ', response.status);
 
-          if (response.status === 201) {
+          if (response.status === 200) {
             navigate('/login');
           } else {
             const contentType = response.headers.get('content-type');
