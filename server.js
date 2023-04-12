@@ -10,6 +10,9 @@ const methodOverride = require('method-override');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 const app = express();
 
@@ -136,9 +139,6 @@ db.once('open', function () {
     res.redirect("http://localhost:3000/login");
   });
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-
 app.post('/login', async (req, res) => {
   try {
     // Check if user exists in the database
@@ -152,7 +152,7 @@ app.post('/login', async (req, res) => {
       return res.status(400).send('Invalid password.');
     }
     const token = jwt.sign({ _id: student._id }, process.env.TOKEN_SECRET);
-    res.header('x-auth-token', token).send('Logged in successfully.');
+    res.header('x-auth-token', token);
 
     // Redirect to the profile page on successful login
     res.redirect("http://localhost:3000/profile");
