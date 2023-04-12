@@ -105,16 +105,21 @@ db.once('open', function () {
       //hash the password
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(req.body.password, salt);
-
-    Student.create({
+    try{
+    await Student.create({
       StudentID: req.body['sid'],
       Name: req.body['name'],
       Email: req.body['email'],
       Password: hashedPassword,
       Major: req.body['major'],
       Year: req.body['year']
-    })
-    res.redirect("http://localhost:3000/login");
+    });
+      res.status(200).json({ message: 'Student registered successfully' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Error registering the student' });
+    }
+
   });
 
   app.post('/delete_user/:studentID', (req, res) => {
