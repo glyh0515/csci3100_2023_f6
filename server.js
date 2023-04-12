@@ -65,6 +65,7 @@ db.once('open', function () {
     CourseName: String,
     Timeslot: String,
     Venue: String,
+    Instructor: String,
     Department: String,
     Units: Number,
     Vacancy: Number,
