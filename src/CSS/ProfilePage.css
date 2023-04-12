@@ -1,9 +1,6 @@
 .profile-page {
   display: flex;
-  margin: 1rem;
-  color: #bd4c4c;
-
-  
+  margin: 1rem;  
 }
 
 .left-column {
@@ -12,7 +9,6 @@
   float: left;
   text-align: left;
   background-color: blanchedalmond;
-  color: #bd4c4c;
 }
 
 .profile-picture {
@@ -23,11 +19,11 @@
 }
 
 .personal-info {
+  color: rgb(158, 57, 10);
   font-size: 18px;
   list-style: none;
   padding: 0;
-  background-color: blanchedalmond;
-  color: #bd4c4c;
+
 }
 
 .personal-info-item {
@@ -41,9 +37,11 @@
 .course-list {
   list-style: none;
   padding: 0;
+  color: rgb(158, 57, 10);
 }
 
 .course-item {
+
   display: flex;
   align-items: center;
   margin-bottom: 0.5rem;
@@ -56,21 +54,34 @@
 }
 
 .drop-course-btn {
-  background-color: brown;
   width: 100px;
-  color: white;
-  border: none;
+  background: #d7cdc3;
+  color: rgb(158, 57, 10);
+  font-size: 17px;
+  border: 1px solid #865344;
+  border-radius: 10px;
   padding: 0.25rem 0.5rem;
   cursor: pointer;
 }
 
+.drop-course-btn:hover{
+  border: 2px solid #551805;
+  transition: 0.1s;
+  color:  #551805;
+}
+
 .profile-header{
+  color: rgb(158, 57, 10);
   width: 100%;
   display: flex;
   justify-content: center;
   padding: 1rem;
   text-align: center;
-  background-color: blanchedalmond;
   border-radius: 5px;
-  color: #bd4c4c;
+  font-size: 24px; 
+}
+
+.header{
+  font-size: 24px;
+  color: rgb(158, 57, 10);
 }

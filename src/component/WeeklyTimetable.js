@@ -58,39 +58,42 @@ const courseSchedule = {
 
 const WeeklyTimetable = () => {
   return (
-    <div className="timetable-container">
+    <div >
       <User_nav />
-      <table className="timetable">
-        <thead>
-          <tr>
-            <th>Time</th>
-            {days.map((day, idx) => (
-              <th key={idx}>{day}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {Array.from({ length: 10 }, (_, hour) => (
-            <tr key={hour}>
-              <td>{`${hour+8}:30`} - {`${hour+9}:15`}</td>
-              {days.map((day, dayIndex) => {
-                const course = courseSchedule[day]?.[hour];
-                return (
-                  <td key={dayIndex} className="timetable-cell">
-                    {course && (
-                      <>
-                        <div>{course.courseCode}</div>
-                        <div>{course.courseName}</div>
-                        <div>{course.classroom}</div>
-                      </>
-                    )}
-                  </td>
-                );
-              })}
+      <div className="timetable-container">
+        <table className="timetable">
+          <thead>
+            <tr>
+              <th>Time</th>
+              {days.map((day, idx) => (
+                <th key={idx}>{day}</th>
+              ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {Array.from({ length: 10 }, (_, hour) => (
+              <tr key={hour}>
+                <td>{`${hour+8}:30`} - {`${hour+9}:15`}</td>
+                {days.map((day, dayIndex) => {
+                  const course = courseSchedule[day]?.[hour];
+                  return (
+                    <td key={dayIndex} className="timetable-cell">
+                      {course && (
+                        <>
+                          <div>{course.courseCode}</div>
+                          <div>{course.courseName}</div>
+                          <div>{course.classroom}</div>
+                        </>
+                      )}
+                    </td>
+                  );
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      
     </div>
   );
 };

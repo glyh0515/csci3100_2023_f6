@@ -36,9 +36,9 @@ const ProfilePage = () => {
     <div>
       <User_nav />
       <Box className="profile-page" sx={{ display: 'flex', margin: '1rem' }}>
-        <Card className="left-column" sx={{ marginRight: '1rem' ,backgroundColor: 'blanchedalmond', maxWidth:400,minWidth:350 }}>
+        <Card className="left-column" sx={{ marginRight: '1rem' ,backgroundColor: '#d7cdc3', maxWidth:400,minWidth:350 }}>
           <CardContent>
-            <Typography className='profile-header' >Profile</Typography>
+            <Typography className='profile-header' sx={{fontSize: 24}}>Profile</Typography>
             <Box
               sx={{
                 display: 'flex',
@@ -54,28 +54,36 @@ const ProfilePage = () => {
                 sx={{ width: '150px', height: '150px' }}
               />
             </Box>
-            <Typography className='profile-header'>Personal Information</Typography>
-            <List className="personal-info">
-              <ListItem>
-                <ListItemText className='personal-info-item' primary={`Name: ${profile.name}`} />
-              </ListItem>
-              <ListItem>
-                <ListItemText className='personal-info-item' primary={`Email: ${profile.email}`} />
-              </ListItem>
-              <ListItem>
-                <ListItemText className='personal-info-item' primary={`Student ID: ${profile.sid}`} />
-              </ListItem>
-              <ListItem>
-                <ListItemText className='personal-info-item' primary={`Major: ${profile.major}`} />
-              </ListItem>
-              <ListItem>
-                <ListItemText className='personal-info-item' primary={`Year: ${profile.year}`} />
-              </ListItem>
-            </List>
+            <Box sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                marginBottom: '1rem',
+              }}
+            >
+              
+              <List className="personal-info">
+                <ListItem>
+                  <ListItemText className='personal-info-item' primary={`Name: ${profile.name}`} />
+                </ListItem>
+                <ListItem>
+                  <ListItemText className='personal-info-item' primary={`Email: ${profile.email}`} />
+                </ListItem>
+                <ListItem>
+                  <ListItemText className='personal-info-item' primary={`Student ID: ${profile.sid}`} />
+                </ListItem>
+                <ListItem>
+                  <ListItemText className='personal-info-item' primary={`Major: ${profile.major}`} />
+                </ListItem>
+                <ListItem>
+                  <ListItemText className='personal-info-item' primary={`Year: ${profile.year}`} />
+                </ListItem>
+              </List>
+            </Box>
           </CardContent>
         </Card>
         <Box className="main-content" sx={{ flex: 2 }}>
-          <Typography className='header' >Enrolled Courses</Typography>
+          <Typography className='header' sx={{fontSize: 24}} >Enrolled Courses</Typography>
           <List className="course-list">
             {courses.map((course, index) => (
               <ListItem key={course.code} className="course-item">
@@ -84,14 +92,12 @@ const ProfilePage = () => {
                   secondary={course.name}
                   sx={{ marginRight: '1rem' }}
                 />
-                <Button
-                  variant="contained"
-                  color="error"
+                <button
                   className='drop-course-btn'
                   onClick={() => handleDropCourse(index)}
                 >
                   Drop
-                </Button>
+                </button>
               </ListItem>
             ))}
           </List>

@@ -1,19 +1,21 @@
 .timetable-container {
     overflow-x: auto;
-    left: 200px;
+    width: 100%;
     top: 30px;
+    
   }
   
   .timetable {
-
+    margin-left: calc(50% - 420px);
     width: 840px;
+    position: relative;
     border-collapse: collapse;
     border-radius: 20px;
   }
   
   .timetable th,
   .timetable td {
-    border: 1px solid #a39d9d;
+    border: 1px solid #865344;
     width: 120px;
     padding: 8px;
     text-align: center;
@@ -21,7 +23,7 @@
   }
   
   .timetable thead {
-    background-color: #e07b7b;
+    background-color: #d7cdc3;
     font-weight: bold;
   }
   
