@@ -1,110 +1,118 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Admin_nav from './Admin_nav';
 import '../CSS/CreateCourse.css';
+import { useNavigate } from 'react-router-dom';
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
+
+const inputFields = [
+  { id: 'courseID', label: 'Course ID', type: 'text' },
+  { id: 'name', label: 'Course Name', type: 'text' },
+  { id: 'time', label: 'Time', type: 'text' },
+  { id: 'venue', label: 'Venue', type: 'text' },
+  { id: 'Department', label: 'Department', type: 'text' },
+  { id: 'instructor', label: 'Instructor', type: 'text' },
+  { id: 'vacancy', label: 'Vacancy', type: 'text' }
+];
 
 function Create_Course() {
-  const [courseId, setCourseId] = useState('');
-  const [courseName, setCourseName] = useState('');
-  const [time, setTime] = useState('');
-  const [venue, setVenue] = useState('');
-  const [department, setDepartment] = useState('');
-  const [instructor, setInstructor] = useState('');
-  const [vacancy, setVacancy] = useState('');
+  const navigate = useNavigate();
+  const [formData, setFormData] = React.useState({
+    courseID: '',
+    name: '',
+    time: '',
+    venue: '',
+    Department: '',
+    instructor: '',
+    vacancy: '',
+    errors: {}
+  });
 
-  const days = [
-  'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'
-  ];
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.id]: e.target.value
+    });
+  }
+  const validate = () => {
+    let errors = {};
+    if (!formData.courseID.trim()) {
+      errors.courseID = 'Course ID is required';
+    }
+    if (!formData.name.trim()) {
+      errors.name = 'Course name is required';
+    } 
+    if (!formData.time.trim()) {
+      errors.time = 'Time is required';
+    } 
+    if (!formData.venue.trim()) {
+      errors.venue = 'Venue is required';
+    }
+    if (!formData.Department.trim()) {
+      errors.Department = 'Department is required';
+    }
+    if (!formData.instructor.trim()) {
+      errors.instructor = 'Instructor is required';
+    } 
+    if (!formData.vacancy.trim()) {
+      errors.vacancy = 'Vacancy is required';
+    } 
+    return errors;
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Do something with the course information, like send it to a server
-    console.log({ courseId, courseName, time, venue, department, instructor, vacancy });
-    // Reset the form
-    setCourseId('');
-    setCourseName('');
-    setTime('');
-    setVenue('');
-    setDepartment('');
-    setInstructor('');
-    setVacancy('');
+    const errors = validate();
+    if (Object.keys(errors).length > 0) {
+      setFormData({
+        ...formData,
+        errors: errors
+      });
+    } else {
+      
+    }
   };
 
+
   return (
-  <div className='create_course_container'>
+  <div className='create-course-container'>
     <Admin_nav />
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="courseId" className='create_course_header'>Course ID:</label>
-        <input
-          type="text"
-          id="courseId"
-          value={courseId}
-          onChange={(e) => setCourseId(e.target.value)}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="courseName" className='create_course_header'>Course Name:</label>
-        <input
-          type="text"
-          id="courseName"
-          value={courseName}
-          onChange={(e) => setCourseName(e.target.value)}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="time" className='create_course_header'>Time:</label>
-        <input
-          type="text"
-          id="time"
-          value={time}
-          onChange={(e) => setTime(e.target.value)}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="venue" className='create_course_header'>Venue:</label>
-        <input
-          type="text"
-          id="venue"
-          value={venue}
-          onChange={(e) => setVenue(e.target.value)}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="department" className='create_course_header'>Department:</label>
-        <input
-          type="text"
-          id="department"
-          value={department}
-          onChange={(e) => setDepartment(e.target.value)}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="instructor" className='create_course_header'>Instructor:</label>
-        <input
-          type="text"
-          id="instructor"
-          value={instructor}
-          onChange={(e) => setInstructor(e.target.value)}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="vacancy" className='create_course_header'>Vacancy:</label>
-        <input
-          type="number"
-          id="vacancy"
-          value={vacancy}
-          onChange={(e) => setVacancy(e.target.value)}
-          required
-        />
-      </div>
-      <button type="submit" className='create_course_header'>Create Course</button>
-    </form>
+      <Box sx={{
+        width: 400,
+        maxHeight: 800,
+        minHeight: 500,
+        backgroundColor: '#d7cdc3',
+        borderRadius: '20px',
+        position: 'fixed',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+      }}
+      >
+      <form onSubmit={handleSubmit} className='create-course-form'>
+      <h2>Create Course</h2>
+        <Box sx={{ width: '100%', display: 'inline-block', padding: 2 }}>
+          {inputFields.map((field) => (
+            <TextField
+              color='warning'
+              size='small'
+              key={field.id}
+              id={field.id}
+              name={field.id}
+              label={field.label}
+              type={field.type}
+              variant="outlined"
+              margin="dense"
+              onChange={handleChange}
+              error={formData.errors[field.id] ? true : false}
+              helperText={formData.errors[field.id]}
+              sx={{ width: '100%' }}
+            />
+          ))}
+        </Box>
+        <button type="submit" className='create-course-btn'>Create Course</button>
+      </form>
+    </Box>  
   </div>
     
   );
