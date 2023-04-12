@@ -222,6 +222,25 @@ db.once('open', function () {
     }
   });
 
+  app.post('/course/register', async (req, res) => {
+    try {
+      await Course.create({
+        CourseID: req.body['courseID'],
+        CourseName: req.body['courseName'],
+        Timeslot: req.body['timeslot'],
+        Venue: req.body['venue'],
+        Department: req.body['department'],
+        Instructor: req.body['instructor'],
+        Units: req.body['units'],
+        Vacancy: req.body['vacancy'],
+      });
+      res.status(200).json({ message: 'Student registered successfully' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Error registering the student' });
+    }
+  });
+
   app.delete('/user/:studentID', async (req, res) => {
     try {
       await User.findOneAndDelete({ StudentID: req.params['studentID'] });
@@ -253,9 +272,6 @@ db.once('open', function () {
     }
   });
 });
-
-
-
 
 // Start the server
 const server = app.listen(8080);
