@@ -1,156 +1,113 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Admin_nav from './Admin_nav';
-import { useNavigate } from 'react-router-dom';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import { AiOutlineSend } from 'react-icons/ai';
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
-import InputLabel from '@mui/material/InputLabel';
-import FormControl from '@mui/material/FormControl';
-import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import '../CSS/CreateCourse.css';
 
-const inputFields = [
-    { id: 1, type: 'text', name: 'course_code', label: 'Course Code' },
-    { id: 2, type: 'text', name: 'course_name', label: 'Course Name' },
-    { id: 3, type: 'select', name: 'day', label: 'Day' },
-    { id: 4, type: 'timeRange', name: 'time', label: 'Time Range' },
-    { id: 5, type: 'text', name: 'location', label: 'Location' },
-    { id: 6, type: 'text', name: 'instructor', label: 'Instructor' },
-];
+function Create_Course() {
+  const [courseId, setCourseId] = useState('');
+  const [courseName, setCourseName] = useState('');
+  const [time, setTime] = useState('');
+  const [venue, setVenue] = useState('');
+  const [department, setDepartment] = useState('');
+  const [instructor, setInstructor] = useState('');
+  const [vacancy, setVacancy] = useState('');
 
-const days = [
+  const days = [
   'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'
-];
+  ];
 
-function CreateCourse() {
-  const navigate = useNavigate();
-  const [formData, setFormData] = React.useState({
-    course_code: '',
-    course_name: '',
-    day: '',
-    time: '',
-    location: '',
-    instructor: '',
-    errors: {}
-  });
-
-const handleChange = (e) => {
-  setFormData({
-    ...formData,
-    [e.target.name]: e.target.value
-  });
-};
-
-const validate = () => {
-  let errors = {};
-  if (!formData.course_code.trim()) {
-    errors.course_code = 'Course Code is required';
-  }
-  if (!formData.course_name.trim()) {
-    errors.course_name = 'Course Name is required';
-  }
-  if (!formData.day.trim()) {
-    errors.day = 'Day is required';
-  }
-  if (!formData.time.trim()) {
-    errors.time = 'Time is required';
-  }
-  if (!formData.location.trim()) {
-    errors.location = 'Location is required';
-  }
-  if (!formData.instructor.trim()) {
-    errors.instructor = 'Instructor is required';
-  }
-  return errors;
-};
-
-const handleSubmit = (e) => {
-  e.preventDefault();
-  const errors = validate();
-  if (Object.keys(errors).length === 0) {
-    //perform create course
-    console.log('perform create course');
-  } else {
-    setFormData({
-      ...formData,
-      errors: errors
-    });
-  }
-};
-
-const handleTimeChange = (name, value) => {
-  setFormData({
-    ...formData,
-    [name]: value
-  });
-};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Do something with the course information, like send it to a server
+    console.log({ courseId, courseName, time, venue, department, instructor, vacancy });
+    // Reset the form
+    setCourseId('');
+    setCourseName('');
+    setTime('');
+    setVenue('');
+    setDepartment('');
+    setInstructor('');
+    setVacancy('');
+  };
 
   return (
-    <div>
+  <div className='create_course_container'>
     <Admin_nav />
-        <form onSubmit={handleSubmit}>
-          <h1>Create Course</h1>
-          {inputFields.map((inputField) => (
-            <div key={inputField.id}>
-              {inputField.type === 'select' ? (
-                <FormControl fullWidth variant="outlined" margin="normal">
-                  <InputLabel htmlFor={inputField.name}>{inputField.label}</InputLabel>
-                  <Select
-                    label={inputField.label}
-                    name={inputField.name}
-                    onChange={handleChange}
-                    value={formData[inputField.name]}
-                  >
-                    {inputField.options.map((option, index) => (
-                      <MenuItem key={index} value={option}>
-                        {option}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-              ) : inputField.type === 'timeRange' ? (
-                <>
-                <TimePicker
-                  label="From"
-                  value={formData['fromTime']}
-                  onChange={(time) => handleTimeChange('fromTime', time)}
-                  inputFormat="HH:mm"
-                  renderInput={(params) => <TextField {...params} />}
-                />
-                <TimePicker
-                  label="To"
-                  value={formData['toTime']}
-                  onChange={(time) => handleTimeChange('toTime', time)}
-                  inputFormat="HH:mm"
-                  renderInput={(params) => <TextField {...params} />}
-                />
-                </>
-              ) : (
-              <TextField
-                fullWidth
-                label={inputField.label}
-                margin="normal"
-                name={inputField.name}
-                onChange={handleChange}
-                type={inputField.type}
-                value={formData[inputField.name]}
-                variant="outlined"
-              />
-              )}
-              {formData.errors[inputField.name] && (
-                <div className="error">{formData.errors[inputField.name]}</div>
-              )}
-            </div>
-          ))}
-          <Button type="submit" onClick={handleSubmit} 
-             variant="contained" endIcon={<AiOutlineSend />} 
-            style={{ fontSize:'12px' , backgroundColor:'#c7b9b4', color:'black', width:'150px', height:'40px', borderRadius:'10px', marginBottom:'10px'
-          }}
-          >Submit</Button>
-        </form>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label htmlFor="courseId" className='create_course_header'>Course ID:</label>
+        <input
+          type="text"
+          id="courseId"
+          value={courseId}
+          onChange={(e) => setCourseId(e.target.value)}
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor="courseName" className='create_course_header'>Course Name:</label>
+        <input
+          type="text"
+          id="courseName"
+          value={courseName}
+          onChange={(e) => setCourseName(e.target.value)}
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor="time" className='create_course_header'>Time:</label>
+        <input
+          type="text"
+          id="time"
+          value={time}
+          onChange={(e) => setTime(e.target.value)}
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor="venue" className='create_course_header'>Venue:</label>
+        <input
+          type="text"
+          id="venue"
+          value={venue}
+          onChange={(e) => setVenue(e.target.value)}
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor="department" className='create_course_header'>Department:</label>
+        <input
+          type="text"
+          id="department"
+          value={department}
+          onChange={(e) => setDepartment(e.target.value)}
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor="instructor" className='create_course_header'>Instructor:</label>
+        <input
+          type="text"
+          id="instructor"
+          value={instructor}
+          onChange={(e) => setInstructor(e.target.value)}
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor="vacancy" className='create_course_header'>Vacancy:</label>
+        <input
+          type="number"
+          id="vacancy"
+          value={vacancy}
+          onChange={(e) => setVacancy(e.target.value)}
+          required
+        />
+      </div>
+      <button type="submit" className='create_course_header'>Create Course</button>
+    </form>
+  </div>
+    
   );
-}
+};
 
-export default CreateCourse;
+export default Create_Course;
