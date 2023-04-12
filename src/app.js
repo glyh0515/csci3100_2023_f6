@@ -23,7 +23,6 @@ function App() {
         <Route path="/search" element={<Course_Catalog_Index />} />
         <Route path="/create_admin" element={<CreateAdmin />} />
         <Route path="/create_course" element={<CreateCourse />} />
-        <Route path="/all_course" element={<All_Course />} /> 
         <Route path="/weeklytimetable" element={<WeeklyTimetable />} />
         <Route path="/all_course" element={<All_Course />} />
         <Route path="/profile" element={<ProfilePage />} />

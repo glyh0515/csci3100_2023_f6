@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../CSS/ProfilePage.css';
 import {
   Box,
@@ -10,32 +10,47 @@ import {
 
 const CourseTable = () => { 
 
-  const [courses, setCourses] = useState([
-    { code: 'CSCI3100', name: 'Software Engineering' },
-    { code: 'CS102', name: 'Data Structures' },
-    { code: 'CS103', name: 'Algorithms' },
-    { code: 'CS106', name: 'Descrete Math' },
-  ]);
+  const [courses, setCourses] = useState([]);
 
-  const handleDeleteCourse = (courseIndex) => {
-    setCourses(courses.filter((_, index) => index !== courseIndex));
-    console.log('Delete',courseIndex);
+  useEffect(() => {
+    fetch('http://localhost:8080/all-course')
+      .then(response => response.json())
+      .then(data => setCourses(data))
+      .catch(error => console.error(error));
+  }, []);
+
+  const handleDeleteCourse = async (courseIndex, courseID) => {
+    try {
+      await fetch(`http://localhost:8080/delete-course/${courseID}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ index: courseIndex })
+      });
+      
+      setCourses(courses.filter((_, index) => index !== courseIndex));
+      console.log('Delete', courseIndex);
+    } catch (error) {
+      console.error(error);
+    }
   };
+  
   return (
     <div>
       <Box className="main-content" sx={{ flex: 2 }}>
         <Typography className='header' sx={{fontSize: 24}} >Courses Database</Typography>
         <List className="course-list">
           {courses.map((course, index) => (
-            <ListItem key={course.code} className="course-item">
+            <ListItem key={course.CourseID} className="course-item">
               <ListItemText
-                primary={course.code}
-                secondary={course.name}
+                primary={course.CourseID}
+                secondary={course.CourseName}
                 sx={{ marginRight: '1rem' }}
               />
               <button
                 className='Delete-course-btn'
-                onClick={() => handleDeleteCourse(index)}
+                onClick={() => handleDeleteCourse(index, course.CourseID)}
               >
                 Delete
               </button>

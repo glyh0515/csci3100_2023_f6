@@ -64,7 +64,6 @@ db.once('open', function () {
     CourseID: { type: String, unique: true },
     CourseName: String,
     Timeslot: String,
-    Date: String,
     Venue: String,
     Department: String,
     Units: Number,
@@ -89,13 +88,14 @@ db.once('open', function () {
 
   // Define a route that creates a new sample document
   app.get('/create-sample', (req, res) => {
-    Student.create({
-      StudentID: "1155000000",
-      Name: "Hi",
-      Email: "hi@test.com",
-      Password: "abcd1234",
-      Major: "Loser",
-      Year: 2
+    Course.create({
+      CourseID: "CSCI3100",
+      CourseName: "Software Engineering",
+      Timeslot: "Friday 1030-1615",
+      Venue: "Venue 3",
+      Department: "Department of Compuer Science",
+      Units: 6,
+      Vacancy: 300,
     })
     res.send("Document created!");
   });
@@ -156,9 +156,9 @@ db.once('open', function () {
     }
   });
 
-  app.post('/delete-user', async (req, res) => {
+  app.post('/delete-user/:studentID', async (req, res) => {
     try {
-      await Student.findOneAndDelete({StudentID: req.body['studentId']});
+      await Student.findOneAndDelete({StudentID: req.params['studentID']});
       res.status(200).json({ message: 'Student deleted successfully' });
     } catch (error) {
       console.error(error);
@@ -166,9 +166,9 @@ db.once('open', function () {
     }
   });
 
-  app.post('/delete-admin', async (req, res) => {
+  app.post('/delete-admin/:adminID', async (req, res) => {
     try {
-      await Admin.findOneAndDelete({AdminID: req.body['adminId']});
+      await Admin.findOneAndDelete({AdminID: req.params['adminID']});
       res.status(200).json({ message: 'Admin deleted successfully' });
     } catch (error) {
       console.error(error);
@@ -176,10 +176,11 @@ db.once('open', function () {
     }
   });
 
-  app.post('/delete-course', async (req, res) => {
+  app.post('/delete-course/:courseID', async (req, res) => {
     try {
-      await Admin.findOneAndDelete({CourseID: req.body['courseId']});
-      res.status(200).json({ message: 'Coursedeleted successfully' });
+      await Course.findOneAndDelete({CourseID: req.params['courseID']});
+      res.status(200).json({ message: 'Course deleted successfully' });
+      console.log(req.params['courseID'], "deleted!");
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'Error deleting the course' });
