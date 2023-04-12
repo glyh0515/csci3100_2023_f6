@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
@@ -16,6 +16,7 @@ const inputFields = [
 ];
 
 function Register() {
+  const navigate = useNavigate();
   const [formData, setFormData] = React.useState({
     name: '',
     email: '',
@@ -33,7 +34,7 @@ function Register() {
       [e.target.id]: e.target.value
     });
   }
-  /* const validate = () => {
+   const validate = () => {
     let errors = {};
     if (!formData.name.trim()) {
       errors.name = 'Name is required';
@@ -67,7 +68,7 @@ function Register() {
     return errors;
   }
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
     const errors = validate();
     if (Object.keys(errors).length > 0) {
@@ -75,8 +76,33 @@ function Register() {
         ...formData,
         errors: errors
       });
+      } else {
+        try {
+          const response = await fetch('http://localhost:8080/register', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+          });
+          
+
+          if (response.status === 200) {
+            navigate('/login');
+          } else {
+            const contentType = response.headers.get('content-type');
+            if (contentType && contentType.includes('application/json')) {
+              const errorData = await response.json();
+              console.error('Error:', errorData);
+            } else {
+             console.error('Error: Non-JSON response');
+        }
     }
-  } */
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}
+};
 
   return (
     <div style={{ textAlign: 'left' }}>
@@ -93,7 +119,7 @@ function Register() {
         transform: 'translate(-50%, -50%)',
       }}
       >
-        <form class="center" action="http://localhost:8080/register" method="post">
+        <form class="center" onSubmit={handleRegister}>
           <h2>Register</h2>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', width: 500 }}>
 
