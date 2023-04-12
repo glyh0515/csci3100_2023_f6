@@ -8,7 +8,6 @@ import { AiOutlineExport,AiOutlineMenu,AiOutlineCaretLeft,  //icon for top nav
 import IconButton from '@mui/material/IconButton';
 
 
-
 function Admin_nav() { 
     const openNav = () => {
         const sideNav = document.getElementById('admin_nav');

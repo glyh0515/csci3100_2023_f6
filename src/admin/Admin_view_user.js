@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import CourseTable from './CourseTable';
+import All_user from './All_user';
 import Admin_nav from './Admin_nav';
 import '../CSS/Search_form.css';
 import {AiOutlineSearch} from 'react-icons/ai';
 import TextField from '@mui/material/TextField';
 
-const All_Course = () => {
+const Admin_view_user = () => {
   const [searchValue, setSearchValue] = useState("");
 
   const handleSearchValueChange = (event) => {
@@ -35,12 +35,11 @@ const All_Course = () => {
             </button>
           </div>
         </form>
-        <CourseTable />
+        <All_user />
       </div>      
       
     </div>
   );
 };
 
-export default All_Course;
-
+export default Admin_view_user;

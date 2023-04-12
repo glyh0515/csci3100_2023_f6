@@ -11,6 +11,7 @@ import All_Course from './admin/all_course'
 import WeeklyTimetable from './component/WeeklyTimetable';
 import Swap from './user/swap';
 import AdminProfile from './admin/admin_profile';
+import Admin_view_user from './admin/Admin_view_user';
 
 function App() {
   return (
@@ -23,9 +24,9 @@ function App() {
         <Route path="/search" element={<Course_Catalog_Index />} />
         <Route path="/create_admin" element={<CreateAdmin />} />
         <Route path="/create_course" element={<CreateCourse />} />
-        <Route path="/all_course" element={<All_Course />} /> 
-        <Route path="/weeklytimetable" element={<WeeklyTimetable />} />
         <Route path="/all_course" element={<All_Course />} />
+        <Route path="/all_user" element={<Admin_view_user />} />
+        <Route path="/weeklytimetable" element={<WeeklyTimetable />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/swap" element={<Swap />} />
         <Route path="/admin_profile" element={<AdminProfile />} />

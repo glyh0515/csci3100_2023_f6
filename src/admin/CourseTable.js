@@ -23,7 +23,7 @@ const CourseTable = () => {
   };
   return (
     <div>
-      <Box className="main-content" sx={{ flex: 2 }}>
+      <Box className="main-content" sx={{ width:'100%' }}>
         <Typography className='header' sx={{fontSize: 24}} >Courses Database</Typography>
         <List className="course-list">
           {courses.map((course, index) => (

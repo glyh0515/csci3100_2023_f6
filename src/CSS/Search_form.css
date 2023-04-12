@@ -118,3 +118,72 @@
         color: #270b03;
         transition: 0.3s;
     }
+/*----------------Admin Search-------------------*/
+
+.admin-search{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    float:left;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
+    width:100%;
+    height: 100%;
+    border-right: 2px solid #865344;
+    border-bottom: 2px solid #865344;
+    font-size: 24px;
+    color: #865344;
+    background: #d7cdc3;
+    position:static;
+    z-index: 1; /* Stay on top */
+    overflow-x: hidden; /* Disable horizontal scroll */
+    text-align: left;
+    padding: 20px;
+    top: 0;
+    left: 0;
+    
+    
+}
+.admin-searchbar{
+    column-count: 2;
+    width: 800px;
+
+}   
+
+.admin-SearchText .MuiOutlinedInput-root  {        
+    padding: 0px;
+    font-size: 18px;           
+    float: left;
+    width: calc(800px - 40px);
+    height: 40px;
+    background: #C7B9B4;
+    color: #551805;
+    border-top-left-radius : 20px;
+    border-bottom-left-radius : 20px;
+    border-top-right-radius : 0;
+    border-bottom-right-radius : 0;
+    transition: 0.3s;            
+}
+
+
+
+.admin-search-button {
+    border-top-right-radius : 20px;
+    border-bottom-right-radius : 20px;
+    float:right;
+    width: 40px;
+    height:40px;
+    background: #C7B9B4;
+    color: #551805;
+    font-size: 24px;
+    border: 1px solid #857b79;
+    border-left: none;
+    cursor: pointer;
+    
+
+}
+.admin-search-button:hover {           
+    border: 1px solid #270b03;
+    
+}
+
