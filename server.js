@@ -8,6 +8,8 @@ const hpp = require('hpp');
 const cors = require('cors');
 const methodOverride = require('method-override');
 const bodyParser = require('body-parser');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const app = express();
 
@@ -65,7 +67,7 @@ db.once('open', function () {
     Department: String,
     Units: Number,
     Vacancy: Number,
-    EnrolledSturent: { type: mongoose.Schema.Types.ObjectId, ref: 'Student' }
+    EnrolledStudent: { type: mongoose.Schema.Types.ObjectId, ref: 'Student' }
   });
   // Create models based on the schema
   const Student = mongoose.model('Student', StudentSchema);
@@ -97,22 +99,55 @@ db.once('open', function () {
   });
 
   // Posting a register request for student
-  app.post('/register', (req, res) => {
+  app.post('/register', async (req, res) => {
+      //hash the password
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(req.body.password, salt);
+
     Student.create({
       StudentID: req.body['sid'],
       Name: req.body['name'],
       Email: req.body['email'],
-      Password: req.body['password'],
+      Password: hashedPassword,
       Major: req.body['major'],
       Year: req.body['year']
     })
     res.redirect("http://localhost:3000/login");
   });
   
-  app.get('/*', (req, res) => {
+  app.get('/', (req, res) => {
     res.redirect("http://localhost:3000/login");
   });
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+app.post('/login', async (req, res) => {
+  try {
+    // Check if user exists in the database
+    const student = await Student.findOne({ Email: req.body.email });
+    if (!student) {
+      return res.status(400).send('Invalid email.');
+    }
+    // Check if the provided password is valid
+    const validPassword = await bcrypt.compare(req.body.password, student.Password); 
+    if (!validPassword) {
+      return res.status(400).send('Invalid password.');
+    }
+    const token = jwt.sign({ _id: student._id }, process.env.TOKEN_SECRET);
+    res.header('x-auth-token', token).send('Logged in successfully.');
+
+    // Redirect to the profile page on successful login
+    res.redirect("http://localhost:3000/profile");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal server error.');
+  }
 });
+
+});
+
+        
 
 // Start the server
 const server = app.listen(8080);

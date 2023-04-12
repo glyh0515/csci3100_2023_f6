@@ -13,20 +13,20 @@ function Login() {
     const [errorMessage, setErrorMessage] = useState("");
     const navigate = useNavigate();
 
-    function handlelogin(e) {
-        e.preventDefault();
-    // Check if email and password are valid
-        const alert_msg = document.getElementById('alert_msg');
+    //function handlelogin(e) {
+        //e.preventDefault();
+    //// Check if email and password are valid
+        //const alert_msg = document.getElementById('alert_msg');
         
-        if(email === "1155167890@link.cuhk.edu.hk" && password === "12345678"){     // compare the value with the sever
-                setIsValid(true);   // Do something if login is successful
-                navigate('/profile'); // direct to profile
-        }else{
-            setIsValid(false);  // Do something if login is unsuccessful
-            setErrorMessage("Invalid username or password."); // Set error message
+        //if(email === "1155167890@link.cuhk.edu.hk" && password === "12345678"){     // compare the value with the sever
+                //setIsValid(true);   // Do something if login is successful
+                //navigate('/profile'); // direct to profile
+        //}else{
+            //setIsValid(false);  // Do something if login is unsuccessful
+            //setErrorMessage("Invalid username or password."); // Set error message
    
-        }           
-    }
+        //}           
+    //}
 
     function handleEmailChange(e) {
         setEmail(e.target.value);
@@ -65,7 +65,7 @@ function Login() {
                             id="outlined-basic" label="Password" type='password' value={password} 
                             variant="outlined" margin="dense" onChange={handlePasswordChange} />
                
-               <Button className='login_button' type="submit" onClick={handlelogin} variant="contained" endIcon={<AiOutlineSend />}
+               <Button className='login_button' type="submit" variant="contained" endIcon={<AiOutlineSend />}
                 style={{ fontSize:'12px' , backgroundColor:'#c7b9b4', color:'black', width:'120px', height:'40px', marginTop:'10px', borderRadius:'10px', marginBottom:'10px'
                 }}>
                Login
