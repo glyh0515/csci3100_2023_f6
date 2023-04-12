@@ -40,7 +40,7 @@ const All_user = () => {
         <Typography className='header' sx={{fontSize: 24}} >Student Database</Typography>
         <List className="student-list">
           {students.map((student, index) => (
-            <ListItem key={student.SID} className="student-item">
+            <ListItem key={index} className="student-item">
               <ListItemText
                 primary={student.SID}
                 secondary={student.name}
@@ -48,7 +48,7 @@ const All_user = () => {
               />
               <button
                 className='Delete-student-btn'
-                onClick={() => handleDeleteStudent(student.SID)}
+                onClick={() => handleDeleteStudent(index)}
               >
                 Delete Student
               </button>
@@ -58,7 +58,7 @@ const All_user = () => {
         <Typography className='header' sx={{fontSize: 24}} >Admin Database</Typography>
         <List className="admin-list">
           {admins.map((admin, index) => (
-            <ListItem key={admin.ID} className="admin-item">
+            <ListItem key={index} className="admin-item">
               <ListItemText
                 primary={admin.ID}
                 secondary={admin.name}
@@ -66,7 +66,7 @@ const All_user = () => {
               />
               <button
                 className='Delete-admin-btn'
-                onClick={() => handleDeleteAdmin(admin.ID)}
+                onClick={() => handleDeleteAdmin(index)}
               >
                 Delete Admin
               </button>
