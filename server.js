@@ -58,8 +58,7 @@ db.once('open', function () {
     Password: String,
   });
   const CourseSchema = mongoose.Schema({
-    ClassNumber: { type: String, unique: true },
-    CourseID: String,
+    CourseID: { type: String, unique: true },
     CourseName: String,
     Timeslot: String,
     Date: String,
@@ -113,6 +112,24 @@ db.once('open', function () {
       Year: req.body['year']
     })
     res.redirect("http://localhost:3000/login");
+  });
+
+  app.post('/delete_user/:studentID', (req, res) => {
+    Student.findOneAndDelete({
+      StudentID: req.params['studentID']
+    })
+  });
+
+  app.post('/delete_admin/:adminID', (req, res) => {
+    Admin.findOneAndDelete({
+      AdminID: req.params['adminID']
+    })
+  });
+
+  app.post('/delete_course/:courseID', (req, res) => {
+    Course.findOneAndDelete({
+      CourseID: req.params['courseID']
+    })
   });
   
   app.get('/', (req, res) => {
