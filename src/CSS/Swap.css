@@ -1,0 +1,32 @@
+.swap-container{
+    height: 100%;
+    width: 100%;
+    
+}
+
+.swap-form{
+    margin-left: 300px;
+    width: calc(100% - 300px);
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.swap-btn{
+    border-radius: 23px;
+    /* border-bottom-right-radius: 20px; */
+    float: unset;
+    width: 150px;
+    height: 50.85px;
+    padding-left: 1%;
+    margin-left: calc(50% - 75px);
+    background: #d7cdc3;
+    color: rgb(158, 57, 10);
+    font-size: 17px;
+    border: 1px solid #865344;
+    cursor: pointer;
+}
+
+.swap-btn:hover {           
+    border: 2px solid #551805;
+    transition: 0.1s;
+    color:  #551805;
+}

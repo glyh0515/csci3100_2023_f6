@@ -54,11 +54,11 @@ function User_nav() {
 
         <div className="topnav">
             <IconButton onClick={openNav} className='topnav_button'  style={{ float: 'left' }}>
-                <AiOutlineMenu color="#bd4c4c"/>
+                <AiOutlineMenu color="#865344"/>
             </IconButton>
             <span className='topnav_button'>CUSUCS</span>
             <IconButton onClick={handleLogout} className='topnav_button' style={{ float: 'right'}}>
-                <AiOutlineExport color="#bd4c4c"/>
+                <AiOutlineExport color="#865344"/>
             </IconButton>
         </div>
     </div>

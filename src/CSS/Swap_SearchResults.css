@@ -1,0 +1,54 @@
+.search-results{
+    height:100%
+}
+
+.title{
+    font-size: 24px;
+}
+
+.list-item{
+    height: fit-content;
+    min-width: 800px;
+    width: 100%;
+    border-radius: 20px;
+    color: rgb(158, 57, 10);
+    background: #d7cdc3;
+    font-size: 32px;
+    border: 3px solid #865344;
+    cursor: pointer;
+    text-align: left;
+    margin-bottom: 20px;
+
+}
+/* below are the list item*/
+.course-code{
+    height:fit-content
+}
+
+.course-name{
+    height:fit-content
+}
+
+.venue{
+    height:fit-content
+}
+
+.department{
+    height:fit-content
+}
+
+.instructor{
+    height:fit-content
+}
+
+.course-units{
+    height:fit-content
+}
+
+.course-status{
+    height:fit-content
+}
+
+.vacancy{
+    height:fit-content
+}

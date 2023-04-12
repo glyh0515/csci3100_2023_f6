@@ -106,6 +106,7 @@ const handleRegister = (e) => {
                 {inputFields.slice(0, 4).map((field) => (
                   <TextField
                     size='small'
+                    color='warning'
                     key={field.id}
                     id={field.id}
                     label={field.label}
@@ -123,6 +124,7 @@ const handleRegister = (e) => {
                 {inputFields.slice(4).map((field) => (
                   <TextField
                     size='small'
+                    color='warning'
                     key={field.id}
                     id={field.id}
                     label={field.label}

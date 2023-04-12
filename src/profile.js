@@ -36,7 +36,7 @@ const ProfilePage = () => {
     <div>
       <User_nav />
       <Box className="profile-page" sx={{ display: 'flex', margin: '1rem' }}>
-        <Card className="left-column" sx={{ marginRight: '1rem' ,backgroundColor: 'blanchedalmond' }}>
+        <Card className="left-column" sx={{ marginRight: '1rem' ,backgroundColor: 'blanchedalmond', maxWidth:400,minWidth:350 }}>
           <CardContent>
             <Typography className='profile-header' >Profile</Typography>
             <Box

@@ -3,10 +3,12 @@ import './CSS/Search_form.css';
 import {AiOutlineSearch} from 'react-icons/ai';
 import TextField from '@mui/material/TextField';
 
+
 function SearchForm() {
   const [searchValue, setSearchValue] = useState("");
   const [openClasses, setOpenClasses] = useState(true);
   const [waitlistClasses, setWaitlistClasses] = useState(true);
+  
   const [classDays, setClassDays] = useState([
     { name: "Mon", checked: true },
     { name: "Tue", checked: true },
@@ -56,19 +58,22 @@ function SearchForm() {
       const dropdown = document.getElementById(dropdownId);
       dropdown.style.display =
         dropdown.style.display === "none" ? "block" : "none";
+        
     };
 
   return (
-  <div className="searchform">
+  <div >
     
-    <form id="search" action="">
+    <form id="search" className="searchform" action="">
       <p>Search</p>
-        <div style={{columnCount: 2}}>
-        <TextField        
+        <div className="searchbar">
+        <TextField                   
+            id="SearchText" 
+            color='warning'
             size="small"
             className="SearchText"
-            type="text" variant="outlined"
-            id="outlined-basic" label="Course Code / Course Name"
+            type="text"            
+            label="Course Code / Course Name"
             name="search" 
             value={searchValue}
             onChange={handleSearchValueChange}
@@ -77,8 +82,7 @@ function SearchForm() {
           <AiOutlineSearch />
         </button>
       </div>
-      
-      <p onClick={() => toggleDropdown("ClassStatus")}>Class Status</p>      
+      <p onClick={() => toggleDropdown("ClassStatus")} >Class Status</p>      
       <div id="ClassStatus" className="ClassStatus">        
         <label className="option">
             <input

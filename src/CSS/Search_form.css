@@ -1,81 +1,120 @@
-        .searchform{
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            float:left;
-            background-color: #94452c;
-            width:250px;
-            height: 100%;
-            border: #94452c;
-            font-size: 20px;
-            color: #551805;
-            position: fixed;
-            z-index: 1; /* Stay on top */
-            overflow-x: hidden; /* Disable horizontal scroll */
-            text-align: left;
-            padding: 20px;
-            top: 0;
-            left: 0;
-            
-            
-        }
-        .SearchText {
-            
-            padding: 5px;
-            font-size: 12px;
-            border: 1px solid #b87742;
-            float: left;
-            width: 100px;
-            background: #b87742;
-            color: #94452c;
-            border-radius: 5px;
-            
-        }
-        .search-button {
-            border-radius: 1px;
-            float:left;
-            width: 50px;
-            height:36px;
-            padding: 0px;
-            background: #b87742;
-            color: rgb(158, 57, 10);
-            font-size: 17px;
-            border: 1px solid #b87742;
-            border-left: none;
-            cursor: pointer;
-            
-
-        }
-        .search-button:hover {
-            background: #551805;
-        }
-        ::placeholder{
-            color: #551805;
-        }
-
-        .option {
-            font-size: 12px;
-        }
-
-        input[type='checkbox'] {
-            accent-color: #b87742;       
-        }
-        .header{
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 24px;
-        }
-
-        .Unit{
-            height: max-content;
-            display: block;
-        }
-
-        .ClassDay{
-            height: max-content;
-            display: block;
-        }
-
-        .ClassStatus{
-            height: max-content;
-            display: block;            
-        }
-
+    .searchform{
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        float:left;
+        border-bottom-right-radius: 20px;
+        border-bottom-left-radius: 0px;
+        border-top-right-radius: 0px;
+        border-top-left-radius: 0px;
+        width:300px;
+        height: 100%;
+        border-right: 2px solid #865344;
+        border-bottom: 2px solid #865344;
+        font-size: 24px;
+        color: #865344;
+        background: #d7cdc3;
+        position:static;
+        z-index: 1; /* Stay on top */
+        overflow-x: hidden; /* Disable horizontal scroll */
+        text-align: left;
+        padding: 20px;
+        top: 0;
+        left: 0;
         
+        
+    }
+    .searchbar{
+        column-count: 2;
+        width: 250px;
+
+    }   
+
+    .SearchText .MuiOutlinedInput-root  {        
+        padding: 0px;
+        font-size: 18px;           
+        float: left;
+        width: calc(250px - 40px);
+        background: #C7B9B4;
+        color: #551805;
+        border-top-left-radius : 20px;
+        border-bottom-left-radius : 20px;
+        border-top-right-radius : 0;
+        border-bottom-right-radius : 0;
+        transition: 0.3s;            
+    }
+
+
+    
+    .search-button {
+        border-top-right-radius : 20px;
+        border-bottom-right-radius : 20px;
+        float:right;
+        width: 40px;
+        height:42.85px;
+        padding-left: 1%;
+        padding-bottom: 10%;
+        background: #C7B9B4;
+        color: #551805;
+        font-size: 24px;
+        border: 1px solid #857b79;
+        border-left: none;
+        cursor: pointer;
+        
+
+    }
+    .search-button:hover {           
+        border: 1px solid #270b03;
+        
+    }
+    ::placeholder{
+        color: #551805;
+    }
+
+    .option {
+        font-size: 18px;
+        padding-left: 20px;
+    }
+
+    input[type='checkbox'] {
+        accent-color: #a56a3a;
+        transform: scale(1.25);
+        transition: 0.3s;
+
+    }
+    .header{
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 24px;
+    }
+
+    .Unit{
+        height: max-content;
+        display: block;
+        transition: 0.3s;
+        
+    }
+
+    .Unit :hover{
+        color: #270b03;
+        transition: 0.3s;
+    }
+
+    .ClassDay{
+        height: max-content;
+        display: block;
+        transition: 0.3s;      
+    }
+
+    .ClassDay :hover{
+        color: #270b03;
+        transition: 0.3s;
+    }
+
+    .ClassStatus{
+        height: max-content;
+        display: block;
+        transition: 0.3s;            
+    }
+
+    .ClassStatus :hover{
+        color: #270b03;
+        transition: 0.3s;
+    }

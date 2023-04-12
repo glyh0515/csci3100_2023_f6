@@ -40,7 +40,8 @@ function Login() {
         <div style={{textAlign:'left'}}>                    
             <h3 style={{ position: 'fixed',
                         top: '0',
-                        width: '100%'}}>
+                        width: '100%',
+                        color:'#34241D'}}>
                 CUSUCS
             </h3>
             <Box sx={{ 
@@ -57,10 +58,12 @@ function Login() {
             <form class="center">
                            
                <TextField 
-                    size='small'
+                    size='small' color='warning'
                     id="outlined-basic" label="Email" type='email' variant="outlined" placeholder='SID@link.cuhk.edu.hk' value={email}
                     pattern="1155[\d]{6}@link.cuhk.edu.hk" margin="dense" onChange={handleEmailChange} />
-               <TextField size='small'  id="outlined-basic" label="Password" type='password' value={password} variant="outlined" margin="dense" onChange={handlePasswordChange} />
+               <TextField size='small'  color='warning'
+                            id="outlined-basic" label="Password" type='password' value={password} 
+                            variant="outlined" margin="dense" onChange={handlePasswordChange} />
                
                <Button className='login_button' type="submit" onClick={handlelogin} variant="contained" endIcon={<AiOutlineSend />}
                 style={{ fontSize:'12px' , backgroundColor:'#c7b9b4', color:'black', width:'120px', height:'40px', marginTop:'10px', borderRadius:'10px', marginBottom:'10px'
