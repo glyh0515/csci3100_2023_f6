@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import User_nav from './User_nav'; // import the User_nav component
 import '../CSS/ProfilePage.css';
 import {
@@ -13,13 +13,14 @@ import {
 } from '@mui/material';
 
 const ProfilePage = () => {
-  const [profile, setProfile] = useState({
-    name: 'Chan Tai Man',
-    email: 'SID@link.cuhk.edu.hk',
-    sid: '123456789',
-    major: 'Computer Science',
-    year: '3',
-  });
+  const [profile, setProfile] = useState({});
+  
+  useEffect(() => {
+    fetch('http://localhost:8080/user/1155100001')
+      .then(response => response.json())
+      .then(data => setProfile(data))
+      .catch(error => console.log(error));
+  }, []);
 
   const [courses, setCourses] = useState([
     { code: 'CSCI3100', name: 'Software Engineering' },
@@ -63,19 +64,19 @@ const ProfilePage = () => {
               
               <List className="personal-info">
                 <ListItem>
-                  <ListItemText className='personal-info-item' primary={`Name: ${profile.name}`} />
+                  <ListItemText className='personal-info-item' primary={`Name: ${profile.Name}`} />
                 </ListItem>
                 <ListItem>
-                  <ListItemText className='personal-info-item' primary={`Email: ${profile.email}`} />
+                  <ListItemText className='personal-info-item' primary={`Email: ${profile.Email}`} />
                 </ListItem>
                 <ListItem>
-                  <ListItemText className='personal-info-item' primary={`Student ID: ${profile.sid}`} />
+                  <ListItemText className='personal-info-item' primary={`Student ID: ${profile.StudentID}`} />
                 </ListItem>
                 <ListItem>
-                  <ListItemText className='personal-info-item' primary={`Major: ${profile.major}`} />
+                  <ListItemText className='personal-info-item' primary={`Major: ${profile.Major}`} />
                 </ListItem>
                 <ListItem>
-                  <ListItemText className='personal-info-item' primary={`Year: ${profile.year}`} />
+                  <ListItemText className='personal-info-item' primary={`Year: ${profile.Year}`} />
                 </ListItem>
               </List>
             </Box>

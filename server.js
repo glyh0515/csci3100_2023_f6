@@ -90,13 +90,14 @@ db.once('open', function () {
   // Define a route that creates a new sample document
   app.get('/create-sample', (req, res) => {
     Course.create({
-      CourseID: "CSCI3100",
-      CourseName: "Software Engineering",
-      Timeslot: "Friday 1030-1615",
-      Venue: "Venue 3",
-      Department: "Department of Compuer Science",
-      Units: 6,
-      Vacancy: 300,
+      CourseID: "MUSC1000",
+      CourseName: "Music Theory",
+      Timeslot: "Wednesday 1630-1815",
+      Venue: "Venue 1",
+      Department: "Department of Music",
+      Instructor: "Katy Leung",
+      Units: 2,
+      Vacancy: 40,
     })
     res.send("Document created!");
   });
@@ -124,6 +125,34 @@ db.once('open', function () {
   app.get('/all-course', async (req, res) => {
     try {
       const courses = await Course.find({});
+      res.status(200).json(courses);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal server error.');
+    }
+  });
+
+  app.get('/user/:studentID', async (req, res) => {
+    try {
+      const users = await User.findOne({ StudentID: req.params['studentID'] });
+      res.status(200).json(users);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal server error.');
+    }
+  });
+  app.get('/admin/:adminID', async (req, res) => {
+    try {
+      const admins = await Admin.findOne({ AdminID: req.params['adminID'] });
+      res.status(200).json(admins);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal server error.');
+    }
+  });
+  app.get('/course/:courseID', async (req, res) => {
+    try {
+      const courses = await Course.findOne({ CourseID: req.params['courseID'] });
       res.status(200).json(courses);
     } catch (error) {
       console.error(error);
@@ -193,6 +222,25 @@ db.once('open', function () {
     }
   });
 
+  app.post('/course/register', async (req, res) => {
+    try {
+      await Course.create({
+        CourseID: req.body['courseID'],
+        CourseName: req.body['courseName'],
+        Timeslot: req.body['timeslot'],
+        Venue: req.body['venue'],
+        Department: req.body['department'],
+        Instructor: req.body['instructor'],
+        Units: req.body['units'],
+        Vacancy: req.body['vacancy'],
+      });
+      res.status(200).json({ message: 'Student registered successfully' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Error registering the student' });
+    }
+  });
+
   app.delete('/user/:studentID', async (req, res) => {
     try {
       await User.findOneAndDelete({ StudentID: req.params['studentID'] });
@@ -225,8 +273,5 @@ db.once('open', function () {
   });
 });
 
-
-
-
-  // Start the server
-  const server = app.listen(8080);
+// Start the server
+const server = app.listen(8080);
