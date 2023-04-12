@@ -100,7 +100,17 @@ db.once('open', function () {
     res.send("Document created!");
   });
 
-  app.get('/enrolled-course')
+  app.get('/all-course', async (req, res) => {
+    try {
+      // Query the Course collection to get all courses
+      const courses = await Course.find({});
+      // Return the courses in JSON format
+      res.status(200).json(courses);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal server error.');
+    }
+  });
 
   app.post('/login', async (req, res) => {
     try {
@@ -146,9 +156,9 @@ db.once('open', function () {
     }
   });
 
-  app.post('/delete-user/:userID', async (req, res) => {
+  app.post('/delete-user', async (req, res) => {
     try {
-      await Student.findOneandDelete({StudentID: req.params['studentId']});
+      await Student.findOneAndDelete({StudentID: req.body['studentId']});
       res.status(200).json({ message: 'Student deleted successfully' });
     } catch (error) {
       console.error(error);
@@ -156,9 +166,9 @@ db.once('open', function () {
     }
   });
 
-  app.post('/delete-admin/:adminID', async (req, res) => {
+  app.post('/delete-admin', async (req, res) => {
     try {
-      await Admin.findOneandDelete({StudentID: req.params['adminId']});
+      await Admin.findOneAndDelete({AdminID: req.body['adminId']});
       res.status(200).json({ message: 'Admin deleted successfully' });
     } catch (error) {
       console.error(error);
@@ -166,9 +176,9 @@ db.once('open', function () {
     }
   });
 
-  app.post('/delete-course/:courseID', async (req, res) => {
+  app.post('/delete-course', async (req, res) => {
     try {
-      await Admin.findOneandDelete({StudentID: req.params['courseId']});
+      await Admin.findOneAndDelete({CourseID: req.body['courseId']});
       res.status(200).json({ message: 'Coursedeleted successfully' });
     } catch (error) {
       console.error(error);
