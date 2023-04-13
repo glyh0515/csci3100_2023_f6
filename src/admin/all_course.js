@@ -15,8 +15,7 @@ const All_Course = () => {
   return (
     <div>
       <Admin_nav />
-      <div style={{width:'100%'}} >       
-        <form id="admin_search" className="admin-search" action="">         
+      <form id="admin_search" className="admin-search" action="">         
             Search:
             <div className="admin-searchbar">
             <TextField                   
@@ -35,6 +34,7 @@ const All_Course = () => {
             </button>
           </div>
         </form>
+      <div style={{width:'100%',marginTop:'125px'}} >            
         <CourseTable />
       </div>      
       

@@ -41,9 +41,6 @@ function User_nav() {
             <NavLink to="/search" onClick={closeNav}>
                 <AiOutlineFileSearch/> Search
             </NavLink>
-            <NavLink to="/enroll" onClick={closeNav}>
-                <AiOutlinePlusSquare/> Enroll
-            </NavLink>
             <NavLink to="/swap" onClick={closeNav}>
                 <AiOutlineSwap/> Swap
             </NavLink>

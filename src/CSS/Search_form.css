@@ -123,12 +123,11 @@
 .admin-search{
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     float:left;
-    border-bottom-right-radius: 20px;
-    border-bottom-left-radius: 0px;
+    min-width: 800px;
+    width:100%;
+    height: 125px;
     border-top-right-radius: 0px;
     border-top-left-radius: 0px;
-    width:100%;
-    height: 100%;
     border-right: 2px solid #865344;
     border-bottom: 2px solid #865344;
     font-size: 24px;
@@ -145,7 +144,7 @@
     
 }
 .admin-searchbar{
-    width: 800px;
+    width: 100%;
 
 }   
 
@@ -153,7 +152,22 @@
     padding: 0px;
     font-size: 18px;           
     float: left;
-    width: calc(800px - 40px);
+    width: 100%;
+    height:42.85px;
+    background: #C7B9B4;
+    color: #551805;
+    border-top-left-radius : 20px;
+    border-bottom-left-radius : 20px;
+    border-top-right-radius : 0;
+    border-bottom-right-radius : 0;
+    transition: 0.3s;            
+}
+
+.admin-SearchText {        
+    padding: 0px;
+    font-size: 18px;           
+    float: left;
+    width: calc(100% - 40px);
     height:42.85px;
     background: #C7B9B4;
     color: #551805;
