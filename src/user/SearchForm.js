@@ -4,7 +4,7 @@ import {AiOutlineSearch} from 'react-icons/ai';
 import TextField from '@mui/material/TextField';
 import axios from 'axios';
 
-function SearchForm() {
+function SearchForm({ onSearchResults }) {
   const [searchValue, setSearchValue] = useState("");
   const [openClasses, setOpenClasses] = useState(true);
   const [waitlistClasses, setWaitlistClasses] = useState(true);
@@ -67,7 +67,8 @@ function SearchForm() {
             const response = await axios.get('http://localhost:8080/search' , {
                 params: { keyword: searchValue },
             });
-            console.log(response.data);
+            console.log("Search results:", response.data);
+            onSearchResults(response.data);
         }catch(error){
             console.error(error);
         }

@@ -271,7 +271,6 @@ db.once('open', function () {
       res.status(500).json({ message: 'Error deleting the course' });
     }
   });
-});
   
   app.get('/search', async (req, res) => {
   try {
@@ -287,6 +286,8 @@ db.once('open', function () {
     console.error(error);
     res.status(500).send('Internal server error.');
   }
+});
+
 });
 
 
