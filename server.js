@@ -47,7 +47,6 @@ db.once('open', function () {
   // Define schemas for sample models
   const UserSchema = mongoose.Schema({
     StudentID: { type: String, unique: true },
-    Role: { type: String, default: 'student' },
     Name: String,
     Email: String,
     Password: String,
@@ -57,7 +56,6 @@ db.once('open', function () {
   });
   const AdminSchema = mongoose.Schema({
     AdminID: { type: String, unique: true },
-    Role: { type: String, default: 'admin' },
     Name: String,
     Email: String,
     Password: String,
