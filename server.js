@@ -249,6 +249,29 @@ db.once('open', function () {
     }
   });
 
+  app.put('/add/:studentID/:courseID', async (req, res) => {
+    try {
+      const student = await User.findOne({ StudentID: req.params.studentID });
+      const course = await Course.findOne({ CourseID: req.params.courseID });
+      if (!student) {
+        return res.status(404).json({ message: 'Student not found' });
+      }
+      if (!course) {
+        return res.status(404).json({ message: 'Course not found' });
+      }
+      student.EnrolledCourse.push(course._id);
+      await student.save();
+      course.EnrolledStudent.push(student._id);
+      await course.save();
+      res.status(200).json({ message: 'Course added successfully' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Error adding the course' });
+    }
+  });
+
+  app.put('/drop/:studentid/:courseID');
+
   app.delete('/user/:studentID', async (req, res) => {
     try {
       await User.findOneAndDelete({ StudentID: req.params['studentID'] });
