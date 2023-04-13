@@ -223,6 +223,7 @@ db.once('open', function () {
   });
 
   app.post('/course/register', async (req, res) => {
+      console.log('req.body:', req.body);
     try {
       await Course.create({
         CourseID: req.body['courseID'],
@@ -234,10 +235,10 @@ db.once('open', function () {
         Units: req.body['units'],
         Vacancy: req.body['vacancy'],
       });
-      res.status(200).json({ message: 'Student registered successfully' });
+      res.status(200).json({ message: 'Course registered successfully' });
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: 'Error registering the student' });
+      console.error('Error registering the course:', error);
+      res.status(500).json({ message: 'Error registering the course; ${error.message}' });
     }
   });
 
