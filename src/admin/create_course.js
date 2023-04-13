@@ -98,7 +98,7 @@ function Create_Course() {
   };
 
   return (
-    <div className='create-course-container'>
+    <div >
       <Admin_nav />
       <Box sx={{
         width: 400,
@@ -113,7 +113,7 @@ function Create_Course() {
       }}
       >
         <form onSubmit={handleSubmit} className='create-course-form'>
-          <h2>Create Course</h2>
+          <h2 >Create Course</h2>
           <Box sx={{ width: '100%', display: 'inline-block', padding: 2 }}>
             {inputFields.map((field) => (
               <TextField

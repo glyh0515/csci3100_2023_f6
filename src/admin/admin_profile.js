@@ -70,7 +70,7 @@ const AdminProfilePage = () => {
                    
                   }}>
             <NavLink to="/create_admin" >
-              <Card className="left-column" sx={{ margin:'40px', backgroundColor: '#d7cdc3',  minWidth: 300, height:200 }}>
+              <Card className="left-column" sx={{ margin:'40px', backgroundColor: '#d7cdc3',  minWidth: 300, height:200, float: 'right' }}>
                 <CardContent sx={{textAlign:'center',color:'#77320a'}}>
                   <AiOutlineUserAdd size="5em" />
                   <p>Create Admin</p>
@@ -86,7 +86,7 @@ const AdminProfilePage = () => {
               </Card> 
             </NavLink>
             <NavLink to="/all_course" >
-              <Card className="left-column" sx={{ margin:'40px', backgroundColor: '#d7cdc3',  minWidth: 300, height:200}}>
+              <Card className="left-column" sx={{ margin:'40px', backgroundColor: '#d7cdc3',  minWidth: 300, height:200, float: 'right'}}>
                 <CardContent sx={{textAlign:'center',color:'#77320a'}}>
                   <AiOutlineHdd size="5em"/>
                   <p>View All Courses</p>

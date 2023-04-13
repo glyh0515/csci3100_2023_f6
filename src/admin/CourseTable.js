@@ -38,7 +38,7 @@ const CourseTable = () => {
   
   return (
     <div>
-      <Box className="main-content" sx={{ width:'100%' }}>
+      <Box className="main-content" sx={{ width:'100%' ,padding:'20px'}}>
         <Typography className='header' sx={{fontSize: 24}} >Courses Database</Typography>
         <List className="course-list">
           {courses.map((course, index) => (

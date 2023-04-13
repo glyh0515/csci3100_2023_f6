@@ -64,7 +64,7 @@ const All_user = () => {
 
   return (
     <div>
-      <Box className="main-content" sx={{ width:'100%' }}>
+      <Box className="main-content" sx={{ width:'100%',padding:'20px' }}>
         <Typography className='header' sx={{fontSize: 24}} >Student Database</Typography>
         <List className="student-list">
           {students.map((student, index) => (

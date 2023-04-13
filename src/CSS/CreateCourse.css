@@ -11,6 +11,7 @@
 }
 
 .create-course-form{
+    color:'#865344';
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -26,18 +27,23 @@
 }
 
 .create-course-btn{
-    border-radius : 20px;
-    width: 200px;
-    height:50px;
-    background: #C7B9B4;
-    color: #551805;
-    font-size: 24px;
-    border: 1px solid #857b79;
-    border-left: none;
+    border-radius: 23px;
+    /* border-bottom-right-radius: 20px; */
+    width: 150px;
+    height: 38.85px;
+    padding-left: 1%;
+    /* margin-left: calc(50% - 75px); */
+    background: #d7cdc3;
+    color: rgb(158, 57, 10);
+    font-size: 17px;
+    position: relative;
+    border: 1px solid #865344;
     cursor: pointer;
-    margin-left: calc(50% - 100px);
+    margin-left: calc(50% - 75px);
 }
 
 .create-course-btn:hover{
-    border: 1px solid #270b03;
+    border: 2px solid #551805;
+    transition: 0.1s;
+    color:  #551805;
 }

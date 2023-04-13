@@ -1,9 +1,10 @@
 import React from 'react';
 import Admin_nav from './Admin_nav';
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
 import { AiOutlineSend } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
+import '../CSS/CreateCourse.css';
 
 const inputfields = [
     { id: 'adminID', label: 'Admin ID', type: 'text' },
@@ -90,33 +91,45 @@ function CreateAdmin() {
         }
     }
     return (
-        <div>
+        <div > 
             <Admin_nav />
-            <form onSubmit={handleCreate}>
-                <h4>CREATE ADMIN</h4>
-                {inputfields.map((inputfield) => (
-                    <TextField
-                        key={inputfield.id}
-                        id={inputfield.id}
-                        name={inputfield.id}
-                        label={inputfield.label}
-                        type={inputfield.type}
-                        variant="outlined"
-                        margin="normal"
-                        fullWidth
-                        required
-                        value={formData[inputfield.id]}
-                        onChange={handleChange}
-                        error={formData.errors[inputfield.id] ? true : false}
-                        helperText={formData.errors[inputfield.id]}
-                    />
-                ))}
-                <Button type="submit" endIcon={<AiOutlineSend />} variant="contained"
-                    style={{
-                        fontSize: '12px', backgroundColor: '#c7b9b4', color: 'black', width: '150px', height: '40px', borderRadius: '10px', marginBottom: '10px'
-                    }}
-                >Create</Button>
-            </form>
+            <Box sx={{
+                width: 400,
+                maxHeight: 800,
+                minHeight: 400,
+                backgroundColor: '#d7cdc3',
+                borderRadius: '20px',
+                position: 'fixed',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+            }}
+            >
+                <form onSubmit={handleCreate} className='create-course-form'>
+                    <h2>CREATE ADMIN</h2>
+                    <Box sx={{ width: '100%', display: 'inline-block', padding: 2 }}>
+                    {inputfields.map((inputfield) => (
+                        <TextField
+                            key={inputfield.id}
+                            id={inputfield.id}
+                            name={inputfield.id}
+                            label={inputfield.label}
+                            type={inputfield.type}
+                            color='warning'
+                            size='small'
+                            variant="outlined"
+                            margin="dense"
+                            value={formData[inputfield.id]}
+                            onChange={handleChange}
+                            error={formData.errors[inputfield.id] ? true : false}
+                            helperText={formData.errors[inputfield.id]}
+                            sx={{ width: '100%' }}
+                        />
+                    ))}
+                    </Box>
+                    <button type="submit" className='create-course-btn'>Create Admin</button>
+                </form>
+            </Box>
         </div>
     );
 }
