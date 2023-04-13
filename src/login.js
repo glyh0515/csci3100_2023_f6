@@ -15,6 +15,12 @@ function Login() {
     const [passwordError, setPasswordError] = useState("");
     const navigate = useNavigate();
 
+    const storeStudentData = (token, role, studentID) => {
+        localStorage.setItem('token', token);
+        localStorage.setItem('role', role);
+        localStorage.setItem('studentID', studentID);
+    };
+
     async function handlelogin(e) {
         e.preventDefault();
     // Check if email and password are valid
@@ -42,27 +48,26 @@ function Login() {
             
             console.log(response);
 
-            if (response.status === 400) {
-              setIsValid(false);
-              setErrorMessage("Invalid email or password");
-            } else if (response.status === 200) {
+                if (response.status === 200) {
                 const result = await response.json();
-                const token = result.token;
+                const token = result.token
                 const role = result.role;
+                const studentID = result.studentID;
                 
                 // Store the token in the browser's local storage
-                localStorage.setItem('token', token);
-                localStorage.setItem('role', role);
-                console.log(role);
+                await storeStudentData(token, role, studentID);
+                console.log(token);
                 if(role === "student"){
-                    navigate('/profile');
+                    navigate(`/profile`);
                 } else if(role === "admin"){
                     navigate('/admin_profile');
                 } else {
                     throw new Error('Invalid role');
                 }
             } else {
-              throw new Error('Something went wrong');
+                const errorResult = await response.json();
+                setIsValid(false);
+                setErrorMessage(errorResult.message || "An error occurred");
             }
           } catch (error) {
             console.error(error);

@@ -27,6 +27,7 @@ function User_nav() {
         // e.g. call API to invalidate session token, clear local storage/cookies, etc.
         localStorage.removeItem('token');
         localStorage.removeItem('role');
+        localStorage.removeItem('studentID');
 
         window.location.replace('/login');
     }

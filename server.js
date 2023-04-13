@@ -203,10 +203,9 @@ db.once('open', function () {
         res.status(400).json({ message: 'Invalid email or password' });
       }
       const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
-      res.header('x-auth-token', token).json({ token, role: role });
+      res.status(200).header('x-auth-token', token).json({ token, role: role, studentID: user.StudentID});
 
       // Redirect to the profile page on successful login
-      res.status(200).json({ message: 'Login successful' });
     } catch (error) {
       console.error(error);
       res.status(500).send('Internal server error.');

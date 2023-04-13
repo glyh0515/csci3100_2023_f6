@@ -13,10 +13,11 @@ import {
 } from '@mui/material';
 
 const ProfilePage = () => {
+  const studentID = localStorage.getItem('studentID');
   const [profile, setProfile] = useState({});
   
   useEffect(() => {
-    fetch('http://localhost:8080/user/1155100001')
+    fetch(`http://localhost:8080/user/${studentID}`)
       .then(response => response.json())
       .then(data => setProfile(data))
       .catch(error => console.log(error));
@@ -25,7 +26,7 @@ const ProfilePage = () => {
   const [courses, setCourses] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:8080/user/1155100001/course')
+    fetch(`http://localhost:8080/user/${studentID}/course`)
       .then(response => response.json())
       .then(data => setCourses(data))
       .catch(error => console.log(error));
@@ -33,7 +34,7 @@ const ProfilePage = () => {
 
   const handleDropCourse = (courseIndex) => {
     const courseID = courses[courseIndex].CourseID;
-    fetch(`http://localhost:8080/drop/1155100001/${courseID}`, {
+    fetch(`http://localhost:8080/drop/${studentID}/${courseID}`, {
       method: 'PUT'
     })
     .then(response => response.json())

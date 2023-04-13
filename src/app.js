@@ -1,6 +1,6 @@
 import React from 'react';
 import './CSS/App.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import Login from './login'
 import Register from './register'
 import ProfilePage from './user/profile'
@@ -15,6 +15,7 @@ import Admin_view_user from './admin/Admin_view_user';
 import Swap_SearchResults from './user/Swap_SearchResult';
 
 function App() {
+
   return (
     <BrowserRouter>
       <Routes>
