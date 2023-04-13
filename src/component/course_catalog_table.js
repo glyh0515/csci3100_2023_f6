@@ -143,7 +143,7 @@ const CourseCatalogTable = ({ searchResults }) => {
               >                
                 <Fade in={open}>
                   <Box sx={{
-                    backgroundColor: '#C7B9B4',
+                    backgroundColor: '#d7cdc3',
                     borderRadius: '20px',
                     boxShadow: 24,
                     position: 'absolute',
@@ -151,7 +151,7 @@ const CourseCatalogTable = ({ searchResults }) => {
                     left: '50%',
                     transform: 'translate(-50%, -50%)',
                     border: '2px solid #551805',
-                    padding: '20px',
+                    padding: '40px',
                     maxWidth: '800px',
                     minWidth: '600px',
                     overflow: 'auto'
