@@ -23,13 +23,11 @@ function Login() {
 
         if (!email) {
           setEmailError("Email is required");
-        } else if (!/^1155\d{6}@link\.cuhk\.edu\.hk$/.test(email)) { 
-          setEmailError("Must be SID@link.cuhk.edu.hk");
-        }
+        } 
         if (!password) {
           setPasswordError("Password is required");
         }
-        if (!email || !password || !/^1155\d{6}@link\.cuhk\.edu\.hk$/.test(email)) {
+        if (!email || !password) { 
           return;
         }
       else{
@@ -48,9 +46,21 @@ function Login() {
               setIsValid(false);
               setErrorMessage("Invalid email or password");
             } else if (response.status === 200) {
-              const token = response.headers.get('x-auth-token');
-              setIsValid(true);
-              navigate('/profile');
+                const result = await response.json();
+                const token = result.token;
+                const role = result.role;
+                
+                // Store the token in the browser's local storage
+                localStorage.setItem('token', token);
+                localStorage.setItem('role', role);
+
+                if(role === "student"){
+                    navigate('/profile');
+                } else if(role === "admin"){
+                    navigate('/admin_profile');
+                } else {
+                    throw new Error('Invalid role');
+                }
             } else {
               throw new Error('Something went wrong');
             }

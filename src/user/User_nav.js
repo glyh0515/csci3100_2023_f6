@@ -25,6 +25,9 @@ function User_nav() {
     if (confirmed) {
         // handle logout logic here
         // e.g. call API to invalidate session token, clear local storage/cookies, etc.
+        localStorage.removeItem('token');
+        localStorage.removeItem('role');
+
         window.location.replace('/login');
     }
     };
