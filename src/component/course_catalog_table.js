@@ -39,17 +39,17 @@ const columns = [
   
 ];
 
-/*const data = [
+const data = [
   {
-  id: 'CSCI3100',
-  name: 'Software Engineering',
-  venue: 'LSK LT1', 
-  time:' Mon 12:30pm-2:30pm', 
-  department: 'Computer Science',
-  instructor: 'Micheal Lyu',
-  units: '3',
-  status: 'open',
-  vacancy: '50',
+  CourseID: 'CSCI3100',
+  CourseName: 'Software Engineering',
+  Venue: 'LSK LT1', 
+  Timeslot:' Mon 12:30pm-2:30pm', 
+  Department: 'Computer Science',
+  Instructor: 'Micheal Lyu',
+  Units: '3',
+  Status: 'open',
+  Vacancy: '50',
   },
   {
   id: 'MATH101',
@@ -63,15 +63,15 @@ const columns = [
   vacancy: '0',
   },
  //  Add more courses as needed
-];*/
+];
 const CourseCatalogTable = ({ searchResults }) => {
   console.log("Recieved Search Results: ", searchResults)
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({ columns, data: searchResults });
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({ columns, data });
   const [open, setOpen] = useState(false);
   const [selectedCourse, setSelectedCourse] = useState(null);
 
   const handleViewCourse = (courseIndex) => {
-    setSelectedCourse(searchResults[courseIndex]);
+    setSelectedCourse(data[courseIndex]);
     setOpen(true);
   };
 
