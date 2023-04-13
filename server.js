@@ -272,6 +272,23 @@ db.once('open', function () {
     }
   });
 });
+  
+  app.get('/search', async (req, res) => {
+  try {
+    const keyword = req.query.keyword;
+    const courses = await Course.find({
+      $or: [
+        { CourseID: { $regex: keyword, $options: 'i' } },
+        { CourseName: { $regex: keyword, $options: 'i' } },
+      ],
+    });
+    res.status(200).json(courses);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal server error.');
+  }
+});
+
 
 // Start the server
 const server = app.listen(8080);

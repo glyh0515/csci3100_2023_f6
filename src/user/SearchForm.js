@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import '../CSS/Search_form.css';
 import {AiOutlineSearch} from 'react-icons/ai';
 import TextField from '@mui/material/TextField';
-
+import axios from 'axios';
 
 function SearchForm() {
   const [searchValue, setSearchValue] = useState("");
@@ -61,10 +61,22 @@ function SearchForm() {
         
     };
 
+    const handleFormSubmit = async (event) => {
+        event.preventDefault();
+        try {
+            const response = await axios.get('http://localhost:8080/search' , {
+                params: { keyword: searchValue },
+            });
+            console.log(response.data);
+        }catch(error){
+            console.error(error);
+        }
+    };
+
   return (
   <div >
     
-    <form id="search" className="searchform" action="">
+    <form id="search" className="searchform" action="" onSubmit={handleFormSubmit}>
       <p>Search</p>
         <div className="searchbar">
         <TextField                   
