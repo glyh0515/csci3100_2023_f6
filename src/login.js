@@ -53,7 +53,7 @@ function Login() {
                 // Store the token in the browser's local storage
                 localStorage.setItem('token', token);
                 localStorage.setItem('role', role);
-
+                console.log(role);
                 if(role === "student"){
                     navigate('/profile');
                 } else if(role === "admin"){

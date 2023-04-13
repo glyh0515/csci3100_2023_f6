@@ -71,13 +71,16 @@ function CreateAdmin() {
                     body: JSON.stringify(formData)
                 });
                 if (response.status === 200) {
+                    alert('Admin created successfully');
                     navigate('/create_admin');
                 } else {
                     const contentType = response.headers.get('content-type');
                     if (contentType && contentType.includes('application/json')) {
                         const errorData = await response.json();
+                        alert(errorData.message);
                         console.error('Error:', errorData);
                     } else {
+                        alert('Error: Non-JSON response');
                         console.error('Error: Non-JSON response');
                     }
                 }
