@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useTable } from 'react-table';
 import { Modal, Fade, Typography, Box } from '@mui/material';
+import { calculateNewValue } from '@testing-library/user-event/dist/utils';
 
 const columns = [
   {
@@ -134,49 +135,56 @@ const CourseCatalogTable = ({ searchResults }) => {
              
             );
           })}
-          </tbody> <Modal
+          </tbody> 
+          <Modal
               open={open}
               onClose={handleClose}
               closeAfterTransition
               >                
                 <Fade in={open}>
                   <Box sx={{
-                    backgroundColor: 'white',
-                    borderRadius: '10px',
+                    backgroundColor: '#C7B9B4',
+                    borderRadius: '20px',
                     boxShadow: 24,
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    border: '2px solid #551805',
                     padding: '20px',
-                    maxWidth: '600px',
-                    minWidth: '400px',
+                    maxWidth: '800px',
+                    minWidth: '600px',
                     overflow: 'auto'
                     }}>
-                    <Typography variant="h6" component="h2" sx={{ marginBottom: '20px' }}>
+                    <Typography variant="h6" component="h2" sx={{ marginBottom: '20px',width:'100%' }}>
                       {selectedCourse && `${selectedCourse.CourseID} - ${selectedCourse.CourseName}`}
                     </Typography>
                     {selectedCourse && (
                       <>
-                        <Typography variant="subtitle1" component="h3" sx={{ marginBottom: '10px' }}>
-                          Course Description
+                        <Typography variant="body1" sx={{ marginBottom: '5px',width:'50%' }}>
+                          Venue : {selectedCourse.Venue}
                         </Typography>
-                        <Typography variant="body1" sx={{ whiteSpace: 'pre-line', marginBottom: '20px' }}>
+                        
+                        <Typography variant="body1" sx={{ marginBottom: '5px',width:'50%'  }}>
+                          Instructor : {selectedCourse.Instructor}
+                        </Typography>
+                        <Typography variant="body1" sx={{ whiteSpace: 'pre-line', marginBottom: '5px',width:'50%'  }}>
+                          Timeslot : {selectedCourse.Timeslot}
+                        </Typography>
+                        <Typography variant="body1" sx={{ marginBottom: '5px',width:'50%' }}>
+                          Department : {selectedCourse.Department}
+                        </Typography>
+                        <Typography variant="body1" sx={{ marginBottom: '5px',width:'50%' }}>
+                          Units : {selectedCourse.Units}
+                        </Typography>
+                        <Typography variant="body1" sx={{ marginBottom: '5px',width:'50%' }}>
+                          Vacancy : {selectedCourse.Vacancy}
+                        </Typography>
+                        <Typography variant="body1" sx={{ whiteSpace: 'pre-line', marginBottom: '5px',width:'100%', textAlign:'left' }}>
+                          Course Description:
+                        </Typography>
+                        <Typography variant="body1" sx={{ whiteSpace: 'pre-line', marginBottom: '20px',width:'100%', textAlign:'left' }}>
                           {selectedCourse.CourseDescription}
-                        </Typography>
-                        <Typography variant="subtitle1" component="h3" sx={{ marginBottom: '10px' }}>
-                          Instructor
-                        </Typography>
-                        <Typography variant="body1" sx={{ marginBottom: '20px' }}>
-                          {selectedCourse.Instructor}
-                        </Typography>
-                        <Typography variant="subtitle1" component="h3" sx={{ marginBottom: '10px' }}>
-                          Schedule
-                        </Typography>
-                        <Typography variant="body1" sx={{ whiteSpace: 'pre-line', marginBottom: '20px' }}>
-                          {selectedCourse.Schedule}
-                        </Typography>
-                        <Typography variant="subtitle1" component="h3" sx={{ marginBottom: '10px' }}>
-                          Units
-                        </Typography>
-                        <Typography variant="body1" sx={{ marginBottom: '20px' }}>
-                          {selectedCourse.Units}
                         </Typography>
                       </>
                     )}

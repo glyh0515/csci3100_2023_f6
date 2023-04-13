@@ -4,6 +4,8 @@ import {AiOutlineSearch} from 'react-icons/ai';
 import TextField from '@mui/material/TextField';
 import axios from 'axios';
 
+
+
 function SearchForm({ onSearchResults }) {
   const [searchValue, setSearchValue] = useState("");
   const [openClasses, setOpenClasses] = useState(true);
