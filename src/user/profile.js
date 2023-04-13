@@ -15,6 +15,7 @@ import {
 const ProfilePage = () => {
   const studentID = localStorage.getItem('studentID');
   const [profile, setProfile] = useState({});
+  const [courses, setCourses] = useState([]);
   
   useEffect(() => {
     fetch(`http://localhost:8080/user/${studentID}`)
@@ -23,7 +24,6 @@ const ProfilePage = () => {
       .catch(error => console.log(error));
   }, []);
 
-  const [courses, setCourses] = useState([]);
 
   useEffect(() => {
     fetch(`http://localhost:8080/user/${studentID}/course`)
