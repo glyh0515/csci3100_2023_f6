@@ -47,7 +47,7 @@ db.once('open', function () {
   // Define schemas for sample models
   const UserSchema = mongoose.Schema({
     StudentID: { type: String, unique: true },
-    Role: { type: String, default: 'student' },
+    Role: { type: String, default: 'Student' },
     Name: String,
     Email: String,
     Password: String,
@@ -57,7 +57,7 @@ db.once('open', function () {
   });
   const AdminSchema = mongoose.Schema({
     AdminID: { type: String, unique: true },
-    Role: { type: String, default: 'admin' },
+    Role: { type: String, default: 'Admin' },
     Name: String,
     Email: String,
     Password: String,
@@ -165,7 +165,12 @@ db.once('open', function () {
   app.post('/login', async (req, res) => {
     try {
       // Check if user exists in the database
-      const user = await User.findOne({ Email: req.body.email });
+      let user = await User.findOne({ Email: req.body.email });
+      let role = "student";
+      if(!user){
+        user = await Admin.findOne({ Email: req.body.email });
+        role = "admin";
+      }
       if (!user) {
         res.status(400).json({ message: 'Invalid email or password' });
       }
@@ -175,10 +180,10 @@ db.once('open', function () {
         res.status(400).json({ message: 'Invalid email or password' });
       }
       const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
-      res.header('x-auth-token', token).json({ token, Role: user.Role });
+      res.header('x-auth-token', token).json({ token, role: role });
 
       // Redirect to the profile page on successful login
-      res.redirect("http://localhost:3000/profile");
+      res.status(200).json({ message: 'Login successful' });
     } catch (error) {
       console.error(error);
       res.status(500).send('Internal server error.');

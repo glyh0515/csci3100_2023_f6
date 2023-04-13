@@ -40,39 +40,39 @@ const columns = [
   
 ];
 
-const data = [
-  {
-  CourseID: 'CSCI3100',
-  CourseName: 'Software Engineering',
-  Venue: 'LSK LT1', 
-  Timeslot:' Mon 12:30pm-2:30pm', 
-  Department: 'Computer Science',
-  Instructor: 'Micheal Lyu',
-  Units: '3',
-  Status: 'open',
-  Vacancy: '50',
-  },
-  {
-  id: 'MATH101',
-  name: 'Calculus I',
-  venue: 'YIA LT5',
-  time:' Tue 12:30pm-2:30pm',
-  department: 'Mathematics',
-  instructor: 'Jane Smith',
-  units: '2',
-  status: 'close',
-  vacancy: '0',
-  },
- //  Add more courses as needed
-];
+//const data = [
+  //{
+  //CourseID: 'CSCI3100',
+  //CourseName: 'Software Engineering',
+  //Venue: 'LSK LT1', 
+  //Timeslot:' Mon 12:30pm-2:30pm', 
+  //Department: 'Computer Science',
+  //Instructor: 'Micheal Lyu',
+  //Units: '3',
+  //Status: 'open',
+  //Vacancy: '50',
+  //},
+  //{
+  //id: 'MATH101',
+  //name: 'Calculus I',
+  //venue: 'YIA LT5',
+  //time:' Tue 12:30pm-2:30pm',
+  //department: 'Mathematics',
+  //instructor: 'Jane Smith',
+  //units: '2',
+  //status: 'close',
+  //vacancy: '0',
+  //},
+ ////  Add more courses as needed
+//];
 const CourseCatalogTable = ({ searchResults }) => {
   console.log("Recieved Search Results: ", searchResults)
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({ columns, data });
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({ columns, data: searchResults });
   const [open, setOpen] = useState(false);
   const [selectedCourse, setSelectedCourse] = useState(null);
 
   const handleViewCourse = (courseIndex) => {
-    setSelectedCourse(data[courseIndex]);
+    setSelectedCourse(searchResults[courseIndex]);
     setOpen(true);
   };
 
