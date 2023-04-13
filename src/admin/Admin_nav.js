@@ -36,7 +36,7 @@ function Admin_nav() {
                 <AiOutlineCaretLeft/>
             </a> 
             <NavLink to="/admin_profile" onClick={closeNav}>
-                <AiOutlineUser/> Profile 
+                <AiOutlineUser/>Profile 
             </NavLink>
             <NavLink to="/create_admin" onClick={closeNav}>
                 <AiOutlineUserAdd/>Create Admin
