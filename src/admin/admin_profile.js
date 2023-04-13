@@ -11,7 +11,6 @@ import {
   ListItem,
   ListItemText,
   Typography,
-  colors,
 } from '@mui/material';
 import { AiOutlineSolution,AiOutlineUserAdd,      // icon for sidenav
     AiOutlineHdd,AiOutlineReconciliation
@@ -20,8 +19,9 @@ import { AiOutlineSolution,AiOutlineUserAdd,      // icon for sidenav
 const AdminProfilePage = () => {
   const [adminprofile, setAdminProfile] = useState({});
 
+  const adminID = localStorage.getItem('adminID');
   useEffect(() => {
-    fetch('http://localhost:8080/admin/0001')
+    fetch(`http://localhost:8080/admin/${adminID}`)
       .then(response => response.json())
       .then(data => setAdminProfile(data))
       .catch(error => console.log(error));

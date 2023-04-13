@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import './CSS/App.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import Login from './login'
 import Register from './register'
 import ProfilePage from './user/profile'

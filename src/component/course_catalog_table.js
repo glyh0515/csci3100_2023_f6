@@ -64,6 +64,8 @@ const columns = [
   //},
  ////  Add more courses as needed
 //];
+const studentID = localStorage.getItem('studentID');
+
 const CourseCatalogTable = ({ searchResults }) => {
   console.log("Recieved Search Results: ", searchResults)
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({ columns, data: searchResults });
@@ -81,7 +83,8 @@ const CourseCatalogTable = ({ searchResults }) => {
 
   function handleEnrollCourse(courseIndex) {
     const courseID = searchResults[courseIndex].CourseID;
-    const url = `http://localhost:8080/add/1155100001/${courseID}`;
+
+    const url = `http://localhost:8080/add/${studentID}/${courseID}`;
     fetch(url, {
       method: 'PUT'
     })

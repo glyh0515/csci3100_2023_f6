@@ -4,12 +4,21 @@ import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
 function Swap_EnrolledCourse() {
-  //const [courses, setCourses] = useState([]);
-  const enrolled_courses = [
-    { id: 1, name: "Math 101" },
-    { id: 2, name: "History 201" },
-    { id: 3, name: "Biology 301" },
-  ];
+
+  const [courses, setCourses] = useState([]);
+  const studentID = localStorage.getItem('studentID');
+  useEffect(() => {
+    fetch(`http://localhost:8080/user/${studentID}/course`)
+    .then(response => response.json())
+    .then(data => setCourses(data))
+    .catch(error => console.log(error));
+  }, []);
+
+  //const enrolled_courses = [
+    //{ id: 1, name: "Math 101" },
+    //{ id: 2, name: "History 201" },
+    //{ id: 3, name: "Biology 301" },
+  //];
     const [selected, setSelected] = React.useState('none');
   
     const handleChange = (event, nextSelected) => {
@@ -34,12 +43,12 @@ function Swap_EnrolledCourse() {
             exclusive
             onChange={handleChange}
             >
-            {enrolled_courses.map(enrolled_courses => (
+            {courses.map((course) => (
             <ToggleButton 
-                        key={enrolled_courses.id} 
-                        value={enrolled_courses.id} 
-                        aria-label={enrolled_courses.id}>
-                {enrolled_courses.name}
+                        key={course.id} 
+                        value={course.id} 
+                        aria-label={course.id}>
+                {course.CourseID}
             </ToggleButton>
             ))}
         </ToggleButtonGroup>
