@@ -43,25 +43,25 @@ function Create_Course() {
     }
     if (!formData.courseName.trim()) {
       errors.courseName = 'Course name is required';
-    } 
+    }
     if (!formData.timeslot.trim()) {
-      errors.timeslot = 'Time is required';
-    } 
+      errors.timeslot = 'Timeslot is required';
+    }
     if (!formData.venue.trim()) {
       errors.venue = 'Venue is required';
-    }
-    if (!formData.department.trim()) {
-      errors.department = 'Department is required';
     }
     if (!formData.instructor.trim()) {
       errors.instructor = 'Instructor is required';
     } 
+    if (!formData.department.trim()) {
+      errors.department = 'Department is required';
+    }
     if (!formData.units.trim()) {
       errors.units = 'Units is required';
     }
     if (!formData.vacancy.trim()) {
       errors.vacancy = 'Vacancy is required';
-    } 
+    }
     return errors;
   }
 
@@ -94,14 +94,12 @@ function Create_Course() {
             console.log('Error:', error);
             alert('Error register the course');
         }
-
     }
   };
 
-
   return (
-  <div className='create-course-container'>
-    <Admin_nav />
+    <div className='create-course-container'>
+      <Admin_nav />
       <Box sx={{
         width: 400,
         maxHeight: 800,
@@ -114,32 +112,32 @@ function Create_Course() {
         transform: 'translate(-50%, -50%)',
       }}
       >
-      <form onSubmit={handleSubmit} className='create-course-form'>
-      <h2>Create Course</h2>
-        <Box sx={{ width: '100%', display: 'inline-block', padding: 2 }}>
-          {inputFields.map((field) => (
-            <TextField
-              color='warning'
-              size='small'
-              key={field.id}
-              id={field.id}
-              name={field.id}
-              label={field.label}
-              type={field.type}
-              variant="outlined"
-              margin="dense"
-              onChange={handleChange}
-              error={formData.errors[field.id] ? true : false}
-              helperText={formData.errors[field.id]}
-              sx={{ width: '100%' }}
-            />
-          ))}
-        </Box>
-        <button type="submit" className='create-course-btn'>Create Course</button>
-      </form>
-    </Box>  
-  </div>
-    
+        <form onSubmit={handleSubmit} className='create-course-form'>
+          <h2>Create Course</h2>
+          <Box sx={{ width: '100%', display: 'inline-block', padding: 2 }}>
+            {inputFields.map((field) => (
+              <TextField
+                color='warning'
+                size='small'
+                key={field.id}
+                id={field.id}
+                name={field.id}
+                label={field.label}
+                type={field.type}
+                variant="outlined"
+                margin="dense"
+                onChange={handleChange}
+                error={formData.errors[field.id] ? true : false}
+                helperText={formData.errors[field.id]}
+                sx={{ width: '100%' }}
+              />
+            ))}
+          </Box>
+          <button type="submit" className='create-course-btn'>Create Course</button>
+        </form>
+      </Box>
+    </div>
+
   );
 };
 
