@@ -27,10 +27,13 @@ const Swap = () => {
         <SearchForm onSearchResults={handleSearchResults}/>
         <form onSubmit={handleSubmit} className='swap-form'>
           <EnrolledCourse/>
+          <p className="title">Search Results:
+            <button className='swap-btn' type="submit" disabled={!enrolledCourse || !searchResults}>
+            Swap Courses
+            </button>
+          </p>
           <Swap_SearchResult searchResults={searchResults}/>                    
-          <button className='swap-btn' type="submit" disabled={!enrolledCourse || !searchResults}>
-          Swap Courses
-          </button>
+          
           
         </form>
       </div>

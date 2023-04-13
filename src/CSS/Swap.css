@@ -15,11 +15,11 @@
 .swap-btn{
     border-radius: 23px;
     /* border-bottom-right-radius: 20px; */
-    float: unset;
+    float: right;
     width: 150px;
-    height: 50.85px;
+    height: 38.85px;
     padding-left: 1%;
-    margin-left: calc(50% - 75px);
+    /* margin-left: calc(50% - 75px); */
     background: #d7cdc3;
     color: rgb(158, 57, 10);
     font-size: 17px;

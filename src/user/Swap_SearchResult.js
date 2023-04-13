@@ -60,7 +60,6 @@ function Swap_SearchResults({ searchResults }) {
 
   return (
     <div className="search-results">
-      <p className="title">Search Results:</p>
       <ToggleButtonGroup
             className='list-item'
             orientation="vertical"
