@@ -3,8 +3,7 @@ import '../CSS/Search_form.css';
 import {AiOutlineSearch} from 'react-icons/ai';
 import TextField from '@mui/material/TextField';
 import axios from 'axios';
-
-
+import {AiOutlineCaretDown} from "react-icons/ai";
 
 function SearchForm({ onSearchResults }) {
   const [searchValue, setSearchValue] = useState("");
@@ -62,6 +61,7 @@ function SearchForm({ onSearchResults }) {
         dropdown.style.display === "none" ? "block" : "none";
         
     };
+    
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
@@ -75,6 +75,7 @@ function SearchForm({ onSearchResults }) {
             console.error(error);
         }
     };
+    
 
   return (
   <div >
@@ -97,7 +98,7 @@ function SearchForm({ onSearchResults }) {
           <AiOutlineSearch />
         </button>
       </div>
-      <p onClick={() => toggleDropdown("ClassStatus")} >Class Status</p>      
+      <p onClick={() => toggleDropdown("ClassStatus")} style={{cursor: "pointer"}}  ><AiOutlineCaretDown/>Class Status  </p>      
       <div id="ClassStatus" className="ClassStatus">        
         <label className="option">
             <input
@@ -119,7 +120,7 @@ function SearchForm({ onSearchResults }) {
             Waitlist Class
           </label>
       </div>
-      <p onClick={() => toggleDropdown("ClassDay")}>Class Day</p>      
+      <p onClick={() => toggleDropdown("ClassDay")} style={{cursor: "pointer"}}><AiOutlineCaretDown/>Class Day</p>      
       <div id="ClassDay" className="ClassDay">        
         {classDays.map((day) => (
           <p>
@@ -135,7 +136,7 @@ function SearchForm({ onSearchResults }) {
           </p>
         ))}
       </div>
-      <p onClick={() => toggleDropdown("Unit")}>Units</p>
+      <p onClick={() => toggleDropdown("Unit")}style={{cursor: "pointer"}}><AiOutlineCaretDown/>Units</p>
       <div id="Unit" className="Unit">
         {unitRanges.map((range) => (
           <p>
