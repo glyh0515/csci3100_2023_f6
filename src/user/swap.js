@@ -21,18 +21,17 @@ const Swap = () => {
     };
 
   return (
-    <div>
+    <div >
       <User_nav />
-      <div className='swap-container'>
-        
+      <div className='swap-container'>        
         <SearchForm onSearchResults={handleSearchResults}/>
         <form onSubmit={handleSubmit} className='swap-form'>
           <EnrolledCourse/>
-          <Swap_SearchResult searchResults={searchResults}/>          
-
+          <Swap_SearchResult searchResults={searchResults}/>                    
           <button className='swap-btn' type="submit" disabled={!enrolledCourse || !searchResults}>
-            Swap Courses
+          Swap Courses
           </button>
+          
         </form>
       </div>
       
