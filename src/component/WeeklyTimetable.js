@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import '../CSS/Timetable.css';
 import User_nav from '../user/User_nav'; // import the User_nav component
 //import selected_course from 'path/to/selected_course/database'; // import the selected_course database
 
 const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-const courseSchedule = {
+/* const courseSchedule = {
   Monday: [
     { courseCode: 'MATH101', courseName: 'Calculus I', classroom: 'Room 101', span: 2 },
     null,
@@ -54,9 +54,44 @@ const courseSchedule = {
     null,
     null,
   ],
-};
+}; */
 
 const WeeklyTimetable = () => {
+  const courseSchedule = {
+    Monday: Array(10).fill(null),
+    Tuesday: Array(10).fill(null),
+    Wednesday: Array(10).fill(null),
+    Thursday: Array(10).fill(null),
+    Friday: Array(10).fill(null),
+    Saturday: Array(10).fill(null),
+  }
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    fetch('http://localhost:8080/user/1155100001/course')
+      .then(response => response.json())
+      .then(data => {
+        setData(data);
+      })
+      .catch(error => console.error(error));
+  }, []);
+  for (const course of data) {
+    const timeslotParts = course.Timeslot.split(' ');
+    const weekday = timeslotParts[0];
+    const startHour = parseInt(timeslotParts[1].substring(0, 2));
+    const endHour = parseInt(timeslotParts[1].substring(5, 7));
+    const startSlot = startHour - 8;
+    const endSlot = endHour - 8;
+    const span = endSlot - startSlot;
+    const courseData = {
+      courseCode: course.CourseID,
+      courseName: course.CourseName,
+      classroom: course.Venue,
+      span: span,
+    }
+    for (let i = 0; i < span; i++) {
+      courseSchedule[weekday][startSlot + i] = courseData;
+    }
+  }
   return (
     <div >
       <User_nav />
@@ -73,7 +108,7 @@ const WeeklyTimetable = () => {
           <tbody>
             {Array.from({ length: 10 }, (_, hour) => (
               <tr key={hour}>
-                <td>{`${hour+8}:30`} - {`${hour+9}:15`}</td>
+                <td>{`${hour + 8}:30`} - {`${hour + 9}:15`}</td>
                 {days.map((day, dayIndex) => {
                   const course = courseSchedule[day]?.[hour];
                   return (
@@ -93,7 +128,7 @@ const WeeklyTimetable = () => {
           </tbody>
         </table>
       </div>
-      
+
     </div>
   );
 };

@@ -162,6 +162,20 @@ db.once('open', function () {
     }
   });
 
+  app.get('/user/:studentID/course', async (req, res) => {
+    try {
+      const student = await User.findOne({ StudentID: req.params.studentID }).populate('EnrolledCourse');
+      if (!student) {
+        return res.status(404).json({ message: 'Student not found' });
+      }
+      const courses = student.EnrolledCourse;
+      res.status(200).json(courses);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Error retrieving courses' });
+    }
+  });
+
   app.post('/login', async (req, res) => {
     try {
       // Check if user exists in the database
@@ -270,7 +284,32 @@ db.once('open', function () {
     }
   });
 
-  app.put('/drop/:studentid/:courseID');
+  app.put('/drop/:studentID/:courseID', async (req, res) => {
+    try {
+      const student = await User.findOne({ StudentID: req.params.studentID });
+      const course = await Course.findOne({ CourseID: req.params.courseID });
+      if (!student) {
+        return res.status(404).json({ message: 'Student not found' });
+      }
+      if (!course) {
+        return res.status(404).json({ message: 'Course not found' });
+      }
+      const enrolledCourseIndex = student.EnrolledCourse.indexOf(course._id);
+      if (enrolledCourseIndex > -1) {
+        student.EnrolledCourse.splice(enrolledCourseIndex, 1);
+        await student.save();
+      }
+      const enrolledStudentIndex = course.EnrolledStudent.indexOf(student._id);
+      if (enrolledStudentIndex > -1) {
+        course.EnrolledStudent.splice(enrolledStudentIndex, 1);
+        await course.save();
+      }
+      res.status(200).json({ message: 'Course deleted successfully' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Error deleting the course' });
+    }
+  });
 
   app.delete('/user/:studentID', async (req, res) => {
     try {
