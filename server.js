@@ -47,7 +47,7 @@ db.once('open', function () {
   // Define schemas for sample models
   const UserSchema = mongoose.Schema({
     StudentID: { type: String, unique: true },
-    role: { type: String, default: 'student' },
+    Role: { type: String, default: 'student' },
     Name: String,
     Email: String,
     Password: String,
@@ -57,7 +57,7 @@ db.once('open', function () {
   });
   const AdminSchema = mongoose.Schema({
     AdminID: { type: String, unique: true },
-    role: { type: String, default: 'admin' },
+    Role: { type: String, default: 'admin' },
     Name: String,
     Email: String,
     Password: String,
@@ -175,7 +175,7 @@ db.once('open', function () {
         res.status(400).json({ message: 'Invalid email or password' });
       }
       const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
-      res.header('x-auth-token', token).json({ token, role: user.role });
+      res.header('x-auth-token', token).json({ token, Role: user.Role });
 
       // Redirect to the profile page on successful login
       res.redirect("http://localhost:3000/profile");
