@@ -3,56 +3,13 @@ import "../CSS/Swap_SearchResults.css";
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
-function Swap_SearchResults(/*{ courses ,searchQuery,openClasses, waitlistClasses, classDays, unitRanges }*/) {
+function Swap_SearchResults({ searchResults }) {
   // Filter the courses based on the search query and filters
   const [selected, setSelected] = React.useState('none');
   
     const handleChange = (event, nextSelected) => {
       setSelected(nextSelected);
     };
-  let courses = [
-    {
-      id: 1,
-      code: "MATH101",
-      name: "Calculus I",
-      venue: "Room 101",
-      time:' Mon 12:30pm-2:30pm',
-      department: "Mathematics",
-      instructor: "John Doe",
-      units: 4,
-      status: "Open",
-      vacancy: 10,
-      schedule: ["Monday", "Wednesday", "Friday"]
-    },
-    {
-      id: 2,
-      code: "PHYS101",
-      name: "Physics I",
-      venue: "Room 201",
-      time:' Thur 12:30pm-2:30pm',
-      department: "Physics",
-      instructor: "Jane Doe",
-      units: 4,
-      status: "Waitlist",
-      vacancy: 5,
-      schedule: ["Tuesday", "Thursday"]
-    },
-    {
-      id: 3,
-      code: "ENGL101",
-      name: "English Composition",
-      venue: "Room 301",
-      time:' Tue 1:30pm-3:30pm',
-      department: "English",
-      instructor: "James Smith",
-      units: 3,
-      status: "Open",
-      vacancy: 20,
-      schedule: ["Monday", "Wednesday"]
-    }
-  ];
-  
-  let searchQuery = "math";
   
   let openClasses = true;
   
@@ -95,6 +52,11 @@ function Swap_SearchResults(/*{ courses ,searchQuery,openClasses, waitlistClasse
     }
     return true;
   });*/
+    const filteredCourses = ({searchResults}) => {
+        console.log("Search Results", searchResults);
+    }
+    //change courses to searchResults
+
 
   return (
     <div className="search-results">
@@ -106,20 +68,19 @@ function Swap_SearchResults(/*{ courses ,searchQuery,openClasses, waitlistClasse
             exclusive
             onChange={handleChange}
             >
-            {courses.map(course => (
+            {searchResults.map(course => (
             <ToggleButton 
-                        key={course.id} 
+                        key={course.id}
                         value={course.id} 
                         aria-label={course.id}>
-                <div className="course-code">{course.code}</div>
-                <div className="course-name">{course.name}</div>
-                <div className="venue">{course.venue}</div>
-                <div className="time">{course.time}</div>
-                <div className="department">{course.department}</div>
-                <div className="instructor">{course.instructor}</div>
-                <div className="course-units">{course.units} Units</div>
-                <div className="course-status">{course.status}</div>            
-                <div className="vacancy">{course.vacancy}</div>
+                <div className="course-code">{course.CourseID}</div>
+                <div className="course-name">{course.CourseName}</div>
+                <div className="venue">{course.Venue}</div>
+                <div className="time">{course.Timeslot}</div>
+                <div className="department">{course.Department}</div>
+                <div className="instructor">{course.Instructor}</div>
+                <div className="course-units">{course.Units} Units</div>
+                <div className="vacancy">{course.Vacancy}</div>
             </ToggleButton>
             ))}
         </ToggleButtonGroup>

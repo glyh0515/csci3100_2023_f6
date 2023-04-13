@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Course_Catalog_table from '../component/course_catalog_table';
 import User_nav from './User_nav';
-import Searchform from './SearchForm';
+import SearchForm from './SearchForm';
 import '../CSS/Course_catalog.css';
 
 function Course_Catalog() {
@@ -16,7 +16,7 @@ function Course_Catalog() {
       <div style={{height:'100%'}}>
         <User_nav />                
         <div >
-          <Searchform onSearchResults={handleSearchResults} />
+          <SearchForm onSearchResults={handleSearchResults} />
           <div className='course-catalog'>
             <p className='header'>Search Results</p>            
             <Course_Catalog_table searchResults={searchResults} />
