@@ -203,7 +203,7 @@ db.once('open', function () {
         res.status(400).json({ message: 'Invalid email or password' });
       }
       const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
-      res.status(200).header('x-auth-token', token).json({ token, role: role, studentID: user.StudentID});
+      res.status(200).header('x-auth-token', token).json({ token, role: role, studentID: user.StudentID, adminID: user.AdminID});
 
       // Redirect to the profile page on successful login
     } catch (error) {

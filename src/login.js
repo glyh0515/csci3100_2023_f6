@@ -15,11 +15,6 @@ function Login() {
     const [passwordError, setPasswordError] = useState("");
     const navigate = useNavigate();
 
-    const storeStudentData = (token, role, studentID) => {
-        localStorage.setItem('token', token);
-        localStorage.setItem('role', role);
-        localStorage.setItem('studentID', studentID);
-    };
 
     async function handlelogin(e) {
         e.preventDefault();
@@ -53,10 +48,13 @@ function Login() {
                 const token = result.token
                 const role = result.role;
                 const studentID = result.studentID;
+                const adminID = result.adminID;
                 
                 // Store the token in the browser's local storage
-                await storeStudentData(token, role, studentID);
-                console.log(token);
+                localStorage.setItem('token', token);
+                localStorage.setItem('role', role);
+                localStorage.setItem('studentID', studentID);
+                localStorage.setItem('adminID', adminID);
                 if(role === "student"){
                     navigate(`/profile`);
                 } else if(role === "admin"){
