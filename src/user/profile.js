@@ -22,14 +22,26 @@ const ProfilePage = () => {
       .catch(error => console.log(error));
   }, []);
 
-  const [courses, setCourses] = useState([
-    { code: 'CSCI3100', name: 'Software Engineering' },
-    { code: 'CS102', name: 'Data Structures' },
-    { code: 'CS103', name: 'Algorithms' },
-  ]);
+  const [courses, setCourses] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:8080/user/1155100001/course')
+      .then(response => response.json())
+      .then(data => setCourses(data))
+      .catch(error => console.log(error));
+  }, []);
 
   const handleDropCourse = (courseIndex) => {
-    setCourses(courses.filter((_, index) => index !== courseIndex));
+    const courseID = courses[courseIndex].CourseID;
+    fetch(`http://localhost:8080/drop/1155100001/${courseID}`, {
+      method: 'PUT'
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Course dropped:', data);
+      setCourses(courses.filter((_, index) => index !== courseIndex));
+    })
+    .catch(error => console.log(error));
   };
 
     return (
@@ -86,10 +98,10 @@ const ProfilePage = () => {
           <Typography className='header' sx={{fontSize: 24}} >Enrolled Courses</Typography>
           <List className="course-list">
             {courses.map((course, index) => (
-              <ListItem key={course.code} className="course-item">
+              <ListItem key={course.CourseID} className="course-item">
                 <ListItemText
-                  primary={course.code}
-                  secondary={course.name}
+                  primary={course.CourseID}
+                  secondary={course.CourseName}
                   sx={{ marginRight: '1rem' }}
                 />
                 <button
