@@ -23,7 +23,6 @@
         
     }
     .searchbar{
-        column-count: 2;
         width: 250px;
 
     }   
@@ -35,6 +34,7 @@
         width: calc(250px - 40px);
         background: #C7B9B4;
         color: #551805;
+        height:42.85px;
         border-top-left-radius : 20px;
         border-bottom-left-radius : 20px;
         border-top-right-radius : 0;
@@ -145,7 +145,6 @@
     
 }
 .admin-searchbar{
-    column-count: 2;
     width: 800px;
 
 }   
@@ -155,7 +154,7 @@
     font-size: 18px;           
     float: left;
     width: calc(800px - 40px);
-    height: 40px;
+    height:42.85px;
     background: #C7B9B4;
     color: #551805;
     border-top-left-radius : 20px;
@@ -172,7 +171,7 @@
     border-bottom-right-radius : 20px;
     float:right;
     width: 40px;
-    height:40px;
+    height:42.85px;
     background: #C7B9B4;
     color: #551805;
     font-size: 24px;
