@@ -21,7 +21,7 @@ function SearchForm({ onSearchResults }) {
   const [unitRanges, setUnitRanges] = useState([
     { name: "1-2", checked: true },
     { name: "3-4", checked: true },
-    { name: "4-6", checked: true },
+    { name: "5-6", checked: true },
   ]);
     const handleSearchValueChange = (event) => {
       setSearchValue(event.target.value);
