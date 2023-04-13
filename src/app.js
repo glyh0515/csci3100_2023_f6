@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
 import './CSS/App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from './login'
@@ -13,24 +13,40 @@ import Swap from './user/swap';
 import AdminProfile from './admin/admin_profile';
 import Admin_view_user from './admin/Admin_view_user';
 import Swap_SearchResults from './user/Swap_SearchResult';
+import Loading from "./component/Loading";
+
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+      setTimeout(() => {
+        setIsLoading(false);
+        console.log("Loading complete");
+      }, 500); // set the timeout according to your needs
+
+  }, []);
+
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/search" element={<Course_Catalog />} />
-        <Route path="/create_admin" element={<CreateAdmin />} />
-        <Route path="/create_course" element={<Create_Course />} />
-        <Route path="/all_course" element={<All_Course />} />
-        <Route path="/all_user" element={<Admin_view_user />} />
-        <Route path="/weeklytimetable" element={<WeeklyTimetable />} />
-        <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/swap" element={<Swap />} />
-        <Route path="/admin_profile" element={<AdminProfile />} />
-        <Route path="/swap_search" element={<Swap_SearchResults />} />
-      </Routes>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/search" element={<Course_Catalog />} />
+          <Route path="/create_admin" element={<CreateAdmin />} />
+          <Route path="/create_course" element={<Create_Course />} />
+          <Route path="/all_course" element={<All_Course />} />
+          <Route path="/all_user" element={<Admin_view_user />} />
+          <Route path="/weeklytimetable" element={<WeeklyTimetable />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/swap" element={<Swap />} />
+          <Route path="/admin_profile" element={<AdminProfile />} />
+          <Route path="/swap_search" element={<Swap_SearchResults />} />
+        </Routes>
+      )}
     </BrowserRouter>
   );
 }

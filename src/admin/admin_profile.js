@@ -31,7 +31,7 @@ const AdminProfilePage = () => {
     <div>
       <Admin_nav />
       <Box className="profile-page" sx={{ display: 'flex', margin: '1rem' }}>
-        <Card className="left-column" sx={{ marginRight: '1rem', backgroundColor: '#d7cdc3', maxWidth: 400, minWidth: 350 }}>
+        <Card className="left-column" sx={{float:'right' ,marginRight: '1rem', backgroundColor: '#d7cdc3', maxWidth: 400, minWidth: 350 }}>
           <CardContent>
             <Typography className='profile-header' sx={{ fontSize: 24 }} >Profile</Typography>
             <Box
@@ -99,7 +99,7 @@ const AdminProfilePage = () => {
               <Card className="left-column" sx={{ margin:'40px', backgroundColor: '#d7cdc3',  minWidth: 300, height:200 }}>
                 <CardContent sx={{textAlign:'center',color:'#77320a'}}>
                   <AiOutlineReconciliation size="5em"/>
-                  <p>Create Course Record</p>
+                  <p>Create Course</p>
                 </CardContent>
               </Card> 
                 

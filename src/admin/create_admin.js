@@ -37,8 +37,13 @@ function CreateAdmin() {
         if (!formData.adminID.trim()) {
             errors.adminID = 'Admin ID is required';
         }
+        if (!formData.name.trim()) {
+            errors.name = 'Name is required';
+        }
         if (!formData.email.trim()) {
             errors.email = 'Email is required';
+        }else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+            errors.email = 'Email is invalid';
         }
         if (!formData.password.trim()) {
             errors.password = 'Password is required';

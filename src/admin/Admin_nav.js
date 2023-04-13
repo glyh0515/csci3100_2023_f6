@@ -48,7 +48,7 @@ function Admin_nav() {
                 <AiOutlineHdd/>View All Courses
             </NavLink>
             <NavLink to="/create_course" onClick={closeNav}>
-                <AiOutlineReconciliation/>Create Course Record
+                <AiOutlineReconciliation/>Create Course
             </NavLink>
         </div>
 

@@ -5,6 +5,7 @@ import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { AiOutlineSend } from 'react-icons/ai';
+import Loading from'./component/Loading';
 
 function Login() {
     const [email, setEmail] = useState("");
@@ -13,10 +14,12 @@ function Login() {
     const [errorMessage, setErrorMessage] = useState("");
     const [emailError, setEmailError] = useState("");
     const [passwordError, setPasswordError] = useState("");
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
-
+    
     async function handlelogin(e) {
         e.preventDefault();
+        
     // Check if email and password are valid
         setEmailError("");    
         setPasswordError("");
@@ -31,6 +34,7 @@ function Login() {
           return;
         }
       else{
+          setLoading(true);
           try{
             const response = await fetch('http://localhost:8080/login', {
               method: 'POST',
@@ -44,6 +48,7 @@ function Login() {
 
             if (response.status === 400) {
               setIsValid(false);
+              setLoading(false);
               setErrorMessage("Invalid email or password");
             } else if (response.status === 200) {
                 const result = await response.json();
@@ -55,19 +60,23 @@ function Login() {
                 localStorage.setItem('role', role);
                 console.log(role);
                 if(role === "student"){
+                  
                     navigate('/profile');
                 } else if(role === "admin"){
                     navigate('/admin_profile');
                 } else {
+                    setLoading(false);
                     throw new Error('Invalid role');
                 }
             } else {
+              setLoading(false);
               throw new Error('Something went wrong');
             }
           } catch (error) {
+            setLoading(false);
             console.error(error);
             setIsValid(false);
-            setErrorMessage("An error occurred");
+            setErrorMessage("An error occurred");          
           }
       }
     }
@@ -118,6 +127,7 @@ function Login() {
                <p style={{fontSize:'12px'}}>Don't have an account? <a href="/register">Register</a></p>
             </form>
             </Box>
+            {loading && <Loading />}
         </div>
     );
 }
