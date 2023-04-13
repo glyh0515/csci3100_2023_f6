@@ -15,8 +15,7 @@ const Admin_view_user = () => {
   return (
     <div>
       <Admin_nav />
-      <div style={{width:'100%'}} >       
-        <form id="admin_search" className="admin-search" action="">         
+      <form id="admin_search" className="admin-search" action="">         
             Search:
             <div className="admin-searchbar">
             <TextField                   
@@ -35,6 +34,8 @@ const Admin_view_user = () => {
             </button>
           </div>
         </form>
+      <div style={{width:'100%',marginTop:'125px'}} >       
+        
         <All_user />
       </div>      
       
