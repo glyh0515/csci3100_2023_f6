@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useTable } from 'react-table';
 import { Modal, Fade, Typography, Box } from '@mui/material';
-import { calculateNewValue } from '@testing-library/user-event/dist/utils';
 
 const columns = [
   {
@@ -80,10 +79,23 @@ const CourseCatalogTable = ({ searchResults }) => {
     setOpen(false);
   };
 
-  const handleEnrollCourse = (courseIndex) => {
-    console.log("Enroll",courseIndex)
-  };
-
+  function handleEnrollCourse(courseIndex) {
+    const courseID = searchResults[courseIndex].CourseID;
+    const url = `http://localhost:8080/add/1155100001/${courseID}`;
+    fetch(url, {
+      method: 'PUT'
+    })
+    .then(response => {
+      if (response.ok) {
+        console.log(`Successfully enrolled in course ${courseID}.`);
+      } else {
+        console.error(`Failed to enroll in course ${courseID}.`);
+      }
+    })
+    .catch(error => {
+      console.error(`Error enrolling in course ${courseID}: ${error}`);
+    });
+  }
 
   return (
     <div className='course-catalog-table-container'>
