@@ -82,7 +82,6 @@ db.once('open', function () {
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(methodOverride(function (req, res) {
     if (req.body && typeof req.body === 'object' && '_method' in req.body) {
-      // look in urlencoded POST bodies and delete it
       var method = req.body['_method'];
       delete req.body['_method'];
       return method;
@@ -104,6 +103,7 @@ db.once('open', function () {
     res.send("Document created!");
   });
 
+  // Return information of all users
   app.get('/all-user', async (req, res) => {
     try {
       const users = await User.find({});
@@ -114,6 +114,7 @@ db.once('open', function () {
     }
   });
 
+  // Return information of all admins
   app.get('/all-admin', async (req, res) => {
     try {
       const admins = await Admin.find({});
@@ -124,6 +125,7 @@ db.once('open', function () {
     }
   });
 
+  // Return information of all courses
   app.get('/all-course', async (req, res) => {
     try {
       const courses = await Course.find({});
@@ -134,6 +136,7 @@ db.once('open', function () {
     }
   });
 
+  // Return information of a user based on SID
   app.get('/user/:studentID', async (req, res) => {
     try {
       const users = await User.findOne({ StudentID: req.params['studentID'] });
@@ -143,6 +146,8 @@ db.once('open', function () {
       res.status(500).send('Internal server error.');
     }
   });
+
+  // Return information of an admin based on Admin ID
   app.get('/admin/:adminID', async (req, res) => {
     try {
       const admins = await Admin.findOne({ AdminID: req.params['adminID'] });
@@ -152,6 +157,8 @@ db.once('open', function () {
       res.status(500).send('Internal server error.');
     }
   });
+
+  // Return information of a course based on Course ID
   app.get('/course/:courseID', async (req, res) => {
     try {
       const courses = await Course.findOne({ CourseID: req.params['courseID'] });
@@ -162,6 +169,7 @@ db.once('open', function () {
     }
   });
 
+  // Return information of courses taken by a student based on SID
   app.get('/user/:studentID/course', async (req, res) => {
     try {
       const student = await User.findOne({ StudentID: req.params.studentID }).populate('EnrolledCourse');
@@ -176,12 +184,13 @@ db.once('open', function () {
     }
   });
 
+  // Posting a login request for student
   app.post('/login', async (req, res) => {
     try {
       // Check if user exists in the database
       let user = await User.findOne({ Email: req.body.email });
       let role = "student";
-      if(!user){
+      if (!user) {
         user = await Admin.findOne({ Email: req.body.email });
         role = "admin";
       }
@@ -225,8 +234,8 @@ db.once('open', function () {
     }
   });
 
+  // Posting a register request for admin
   app.post('/admin/register', async (req, res) => {
-    //hash the password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
     try {
@@ -243,8 +252,9 @@ db.once('open', function () {
     }
   });
 
+  // Posting a register request for admin
   app.post('/course/register', async (req, res) => {
-      console.log('req.body:', req.body);
+    console.log('req.body:', req.body);
     try {
       await Course.create({
         CourseID: req.body['courseID'],
@@ -263,6 +273,7 @@ db.once('open', function () {
     }
   });
 
+  // Enrolling a course for student
   app.put('/add/:studentID/:courseID', async (req, res) => {
     try {
       const student = await User.findOne({ StudentID: req.params.studentID });
@@ -284,6 +295,7 @@ db.once('open', function () {
     }
   });
 
+  // Dropping a course for student
   app.put('/drop/:studentID/:courseID', async (req, res) => {
     try {
       const student = await User.findOne({ StudentID: req.params.studentID });
@@ -311,6 +323,7 @@ db.once('open', function () {
     }
   });
 
+  // Deleting a user record
   app.delete('/user/:studentID', async (req, res) => {
     try {
       await User.findOneAndDelete({ StudentID: req.params['studentID'] });
@@ -321,6 +334,7 @@ db.once('open', function () {
     }
   });
 
+  // Deleting an admin record
   app.delete('/admin/:adminID', async (req, res) => {
     try {
       await Admin.findOneAndDelete({ AdminID: req.params['adminID'] });
@@ -331,6 +345,7 @@ db.once('open', function () {
     }
   });
 
+  // Deleting a course record
   app.delete('/course/:courseID', async (req, res) => {
     try {
       await Course.findOneAndDelete({ CourseID: req.params['courseID'] });
@@ -341,25 +356,23 @@ db.once('open', function () {
       res.status(500).json({ message: 'Error deleting the course' });
     }
   });
-  
+
   app.get('/search', async (req, res) => {
-  try {
-    const keyword = req.query.keyword;
-    const courses = await Course.find({
-      $or: [
-        { CourseID: { $regex: keyword, $options: 'i' } },
-        { CourseName: { $regex: keyword, $options: 'i' } },
-      ],
-    });
-    res.status(200).json(courses);
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Internal server error.');
-  }
+    try {
+      const keyword = req.query.keyword;
+      const courses = await Course.find({
+        $or: [
+          { CourseID: { $regex: keyword, $options: 'i' } },
+          { CourseName: { $regex: keyword, $options: 'i' } },
+        ],
+      });
+      res.status(200).json(courses);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal server error.');
+    }
+  });
 });
-
-});
-
 
 // Start the server
 const server = app.listen(8080);
