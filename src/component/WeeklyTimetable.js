@@ -57,6 +57,7 @@ const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
 }; */
 
 const WeeklyTimetable = () => {
+  const studentID = localStorage.getItem('studentID');
   const [loading, setIsLoading] = useState(false);
   const courseSchedule = {
     Monday: Array(10).fill(null),
@@ -69,7 +70,7 @@ const WeeklyTimetable = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
     setIsLoading(true);
-    fetch('http://localhost:8080/user/1155100001/course')
+    fetch(`http://localhost:8080/user/${studentID}/course`)
       .then(response => response.json())
       .then(data => {
         setData(data);
