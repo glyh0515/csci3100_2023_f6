@@ -204,7 +204,7 @@ db.once('open', function () {
       }
       const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
       res.status(200).header('x-auth-token', token).json({ token, role: role, studentID: user.StudentID, adminID: user.AdminID });
-  
+
       // Redirect to the profile page on successful login
     } catch (error) {
       console.error(error);
@@ -283,7 +283,7 @@ db.once('open', function () {
       if (!course) {
         return res.status(404).json({ message: 'Course not found' });
       }
-      if (course. Vacancy == 0) {
+      if (course.Vacancy == 0) {
         return res.status(400).json({ message: 'Course is full!' });
       }
       else {
@@ -332,6 +332,16 @@ db.once('open', function () {
   // Deleting a user record
   app.delete('/user/:studentID', async (req, res) => {
     try {
+      const student = await User.findOne({ StudentID: req.params['studentID'] });
+      const course = await Course.find({});
+      for (let i = 0; i < course.length; i++) {
+        const enrolledStudentIndex = course[i].EnrolledStudent.indexOf(student._id);
+        if (enrolledStudentIndex > -1) {
+          course[i].EnrolledStudent.splice(enrolledStudentIndex, 1);
+          course[i].Vacancy++;
+          await course[i].save();
+        }
+      }
       await User.findOneAndDelete({ StudentID: req.params['studentID'] });
       res.status(200).json({ message: 'Student deleted successfully' });
     } catch (error) {
@@ -354,6 +364,15 @@ db.once('open', function () {
   // Deleting a course record
   app.delete('/course/:courseID', async (req, res) => {
     try {
+      const course = await Course.findOne({ CourseID: req.params['courseID'] });
+      const student = await User.find({});
+      for (let i = 0; i < student.length; i++) {
+        const enrolledCourseIndex = student[i].EnrolledCourse.indexOf(course._id);
+        if (enrolledCourseIndex > -1) {
+          student[i].EnrolledCourse.splice(enrolledCourseIndex, 1);
+          await student[i].save();
+        }
+      }
       await Course.findOneAndDelete({ CourseID: req.params['courseID'] });
       res.status(200).json({ message: 'Course deleted successfully' });
       console.log(req.params['courseID'], "deleted!");
