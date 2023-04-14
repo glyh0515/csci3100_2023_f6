@@ -52,7 +52,14 @@ function Swap_EnrolledCourse() {
                         key={course.id} 
                         value={course.id} 
                         aria-label={course.id}>
-                {course.CourseID}
+                <div className="course-code">{course.CourseID}</div>
+                <div className="course-name">{course.CourseName}</div>
+                <div className="venue">{course.Venue}</div>
+                <div className="time">{course.Timeslot}</div>
+                <div className="department">{course.Department}</div>
+                <div className="instructor">{course.Instructor}</div>
+                <div className="course-units">{course.Units} Units</div>
+                <div className="vacancy">{course.Vacancy}</div>
             </ToggleButton>
             ))}
         </ToggleButtonGroup>
