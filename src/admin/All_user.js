@@ -116,7 +116,7 @@ const All_user = () => {
                 sx={{ marginRight: '1rem' }}
               />
               <button
-                className='Delete-student-btn'
+                className='drop-course-btn'
                 onClick={() => handleDeleteStudent(index, student.StudentID)}
               >
                 Delete Student
