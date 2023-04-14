@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Loading from'../component/Loading';
+import Message from '../component/Message';
 
 const inputFields = [
   { id: 'courseID', label: 'Course ID', type: 'text' },
@@ -20,6 +21,9 @@ const inputFields = [
 function Create_Course() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState("");
+  const [severity, setSeverity] = useState("success");
   const [formData, setFormData] = React.useState({
     courseID: '',
     courseName: '',
@@ -31,6 +35,19 @@ function Create_Course() {
     vacancy: '',
     errors: {}
   });
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
+
+  const Msg = (message,status) => {         // call message
+    setMessage(message);                    
+    setSeverity(status);                   
+    setOpen(true);
+  };
 
   const handleChange = (e) => {
     setFormData({
@@ -89,15 +106,18 @@ function Create_Course() {
                 const result = await response.json();
                 setLoading(false);
                 alert(result.message);
+                Msg("Successfully Create course","success");
                 navigate('/admin_profile');
             } else {
                 const result = await response.json();
                 setLoading(false);
+                Msg("Fail to Create Course","error");
                 alert(result.message);
             }
         } catch (error) {
             console.log('Error:', error);
             setLoading(false);
+            Msg("Fail to Create Course","error");
             alert('Error register the course');
         }
     }
@@ -105,6 +125,10 @@ function Create_Course() {
 
   return (
     <div >
+      <Message open={open} 
+            message={message} 
+            severity={severity} 
+            handleClose={handleClose} />
       {loading && <Loading />}
       <Admin_nav />
       <Box sx={{

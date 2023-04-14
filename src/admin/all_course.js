@@ -5,6 +5,7 @@ import '../CSS/Search_form.css';
 import {AiOutlineSearch} from 'react-icons/ai';
 import TextField from '@mui/material/TextField';
 
+
 const All_Course = () => {
   const [searchValue, setSearchValue] = useState("");
 

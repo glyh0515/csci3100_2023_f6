@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { AiOutlineSend } from 'react-icons/ai';
 import Loading from'./component/Loading';
+import Message from './component/Message';
 
 const inputFields = [
   { id: 'name', label: 'Name', type: 'text' },
@@ -19,6 +20,9 @@ const inputFields = [
 function Register() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState("");
+  const [severity, setSeverity] = useState("success");
   const [formData, setFormData] = React.useState({
     name: '',
     email: '',
@@ -29,6 +33,19 @@ function Register() {
     confirmPassword: '',
     errors: {}
   });
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
+
+  const Msg = (message,status) => {         // call message
+    setMessage(message);                    
+    setSeverity(status);                   
+    setOpen(true);
+  };
 
   const handleChange = (e) => {
     setFormData({
@@ -93,6 +110,7 @@ function Register() {
         if (response.status === 200) {
           setLoading(false);
           alert('Register successfully!');
+          Msg("Successfully Registered","success");
           navigate('/login');
         } else {
           const contentType = response.headers.get('content-type');
@@ -100,15 +118,18 @@ function Register() {
             const errorData = await response.json();
             setLoading(false);
             alert(errorData.message);
+            Msg("Fail to Register ","error");
             console.error('Error:', errorData);
           } else {
             setLoading(false);
             alert('Error: Non-JSON response');
+            Msg("Fail to Register","error");
             console.error('Error: Non-JSON response');
           }
         }
       } catch (error) {
         setLoading(false);
+        Msg("Fail to Register","error");
         console.error('Error:', error);
       }
     }
@@ -117,6 +138,10 @@ function Register() {
   return (
     <div style={{ textAlign: 'left' }}>
       {loading && <Loading />}
+      <Message open={open} 
+            message={message} 
+            severity={severity} 
+            handleClose={handleClose} />
       <h3>CUSUCS</h3>
       <Box sx={{
         width: 600,
@@ -176,7 +201,8 @@ function Register() {
           <Button className='login_button' type="submit" variant="contained" endIcon={<AiOutlineSend />}
             style={{
               fontSize: '12px', backgroundColor: '#c7b9b4', color: 'black', width: '150px', height: '40px', borderRadius: '10px', marginBottom: '10px'
-            }}>
+            }}
+            >
             Register</Button>
           <p style={{ fontSize: '12px' }}>Back to Login page? <a href="/login">Click here</a></p>
         </form>

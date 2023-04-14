@@ -6,7 +6,6 @@ import '../CSS/Course_catalog.css';
 
 
 function Course_Catalog() {
-  const [loading, setLoading] = useState(false);  
   const [searchResults, setSearchResults] = useState([]);
   const [selectedDays, setSelectedDays] = useState([]);
   const [selectedRanges, setSelectedRanges] = useState([]);

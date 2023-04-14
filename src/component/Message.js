@@ -13,17 +13,11 @@ export default function Message(props) {
 
  
 /*
-  import Message from './component/Message';
+  import Message from '../component/Message';
 
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState("");
   const [severity, setSeverity] = useState("success");
-
-  const handleSuccess = (message) => {      // call successfull message
-    setMessage(message);                    // Example: handleSuccess("Successfully registered","error")
-    setSeverity("success");                 // Example: handleSuccess("Successfully login")
-    setOpen(true);
-  };
 
    const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -33,12 +27,18 @@ export default function Message(props) {
   };
 
   const Msg = (message,status) => {         // call message
-    setMessage(message);                    // Example: Msg("Success to registered","success")
-    setSeverity(status);                   // Example: Msg("Fail to login","error")
+    setMessage(message);                    
+    setSeverity(status);                   
     setOpen(true);
   };
   
-   <Message open={open} message={message} severity={severity} handleClose={handleClose} />
+  // Example: Msg("Successfully ","success");
+  // Example: Msg("Fail to ","error");
+
+   <Message open={open} 
+            message={message} 
+            severity={severity} 
+            handleClose={handleClose} />
   
   */
 

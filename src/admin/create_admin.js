@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import Loading from'../component/Loading';
 import { useNavigate } from 'react-router-dom';
 import '../CSS/CreateCourse.css';
+import Message from '../component/Message';
 
 const inputfields = [
     { id: 'adminID', label: 'Admin ID', type: 'text' },
@@ -16,6 +17,9 @@ const inputfields = [
 
 function CreateAdmin() {
     const [loading, setLoading] = useState(false);
+    const [open, setOpen] = useState(false);
+    const [message, setMessage] = useState("");
+    const [severity, setSeverity] = useState("success");
     const navigate = useNavigate();
     const [formData, setFormData] = React.useState({
         adminID: '',
@@ -32,6 +36,19 @@ function CreateAdmin() {
             [e.target.id]: e.target.value
         });
     }
+
+    const handleClose = (event, reason) => {
+        if (reason === "clickaway") {
+          return;
+        }
+        setOpen(false);
+      };
+    
+      const Msg = (message,status) => {         // call message
+        setMessage(message);                    
+        setSeverity(status);                   
+        setOpen(true);
+      };
 
     const validate = () => {
         let errors = {};
@@ -82,6 +99,7 @@ function CreateAdmin() {
                 if (response.status === 200) {
                     alert('Admin created successfully');
                     setLoading(false);
+                    Msg("Successfully Create Admin","success");
                     navigate('/create_admin');
                 } else {
                     const contentType = response.headers.get('content-type');
@@ -95,15 +113,21 @@ function CreateAdmin() {
                         alert('Error: Non-JSON response');
                         console.error('Error: Non-JSON response');
                     }
+                    Msg("Fail to Create Admin","error");
                 }
             } catch (error) {
                 setLoading(false);
+                Msg("Fail to Create Admin","error");
                 console.error('Error:', error);
             }
         }
     }
     return (
-        <div > 
+        <div >
+            <Message open={open} 
+                    message={message} 
+                    severity={severity} 
+                    handleClose={handleClose} /> 
             {loading && <Loading />}
             <Admin_nav />
             <Box sx={{

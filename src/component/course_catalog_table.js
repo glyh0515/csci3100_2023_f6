@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useTable } from 'react-table';
 import { Modal, Fade, Typography, Box } from '@mui/material';
+import Message from './Message';
+import Loading from './Loading';
 
 const columns = [
   {
@@ -69,39 +71,67 @@ const CourseCatalogTable = ({ searchResults }) => {
   console.log("Recieved Search Results: ", searchResults)
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({ columns, data: searchResults });
   const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState("");
+  const [severity, setSeverity] = useState("success");
   const [selectedCourse, setSelectedCourse] = useState(null);
   const studentID = localStorage.getItem('studentID');
+  const [loading, setIsLoading] = useState(true);
+
+  
 
   const handleViewCourse = (courseIndex) => {
     setSelectedCourse(searchResults[courseIndex]);
     setOpen(true);
   };
 
-  const handleClose = () => {
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
+  const Msg = (message,status) => {         // call message
+    setMessage(message);                    
+    setSeverity(status);                   
+    setOpen(true);
+  };
+
+  const handleCloseModal = () => {
     setOpen(false);
   };
 
   function handleEnrollCourse(courseIndex) {
     const courseID = searchResults[courseIndex].CourseID;
-
+    setIsLoading(true);
     const url = `http://localhost:8080/add/${studentID}/${courseID}`;
     fetch(url, {
       method: 'PUT'
     })
     .then(response => {
       if (response.ok) {
+        setIsLoading(false);
         console.log(`Successfully enrolled in course ${courseID}.`);
+        Msg(`Successfully enrolled in course ${courseID}.`,"success");
       } else {
+        setIsLoading(false);
         console.error(`Failed to enroll in course ${courseID}.`);
+        Msg(`Failed to enroll in course ${courseID}.`,"error");
       }
     })
     .catch(error => {
+      setIsLoading(false);
       console.error(`Error enrolling in course ${courseID}: ${error}`);
+      Msg(`Failed to enroll in course ${courseID}.`,"error");
     });
   }
 
   return (
     <div className='course-catalog-table-container'>
+      {loading && <Loading />}
+      <Message open={open} 
+            message={message} 
+            severity={severity} 
+            handleClose={handleClose} />
       <table className='course-catalog-table' {...getTableProps()}>
         <thead>
           {headerGroups.map((headerGroup) => (
@@ -153,7 +183,7 @@ const CourseCatalogTable = ({ searchResults }) => {
           </tbody> 
           <Modal
               open={open}
-              onClose={handleClose}
+              onClose={handleCloseModal}
               closeAfterTransition
               >                
                 <Fade in={open}>

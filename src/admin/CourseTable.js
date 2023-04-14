@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../CSS/ProfilePage.css';
 import Loading from'../component/Loading';
+import Message from '../component/Message';
 import {
   Box,
   List,
@@ -12,6 +13,23 @@ import {
 const CourseTable = () => { 
   const [loading, setLoading] = useState(false);
   const [courses, setCourses] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState("");
+  const [severity, setSeverity] = useState("success");
+
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
+
+  const Msg = (message,status) => {         // call message
+    setMessage(message);                    // Example: Msg("Success to registered","success")
+    setSeverity(status);                   // Example: Msg("Fail to login","error")
+    setOpen(true);
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -35,15 +53,18 @@ const CourseTable = () => {
       
       setCourses(courses.filter((_, index) => index !== courseIndex));
       setLoading(false);
+      Msg("Successfully Delete Course","success");
       console.log('Delete', courseIndex);
     } catch (error) {
       setLoading(false);
+      Msg("Fail to Delete Admin","error");
       console.error(error);
     }
   };
   
   return (
     <div>
+      <Message open={open} message={message} severity={severity} handleClose={handleClose} />
       {loading && <Loading />}
       <Box className="main-content" sx={{ width:'100%' ,padding:'20px'}}>
         <Typography className='header' sx={{fontSize: 24}} >Courses Database</Typography>

@@ -6,7 +6,6 @@ import SearchForm from './SearchForm';
 import '../CSS/Swap.css';
 
 const Swap = () => {
-  const [loading, setLoading] = useState(false);
   const [enrolledCourse, setEnrolledCourse] = useState('');
   const [searchResults, setSearchResults] = useState([]);
 

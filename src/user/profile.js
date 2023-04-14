@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import User_nav from './User_nav'; // import the User_nav component
 import '../CSS/ProfilePage.css';
 import Loading from'../component/Loading';
+import Message from '../component/Message';
 import {
     Avatar,
     Box,
@@ -18,7 +19,23 @@ const ProfilePage = () => {
   const studentID = localStorage.getItem('studentID');
   const [profile, setProfile] = useState({});
   const [courses, setCourses] = useState([]);
-  
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState("");
+  const [severity, setSeverity] = useState("success");
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
+
+  const Msg = (message,status) => {         // call message
+    setMessage(message);                    
+    setSeverity(status);                   
+    setOpen(true);
+  };
+
   useEffect(() => {
     setLoading(true);
     fetch(`http://localhost:8080/user/${studentID}`)
@@ -47,14 +64,22 @@ const ProfilePage = () => {
     .then(response => response.json())
     .then(data => {
       console.log('Course dropped:', data);
+      Msg("Successfully Drop Course","success");
       setCourses(courses.filter((_, index) => index !== courseIndex));
     })
-    .catch(error => console.log(error));
+    .catch(error => {
+      console.log(error);
+      Msg("Fail to Drop Course ","error");
+    });
     setLoading(false);
   };
 
     return (
     <div>
+      <Message open={open} 
+            message={message} 
+            severity={severity} 
+            handleClose={handleClose} />
       {loading && <Loading />}
       <User_nav />
       <Box className="profile-page" sx={{ display: 'flex', margin: '1rem' }}>
