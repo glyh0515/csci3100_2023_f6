@@ -21,9 +21,9 @@ function Course_Catalog() {
     };
 
     const filteredResults = searchResults.filter((result) => {
-      const dayMatch = selectedDays.some((day) => result.Timeslot.includes(day));
+      const dayMatch = Array.isArray(selectedDays) && selectedDays.some((day) => result.Timeslot.includes(day));
       const units = result.Units;
-      const rangeMatch = selectedRanges.some((range) => {
+      const rangeMatch = Array.isArray(selectedRanges)&& selectedRanges.some((range) => {
         const [min, max] = range.split('-').map(Number);
         return units >= min && units <= max;
       });
