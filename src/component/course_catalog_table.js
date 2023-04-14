@@ -135,7 +135,7 @@ const CourseCatalogTable = ({ searchResults }) => {
       <Message open={open} 
             message={message} 
             severity={severity} 
-            handleClose={handleClose} />
+            handleClose={handleCloseModal} />
       <table className='course-catalog-table' {...getTableProps()}>
         <thead>
           {headerGroups.map((headerGroup) => (
