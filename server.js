@@ -195,16 +195,16 @@ db.once('open', function () {
         role = "admin";
       }
       if (!user) {
-        res.status(400).json({ message: 'Invalid email or password' });
+        return res.status(400).json({ message: 'Invalid email or password' });
       }
       // Check if the provided password is valid
       const validPassword = await bcrypt.compare(req.body.password, user.Password);
       if (!validPassword) {
-        res.status(400).json({ message: 'Invalid email or password' });
+        return res.status(400).json({ message: 'Invalid email or password' });
       }
       const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
       res.status(200).header('x-auth-token', token).json({ token, role: role, studentID: user.StudentID, adminID: user.AdminID });
-
+  
       // Redirect to the profile page on successful login
     } catch (error) {
       console.error(error);
