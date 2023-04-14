@@ -283,7 +283,10 @@ db.once('open', function () {
       if (!course) {
         return res.status(404).json({ message: 'Course not found' });
       }
-      if (course.Vacancy > 0) {
+      if (course. Vacancy == 0) {
+        return res.status(400).json({ message: 'Course is full!' });
+      }
+      else {
         student.EnrolledCourse.push(course._id);
         await student.save();
         course.EnrolledStudent.push(student._id);
