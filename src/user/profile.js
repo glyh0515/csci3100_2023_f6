@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import User_nav from './User_nav'; // import the User_nav component
 import '../CSS/ProfilePage.css';
+import Loading from'../component/Loading';
 import {
     Avatar,
     Box,
@@ -13,26 +14,32 @@ import {
 } from '@mui/material';
 
 const ProfilePage = () => {
+  const [loading, setLoading] = useState(false);
   const studentID = localStorage.getItem('studentID');
   const [profile, setProfile] = useState({});
   const [courses, setCourses] = useState([]);
   
   useEffect(() => {
+    setLoading(true);
     fetch(`http://localhost:8080/user/${studentID}`)
       .then(response => response.json())
       .then(data => setProfile(data))
       .catch(error => console.log(error));
+      setLoading(false);
   }, []);
 
 
   useEffect(() => {
+    setLoading(true);
     fetch(`http://localhost:8080/user/${studentID}/course`)
       .then(response => response.json())
       .then(data => setCourses(data))
       .catch(error => console.log(error));
+      setLoading(false);
   }, []);
 
   const handleDropCourse = (courseIndex) => {
+    setLoading(true);
     const courseID = courses[courseIndex].CourseID;
     fetch(`http://localhost:8080/drop/${studentID}/${courseID}`, {
       method: 'PUT'
@@ -43,10 +50,12 @@ const ProfilePage = () => {
       setCourses(courses.filter((_, index) => index !== courseIndex));
     })
     .catch(error => console.log(error));
+    setLoading(false);
   };
 
     return (
     <div>
+      {loading && <Loading />}
       <User_nav />
       <Box className="profile-page" sx={{ display: 'flex', margin: '1rem' }}>
         <Card className="left-column" sx={{ marginRight: '1rem' ,backgroundColor: '#d7cdc3', maxWidth:400,minWidth:350 }}>

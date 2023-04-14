@@ -4,6 +4,7 @@ import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
 function Swap_SearchResults({ searchResults }) {
+
   // Filter the courses based on the search query and filters
   const [selected, setSelected] = React.useState('none');
   

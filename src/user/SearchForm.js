@@ -4,8 +4,10 @@ import {AiOutlineSearch} from 'react-icons/ai';
 import TextField from '@mui/material/TextField';
 import axios from 'axios';
 import {AiOutlineCaretDown} from "react-icons/ai";
+import Loading from'../component/Loading';
 
 function SearchForm({ onSearchResults }) {
+  const [loading, setLoading] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [openClasses, setOpenClasses] = useState(true);
   const [waitlistClasses, setWaitlistClasses] = useState(true);
@@ -66,20 +68,23 @@ function SearchForm({ onSearchResults }) {
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         try {
+          setLoading(true);
             const response = await axios.get('http://localhost:8080/search' , {
                 params: { keyword: searchValue },
             });
             console.log("Search results:", response.data);
+            setLoading(false);
             onSearchResults(response.data);
         }catch(error){
             console.error(error);
+            setLoading(false);
         }
     };
     
 
   return (
   <div >
-    
+    {loading && <Loading />}
     <form id="search" className="searchform" action="" onSubmit={handleFormSubmit}>
       <p>Search</p>
         <div className="searchbar">

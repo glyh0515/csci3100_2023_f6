@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Admin_nav from './Admin_nav';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
-import { AiOutlineSend } from 'react-icons/ai';
+import Loading from'../component/Loading';
 import { useNavigate } from 'react-router-dom';
 import '../CSS/CreateCourse.css';
 
@@ -15,6 +15,7 @@ const inputfields = [
 ];
 
 function CreateAdmin() {
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const [formData, setFormData] = React.useState({
         adminID: '',
@@ -59,6 +60,7 @@ function CreateAdmin() {
     }
 
     const handleCreate = async (e) => {
+        
         e.preventDefault();
         const errors = validate();
         if (Object.keys(errors).length > 0) {
@@ -69,6 +71,7 @@ function CreateAdmin() {
         }
         else {
             try {
+                setLoading(true);
                 const response = await fetch('http://localhost:8080/admin/register', {
                     method: 'POST',
                     headers: {
@@ -78,25 +81,30 @@ function CreateAdmin() {
                 });
                 if (response.status === 200) {
                     alert('Admin created successfully');
+                    setLoading(false);
                     navigate('/create_admin');
                 } else {
                     const contentType = response.headers.get('content-type');
                     if (contentType && contentType.includes('application/json')) {
                         const errorData = await response.json();
                         alert(errorData.message);
+                        setLoading(false);
                         console.error('Error:', errorData);
                     } else {
+                        setLoading(false);
                         alert('Error: Non-JSON response');
                         console.error('Error: Non-JSON response');
                     }
                 }
             } catch (error) {
+                setLoading(false);
                 console.error('Error:', error);
             }
         }
     }
     return (
         <div > 
+            {loading && <Loading />}
             <Admin_nav />
             <Box sx={{
                 width: 400,

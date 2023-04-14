@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../CSS/ProfilePage.css';
+import Loading from'../component/Loading';
 import {
   Box,
   List,
@@ -9,17 +10,20 @@ import {
 } from '@mui/material';
 
 const All_user = () => { 
-
+  const [loading, setLoading] = useState(false);
   const [students, setStudents] = useState([]);
 
   useEffect(() => {
+    setLoading(true);
     fetch('http://localhost:8080/all-user')
       .then(response => response.json())
       .then(data => setStudents(data))
       .catch(error => console.error(error));
+      setLoading(false);
   }, []);
   
   const handleDeleteStudent = async (studentIndex, studentID) => {
+    setLoading(true);
     try {
       await fetch(`http://localhost:8080/user/${studentID}`, {
         method: 'DELETE',
@@ -30,8 +34,10 @@ const All_user = () => {
       });
       
       setStudents(students.filter((_, index) => index !== studentIndex));
+      setLoading(false);
       console.log('Delete', studentIndex);
     } catch (error) {
+      setLoading(false);
       console.error(error);
     }
   };
@@ -39,13 +45,16 @@ const All_user = () => {
   const [admins, setAdmins] = useState([]);
 
   useEffect(() => {
+    setLoading(true);
     fetch('http://localhost:8080/all-admin')
       .then(response => response.json())
       .then(data => setAdmins(data))
       .catch(error => console.error(error));
+      setLoading(false);
   }, []);
 
   const handleDeleteAdmin = async (adminIndex, adminID) => {
+    setLoading(true);
     try {
       await fetch(`http://localhost:8080/admin/${adminID}`, {
         method: 'DELETE',
@@ -56,14 +65,17 @@ const All_user = () => {
       });
       
       setAdmins(admins.filter((_, index) => index !== adminIndex));
+      setLoading(false);
       console.log('Delete', adminIndex);
     } catch (error) {
+      setLoading(false);
       console.error(error);
     }
   };
 
   return (
     <div>
+      {loading && <Loading />}
       <Box className="main-content" sx={{ width:'100%',padding:'20px' }}>
         <Typography className='header' sx={{fontSize: 24}} >Student Database</Typography>
         <List className="student-list">

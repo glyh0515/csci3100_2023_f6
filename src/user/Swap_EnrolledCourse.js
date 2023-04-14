@@ -2,16 +2,19 @@ import React, { useState, useEffect } from 'react';
 import "../CSS/Swap_EnrolledCourse.css";
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import Loading from'../component/Loading';
 
 function Swap_EnrolledCourse() {
-
+  const [loading, setLoading] = useState(false);
   const [courses, setCourses] = useState([]);
   const studentID = localStorage.getItem('studentID');
   useEffect(() => {
+    setLoading(true);
     fetch(`http://localhost:8080/user/${studentID}/course`)
     .then(response => response.json())
     .then(data => setCourses(data))
     .catch(error => console.log(error));
+    setLoading(false);
   }, []);
 
   //const enrolled_courses = [
@@ -35,6 +38,7 @@ function Swap_EnrolledCourse() {
 
   return (
     <div className='Dropdown-Container'> 
+      {loading && <Loading />}
       <p className='dropdown-title'>Enrolled Courses:</p>
         <ToggleButtonGroup
             className='dropdown-list'

@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { AiOutlineSend } from 'react-icons/ai';
+import Loading from'./component/Loading';
 
 const inputFields = [
   { id: 'name', label: 'Name', type: 'text' },
@@ -16,6 +17,7 @@ const inputFields = [
 ];
 
 function Register() {
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [formData, setFormData] = React.useState({
     name: '',
@@ -77,6 +79,7 @@ function Register() {
         errors: errors
       });
     } else {
+      setLoading(true);
       try {
         const response = await fetch('http://localhost:8080/user/register', {
           method: 'POST',
@@ -88,20 +91,24 @@ function Register() {
 
 
         if (response.status === 200) {
+          setLoading(false);
           alert('Register successfully!');
           navigate('/login');
         } else {
           const contentType = response.headers.get('content-type');
           if (contentType && contentType.includes('application/json')) {
             const errorData = await response.json();
+            setLoading(false);
             alert(errorData.message);
             console.error('Error:', errorData);
           } else {
+            setLoading(false);
             alert('Error: Non-JSON response');
             console.error('Error: Non-JSON response');
           }
         }
       } catch (error) {
+        setLoading(false);
         console.error('Error:', error);
       }
     }
@@ -109,6 +116,7 @@ function Register() {
 
   return (
     <div style={{ textAlign: 'left' }}>
+      {loading && <Loading />}
       <h3>CUSUCS</h3>
       <Box sx={{
         width: 600,

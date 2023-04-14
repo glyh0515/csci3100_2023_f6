@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Admin_nav from './Admin_nav';
 import '../CSS/ProfilePage.css';
 import { NavLink } from 'react-router-dom';
+import Loading from'../component/Loading';
 import {
   Avatar,
   Box,
@@ -17,18 +18,22 @@ import { AiOutlineSolution,AiOutlineUserAdd,      // icon for sidenav
      } from 'react-icons/ai';
 
 const AdminProfilePage = () => {
+  const [loading, setLoading] = useState(false);
   const [adminprofile, setAdminProfile] = useState({});
 
   const adminID = localStorage.getItem('adminID');
   useEffect(() => {
+    setLoading(true);
     fetch(`http://localhost:8080/admin/${adminID}`)
       .then(response => response.json())
       .then(data => setAdminProfile(data))
       .catch(error => console.log(error));
+      setLoading(false);
   }, []);
 
   return (
     <div>
+      {loading && <Loading />}
       <Admin_nav />
       <Box className="profile-page" sx={{ display: 'flex', margin: '1rem' }}>
         <Card className="left-column" sx={{float:'right' ,marginRight: '1rem', backgroundColor: '#d7cdc3', maxWidth: 400, minWidth: 350 }}>

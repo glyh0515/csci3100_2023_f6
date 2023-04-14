@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Admin_nav from './Admin_nav';
 import '../CSS/CreateCourse.css';
 import { useNavigate } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
+import Loading from'../component/Loading';
 
 const inputFields = [
   { id: 'courseID', label: 'Course ID', type: 'text' },
@@ -17,6 +18,7 @@ const inputFields = [
 ];
 
 function Create_Course() {
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [formData, setFormData] = React.useState({
     courseID: '',
@@ -75,6 +77,7 @@ function Create_Course() {
       });
     } else {
         try {
+          setLoading(true);
             const response = await fetch('http://localhost:8080/course/register', {
             method: 'POST',
             headers: {
@@ -84,14 +87,17 @@ function Create_Course() {
             });
             if (response.ok) {
                 const result = await response.json();
+                setLoading(false);
                 alert(result.message);
                 navigate('/admin_profile');
             } else {
                 const result = await response.json();
+                setLoading(false);
                 alert(result.message);
             }
         } catch (error) {
             console.log('Error:', error);
+            setLoading(false);
             alert('Error register the course');
         }
     }
@@ -99,6 +105,7 @@ function Create_Course() {
 
   return (
     <div >
+      {loading && <Loading />}
       <Admin_nav />
       <Box sx={{
         width: 400,

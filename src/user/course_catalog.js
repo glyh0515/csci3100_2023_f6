@@ -4,8 +4,10 @@ import User_nav from './User_nav';
 import SearchForm from './SearchForm';
 import '../CSS/Course_catalog.css';
 
+
 function Course_Catalog() {
-    const [searchResults, setSearchResults] = useState([]);
+  const [loading, setLoading] = useState(false);  
+  const [searchResults, setSearchResults] = useState([]);
 
     const handleSearchResults = (results) => {
         console.log("Settingg search results", results);
