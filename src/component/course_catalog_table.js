@@ -101,28 +101,31 @@ const CourseCatalogTable = ({ searchResults }) => {
   };
 
   function handleEnrollCourse(courseIndex) {
-    const courseID = searchResults[courseIndex].CourseID;
-    setIsLoading(true);
-    const url = `http://localhost:8080/add/${studentID}/${courseID}`;
-    fetch(url, {
-      method: 'PUT'
-    })
-    .then(response => {
-      if (response.ok) {
+    const confirmed = window.confirm('Confirm Enroll?');
+    if (confirmed) {
+      const courseID = searchResults[courseIndex].CourseID;
+      setIsLoading(true);
+      const url = `http://localhost:8080/add/${studentID}/${courseID}`;
+      fetch(url, {
+        method: 'PUT'
+      })
+      .then(response => {
+        if (response.ok) {
+          setIsLoading(false);
+          console.log(`Successfully enrolled in course ${courseID}.`);
+          Msg(`Successfully enrolled in course ${courseID}.`,"success");
+        } else {
+          setIsLoading(false);
+          console.error(`Failed to enroll in course ${courseID}.`);
+          Msg(`Failed to enroll in course ${courseID}.`,"error");
+        }
+      })
+      .catch(error => {
         setIsLoading(false);
-        console.log(`Successfully enrolled in course ${courseID}.`);
-        Msg(`Successfully enrolled in course ${courseID}.`,"success");
-      } else {
-        setIsLoading(false);
-        console.error(`Failed to enroll in course ${courseID}.`);
-        Msg(`Failed to enroll in course ${courseID}.`,"error");
-      }
-    })
-    .catch(error => {
-      setIsLoading(false);
-      console.error(`Error enrolling in course ${courseID}: ${error}`);
-      Msg(`Failed to enroll in course ${courseID}.`,"error");
-    });
+        console.error(`Error enrolling in course ${courseID}: ${error}`);
+        Msg(`Failed to enroll in course ${courseID}`,"error");
+      });
+    }
   }
 
   return (

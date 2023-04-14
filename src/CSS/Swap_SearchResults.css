@@ -23,36 +23,45 @@
 }
 /* below are the list item*/
 .course-code{
-    height:fit-content
+    height:fit-content;
+    width:12.5%;
 }
 
 .course-name{
-    height:fit-content
+    height:fit-content;
+    width:12.5%;
 }
 
 .venue{
+    width:12.5%;
     height:fit-content
 }
 .time{
+    width:12.5%;
     height:fit-content 
 }
 
 .department{
+    width:12.5%;
     height:fit-content
 }
 
 .instructor{
+    width:12.5%;
     height:fit-content
 }
 
 .course-units{
+    width:12.5%;
     height:fit-content
 }
 
 .course-status{
+    width:12.5%;
     height:fit-content
 }
 
 .vacancy{
+    width:12.5%;
     height:fit-content
 }

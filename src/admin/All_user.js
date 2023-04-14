@@ -41,25 +41,28 @@ const All_user = () => {
   };
 
   const handleDeleteStudent = async (studentIndex, studentID) => {
-    setLoading(true);
-    try {
-      await fetch(`http://localhost:8080/user/${studentID}`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ index: studentIndex })
-      });
-      
-      setStudents(students.filter((_, index) => index !== studentIndex));
-      setLoading(false);
-      Msg("Successfully Delete Student","success");
-      console.log('Delete', studentIndex);
-    } catch (error) {
-      setLoading(false);
-      Msg("Fail to Delete Student","error");
-      console.error(error);
-    }
+    const confirmed = window.confirm('Confirm Delete ?The Delete Action cannot be reverse');
+    if (confirmed) { 
+      setLoading(true);
+      try {
+        await fetch(`http://localhost:8080/user/${studentID}`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ index: studentIndex })
+        });
+        
+        setStudents(students.filter((_, index) => index !== studentIndex));
+        setLoading(false);
+        Msg("Successfully Delete Student","success");
+        console.log('Delete', studentIndex);
+      } catch (error) {
+        setLoading(false);
+        Msg("Fail to Delete Student","error");
+        console.error(error);
+      }
+    }  
   };
 
   const [admins, setAdmins] = useState([]);
@@ -74,24 +77,27 @@ const All_user = () => {
   }, []);
 
   const handleDeleteAdmin = async (adminIndex, adminID) => {
-    setLoading(true);
-    try {
-      await fetch(`http://localhost:8080/admin/${adminID}`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ index: adminIndex })
-      });
-      
-      setAdmins(admins.filter((_, index) => index !== adminIndex));
-      setLoading(false);
-      Msg("Successfully Delete Admin","success");
-      console.log('Delete', adminIndex);
-    } catch (error) {
-      setLoading(false);
-      Msg("Fail to Delete Admin","error");
-      console.error(error);
+    const confirmed = window.confirm('Confirm Delete ?The Delete Action cannot be reverse');
+    if (confirmed) { 
+      setLoading(true);
+      try {
+        await fetch(`http://localhost:8080/admin/${adminID}`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ index: adminIndex })
+        });
+        
+        setAdmins(admins.filter((_, index) => index !== adminIndex));
+        setLoading(false);
+        Msg("Successfully Delete Admin","success");
+        console.log('Delete', adminIndex);
+      } catch (error) {
+        setLoading(false);
+        Msg("Fail to Delete Admin","error");
+        console.error(error);
+      }
     }
   };
 
