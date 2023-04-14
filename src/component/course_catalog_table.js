@@ -190,7 +190,7 @@ const CourseCatalogTable = ({ searchResults }) => {
               onClose={handleCloseModal}
               closeAfterTransition
               >                
-                <Fade in={open}>
+                <Fade in={openModal}>
                   <Box sx={{
                     backgroundColor: '#d7cdc3',
                     borderRadius: '20px',
