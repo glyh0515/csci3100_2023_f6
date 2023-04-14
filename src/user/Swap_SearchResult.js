@@ -55,7 +55,7 @@ function Swap_SearchResults({ searchResults }) {
   });*/
     const filteredCourses = ({searchResults}) => {
         console.log("Search Results", searchResults);
-    }
+    };
     //change courses to searchResults
 
 
