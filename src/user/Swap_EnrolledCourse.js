@@ -39,6 +39,7 @@ function Swap_EnrolledCourse() {
   return (
     <div className='Dropdown-Container'> 
       {loading && <Loading />}
+      
       <p className='dropdown-title'>Enrolled Courses:</p>
         <ToggleButtonGroup
             className='dropdown-list'
@@ -47,6 +48,18 @@ function Swap_EnrolledCourse() {
             exclusive
             onChange={handleChange}
             >
+              <ToggleButton 
+                        key='header'
+                        aria-label='header'>
+                <div className="course-code">CourseID</div>
+                <div className="course-name">CourseName</div>
+                <div className="venue">Venue</div>
+                <div className="time">Timeslot</div>
+                <div className="department">Department</div>
+                <div className="instructor">Instructor</div>
+                <div className="course-units">Units</div>
+                <div className="vacancy">Vacancy</div>
+            </ToggleButton>
             {courses.map((course) => (
             <ToggleButton 
                         key={course.id} 
