@@ -41,7 +41,7 @@ const All_user = () => {
   };
 
   const handleDeleteStudent = async (studentIndex, studentID) => {
-    const confirmed = window.confirm('Confirm Delete ?The Delete Action cannot be reverse');
+    const confirmed = window.confirm('Confirm Delete ?The Delete Action cannot be reversed');
     if (confirmed) { 
       setLoading(true);
       try {
@@ -77,7 +77,7 @@ const All_user = () => {
   }, []);
 
   const handleDeleteAdmin = async (adminIndex, adminID) => {
-    const confirmed = window.confirm('Confirm Delete ?The Delete Action cannot be reverse');
+    const confirmed = window.confirm('Confirm Delete ?The Delete Action cannot be reversed');
     if (confirmed) { 
       setLoading(true);
       try {
