@@ -70,9 +70,9 @@ function Swap_SearchResults({ searchResults }) {
             >
             {searchResults.map(course => (
             <ToggleButton 
-                        key={course.id}
-                        value={course.id} 
-                        aria-label={course.id}>
+                        key={course._id}
+                        value={course._id} 
+                        aria-label={course._id}>
                 <div className="course-code">{course.CourseID}</div>
                 <div className="course-name">{course.CourseName}</div>
                 <div className="venue">{course.Venue}</div>

@@ -8,11 +8,36 @@ import '../CSS/Swap.css';
 const Swap = () => {
   const [enrolledCourse, setEnrolledCourse] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  
+  const studentID = localStorage.getItem('studentID');
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     // Handle form submission logic here, e.g., make an API call to swap the courses
-    console.log('Swapping', enrolledCourse, 'with', searchResults);
+    try {
+      const  response = await fetch(`/swap-course`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          studentID: studentID,
+          oldCourseID: enrolledCourse.CourseID,
+          newCourseID: searchResults.CourseID,
+        }),
+      });
+
+      if(response.ok) {
+        const data = await response.json();
+        console.log('Swapping', enrolledCourse, 'with', searchResults);
+        console.log('Response:', data.message);
+      } else {
+        console.log('Error:', response.status, response.statusText);
+      }
+    } catch (error) {
+      console.log('Error:', error);
+    }
+
   };
 
     const handleSearchResults = (results) => {
