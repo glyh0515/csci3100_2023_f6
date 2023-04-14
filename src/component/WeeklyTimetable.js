@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '../CSS/Timetable.css';
 import User_nav from '../user/User_nav'; // import the User_nav component
 //import selected_course from 'path/to/selected_course/database'; // import the selected_course database
-
+import Loading from'./Loading';
 const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 /* const courseSchedule = {
@@ -57,6 +57,7 @@ const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
 }; */
 
 const WeeklyTimetable = () => {
+  const [loading, setIsLoading] = useState(false);
   const courseSchedule = {
     Monday: Array(10).fill(null),
     Tuesday: Array(10).fill(null),
@@ -67,12 +68,15 @@ const WeeklyTimetable = () => {
   }
   const [data, setData] = useState([]);
   useEffect(() => {
+    setIsLoading(true);
     fetch('http://localhost:8080/user/1155100001/course')
       .then(response => response.json())
       .then(data => {
         setData(data);
-      })
+      })      
       .catch(error => console.error(error));
+      setIsLoading(false);
+      
   }, []);
   for (const course of data) {
     const timeslotParts = course.Timeslot.split(' ');
@@ -94,6 +98,7 @@ const WeeklyTimetable = () => {
   }
   return (
     <div >
+      
       <User_nav />
       <div className="timetable-container">
         <table className="timetable">
@@ -128,7 +133,7 @@ const WeeklyTimetable = () => {
           </tbody>
         </table>
       </div>
-
+    {loading && <Loading />}
     </div>
   );
 };
