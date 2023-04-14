@@ -70,6 +70,7 @@ const columns = [
 const CourseCatalogTable = ({ searchResults }) => {
   console.log("Recieved Search Results: ", searchResults)
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({ columns, data: searchResults });
+  const [openModal, setOpenModal] = useState(false);
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState("");
   const [severity, setSeverity] = useState("success");
@@ -81,7 +82,7 @@ const CourseCatalogTable = ({ searchResults }) => {
 
   const handleViewCourse = (courseIndex) => {
     setSelectedCourse(searchResults[courseIndex]);
-    setOpen(true);
+    setOpenModal(true);
   };
 
   const handleClose = (event, reason) => {
@@ -97,7 +98,7 @@ const CourseCatalogTable = ({ searchResults }) => {
   };
 
   const handleCloseModal = () => {
-    setOpen(false);
+    setOpenModal(false);
   };
 
   function handleEnrollCourse(courseIndex) {
@@ -185,7 +186,7 @@ const CourseCatalogTable = ({ searchResults }) => {
           })}
           </tbody> 
           <Modal
-              open={open}
+              open={openModal}
               onClose={handleCloseModal}
               closeAfterTransition
               >                
