@@ -64,13 +64,13 @@ const columns = [
   //},
  ////  Add more courses as needed
 //];
-const studentID = localStorage.getItem('studentID');
 
 const CourseCatalogTable = ({ searchResults }) => {
   console.log("Recieved Search Results: ", searchResults)
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({ columns, data: searchResults });
   const [open, setOpen] = useState(false);
   const [selectedCourse, setSelectedCourse] = useState(null);
+  const studentID = localStorage.getItem('studentID');
 
   const handleViewCourse = (courseIndex) => {
     setSelectedCourse(searchResults[courseIndex]);

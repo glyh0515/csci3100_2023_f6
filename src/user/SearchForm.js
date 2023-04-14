@@ -6,11 +6,9 @@ import axios from 'axios';
 import {AiOutlineCaretDown} from "react-icons/ai";
 import Loading from'../component/Loading';
 
-function SearchForm({ onSearchResults }) {
+function SearchForm({ onSearchResults, onFiltersChange}) {
   const [loading, setLoading] = useState(false);
   const [searchValue, setSearchValue] = useState("");
-  const [openClasses, setOpenClasses] = useState(true);
-  const [waitlistClasses, setWaitlistClasses] = useState(true);
   
   const [classDays, setClassDays] = useState([
     { name: "Mon", checked: true },
@@ -29,13 +27,6 @@ function SearchForm({ onSearchResults }) {
       setSearchValue(event.target.value);
     };
 
-    const handleOpenClassesChange = (event) => {
-      setOpenClasses(event.target.checked);
-    };
-
-    const handleWaitlistClassesChange = (event) => {
-      setWaitlistClasses(event.target.checked);
-    };
 
     const handleClassDayChange = (event) => {
       const dayName = event.target.name;
@@ -45,6 +36,7 @@ function SearchForm({ onSearchResults }) {
           day.name === dayName ? { ...day, checked: isChecked } : day
         )
       );
+        onFiltersChange({classDays, unitRanges});
     };
 
     const handleUnitRangeChange = (event) => {
@@ -55,6 +47,7 @@ function SearchForm({ onSearchResults }) {
           range.name === unitRangeName ? { ...range, checked: isChecked } : range
         )
       );
+        onFiltersChange({classDays, unitRanges});
     };
 
     const toggleDropdown = (dropdownId) => {
@@ -75,13 +68,18 @@ function SearchForm({ onSearchResults }) {
             console.log("Search results:", response.data);
             setLoading(false);
             onSearchResults(response.data);
+            handleFiltersChange();
         }catch(error){
             console.error(error);
             setLoading(false);
         }
     };
     
-
+    const handleFiltersChange = () => {
+        const selectedDays = classDays.filter((day) => day.checked).map((day) => day.name);
+        const selectedRanges = unitRanges.filter((range) => range.checked).map((range) => range.name);
+        onFiltersChange(selectedDays, selectedRanges);
+    };
   return (
   <div >
     {loading && <Loading />}
@@ -102,28 +100,6 @@ function SearchForm({ onSearchResults }) {
         <button type="submit" className="search-button">
           <AiOutlineSearch />
         </button>
-      </div>
-      <p onClick={() => toggleDropdown("ClassStatus")} style={{cursor: "pointer"}}  ><AiOutlineCaretDown/>Class Status  </p>      
-      <div id="ClassStatus" className="ClassStatus">        
-        <label className="option">
-            <input
-              type="checkbox"
-              name="open"
-              checked={openClasses}
-              onChange={handleOpenClassesChange}
-            />{" "}
-            Open Classes
-          </label>
-          <br />
-          <label className="option">
-            <input
-              type="checkbox"
-              name="waitlist"
-              checked={waitlistClasses}
-              onChange={handleWaitlistClassesChange}
-            />{" "}
-            Waitlist Class
-          </label>
       </div>
       <p onClick={() => toggleDropdown("ClassDay")} style={{cursor: "pointer"}}><AiOutlineCaretDown/>Class Day</p>      
       <div id="ClassDay" className="ClassDay">        
@@ -161,4 +137,5 @@ function SearchForm({ onSearchResults }) {
   </div>
   );
 }
+
 export default SearchForm;

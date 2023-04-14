@@ -195,16 +195,16 @@ db.once('open', function () {
         role = "admin";
       }
       if (!user) {
-        res.status(400).json({ message: 'Invalid email or password' });
+        return res.status(400).json({ message: 'Invalid email or password' });
       }
       // Check if the provided password is valid
       const validPassword = await bcrypt.compare(req.body.password, user.Password);
       if (!validPassword) {
-        res.status(400).json({ message: 'Invalid email or password' });
+        return res.status(400).json({ message: 'Invalid email or password' });
       }
       const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
-      res.status(200).header('x-auth-token', token).json({ token, role: role, studentID: user.StudentID, adminID: user.AdminID});
-
+      res.status(200).header('x-auth-token', token).json({ token, role: role, studentID: user.StudentID, adminID: user.AdminID });
+  
       // Redirect to the profile page on successful login
     } catch (error) {
       console.error(error);
@@ -283,9 +283,15 @@ db.once('open', function () {
       if (!course) {
         return res.status(404).json({ message: 'Course not found' });
       }
-      student.EnrolledCourse.push(course._id);
-      await student.save();
-      course.EnrolledStudent.push(student._id);
+      if (course. Vacancy == 0) {
+        return res.status(400).json({ message: 'Course is full!' });
+      }
+      else {
+        student.EnrolledCourse.push(course._id);
+        await student.save();
+        course.EnrolledStudent.push(student._id);
+        course.Vacancy--;
+      }
       await course.save();
       res.status(200).json({ message: 'Course added successfully' });
     } catch (error) {
@@ -313,6 +319,7 @@ db.once('open', function () {
       const enrolledStudentIndex = course.EnrolledStudent.indexOf(student._id);
       if (enrolledStudentIndex > -1) {
         course.EnrolledStudent.splice(enrolledStudentIndex, 1);
+        course.Vacancy++;
         await course.save();
       }
       res.status(200).json({ message: 'Course deleted successfully' });
