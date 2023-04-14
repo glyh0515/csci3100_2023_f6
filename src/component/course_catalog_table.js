@@ -75,7 +75,7 @@ const CourseCatalogTable = ({ searchResults }) => {
   const [severity, setSeverity] = useState("success");
   const [selectedCourse, setSelectedCourse] = useState(null);
   const studentID = localStorage.getItem('studentID');
-  const [loading, setIsLoading] = useState(true);
+  const [loading, setIsLoading] = useState(false);
 
   
 
