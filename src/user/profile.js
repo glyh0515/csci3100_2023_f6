@@ -56,7 +56,7 @@ const ProfilePage = () => {
   }, []);
 
   const handleDropCourse = (courseIndex) => {
-    const confirmed = window.confirm('Confirm Drop Course ?The Drop Action cannot be reverse');
+    const confirmed = window.confirm('Confirm Drop Course ?The Drop Action cannot be reversed');
     if (confirmed) { 
       setLoading(true);
       const courseID = courses[courseIndex].CourseID;
