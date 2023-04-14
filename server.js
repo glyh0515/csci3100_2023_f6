@@ -399,20 +399,26 @@ db.once('open', function () {
   });
 
   app.post('/swap-course', async (req, res) => {
-    try{
+    try {
       const { studentID, oldCourseID, newCourseID } = req.body;
+      console.log(studentID);
+      console.log(oldCourseID);
+      console.log(newCourseID);
 
-      const student = await User.findOnw({ StudentID: studentID });
+      const student = await User.findOne({ StudentID: studentID });
       const oldCourse = await Course.findOne({ CourseID: oldCourseID });
       const newCourse = await Course.findOne ({ CourseID: newCourseID });
 
-      student.EnrolledCourse = student.EnrolledCourse.filter(course => course.toString() !== oldCourse._id.toString());
+      const enrolledStudentIndex = oldCourse.EnrolledStudent.indexOf(student._id);
+      if (enrolledStudentIndex > -1) {
+        oldCourse.EnrolledStudent.splice(enrolledStudentIndex, 1);
+        oldCourse.Vacancy++;
+      }
 
       student.EnrolledCourse.push(newCourse._id);
 
-      oldCourse.EnrolledStudent = oldCourse.EnrolledStudent.filter(student => student.toString() !== student._id.toString());
-
       newCourse.EnrolledStudent.push(student._id);
+      newCourse.Vacancy--;
 
       await student.save();
       await oldCourse.save();
