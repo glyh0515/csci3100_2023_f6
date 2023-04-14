@@ -56,22 +56,25 @@ const ProfilePage = () => {
   }, []);
 
   const handleDropCourse = (courseIndex) => {
-    setLoading(true);
-    const courseID = courses[courseIndex].CourseID;
-    fetch(`http://localhost:8080/drop/${studentID}/${courseID}`, {
-      method: 'PUT'
-    })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Course dropped:', data);
-      Msg("Successfully Drop Course","success");
-      setCourses(courses.filter((_, index) => index !== courseIndex));
-    })
-    .catch(error => {
-      console.log(error);
-      Msg("Fail to Drop Course ","error");
-    });
-    setLoading(false);
+    const confirmed = window.confirm('Confirm Drop Course ?The Drop Action cannot be reverse');
+    if (confirmed) { 
+      setLoading(true);
+      const courseID = courses[courseIndex].CourseID;
+      fetch(`http://localhost:8080/drop/${studentID}/${courseID}`, {
+        method: 'PUT'
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Course dropped:', data);
+        Msg("Successfully Drop Course","success");
+        setCourses(courses.filter((_, index) => index !== courseIndex));
+      })
+      .catch(error => {
+        console.log(error);
+        Msg("Fail to Drop Course ","error");
+      });
+      setLoading(false);
+    }
   };
 
     return (

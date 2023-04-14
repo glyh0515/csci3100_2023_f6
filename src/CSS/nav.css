@@ -5,7 +5,8 @@
     z-index: 1; /* Stay on top */
     top: 0; /* Stay at the top */
     left: 0;
-    background-color: rgb(179, 153, 119); /* Black*/
+    border-right: solid 1px #77320a ;
+    background-color: #d8cec4; /* Black*/
     overflow-x: hidden; /* Disable horizontal scroll */
     padding-top: 50px; /* Place content 60px from the top */
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */

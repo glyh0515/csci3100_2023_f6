@@ -61,6 +61,7 @@ function Swap_SearchResults({ searchResults }) {
 
   return (
     <div className="search-results">
+      
       <ToggleButtonGroup
             className='list-item'
             orientation="vertical"
@@ -68,6 +69,18 @@ function Swap_SearchResults({ searchResults }) {
             exclusive
             onChange={handleChange}
             >
+            <ToggleButton 
+                        key='header'
+                        aria-label='header'>
+                <div className="course-code">CourseID</div>
+                <div className="course-name">CourseName</div>
+                <div className="venue">Venue</div>
+                <div className="time">Timeslot</div>
+                <div className="department">Department</div>
+                <div className="instructor">Instructor</div>
+                <div className="course-units">Units</div>
+                <div className="vacancy">Vacancy</div>
+            </ToggleButton>
             {searchResults.map(course => (
             <ToggleButton 
                         key={course._id}

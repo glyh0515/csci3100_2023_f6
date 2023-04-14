@@ -57,7 +57,6 @@ function SearchForm({ onSearchResults, onFiltersChange}) {
         
     };
     
-
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         try {

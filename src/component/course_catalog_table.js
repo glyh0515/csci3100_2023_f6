@@ -70,6 +70,7 @@ const columns = [
 const CourseCatalogTable = ({ searchResults }) => {
   console.log("Recieved Search Results: ", searchResults)
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({ columns, data: searchResults });
+  const [openModal, setOpenModal] = useState(false);
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState("");
   const [severity, setSeverity] = useState("success");
@@ -81,7 +82,7 @@ const CourseCatalogTable = ({ searchResults }) => {
 
   const handleViewCourse = (courseIndex) => {
     setSelectedCourse(searchResults[courseIndex]);
-    setOpen(true);
+    setOpenModal(true);
   };
 
   const handleClose = (event, reason) => {
@@ -97,32 +98,35 @@ const CourseCatalogTable = ({ searchResults }) => {
   };
 
   const handleCloseModal = () => {
-    setOpen(false);
+    setOpenModal(false);
   };
 
   function handleEnrollCourse(courseIndex) {
-    const courseID = searchResults[courseIndex].CourseID;
-    setIsLoading(true);
-    const url = `http://localhost:8080/add/${studentID}/${courseID}`;
-    fetch(url, {
-      method: 'PUT'
-    })
-    .then(response => {
-      if (response.ok) {
+    const confirmed = window.confirm('Confirm Enroll?');
+    if (confirmed) {
+      const courseID = searchResults[courseIndex].CourseID;
+      setIsLoading(true);
+      const url = `http://localhost:8080/add/${studentID}/${courseID}`;
+      fetch(url, {
+        method: 'PUT'
+      })
+      .then(response => {
+        if (response.ok) {
+          setIsLoading(false);
+          console.log(`Successfully enrolled in course ${courseID}.`);
+          Msg(`Successfully enrolled in course ${courseID}.`,"success");
+        } else {
+          setIsLoading(false);
+          console.error(`Failed to enroll in course ${courseID}.`);
+          Msg(`Failed to enroll in course ${courseID}.`,"error");
+        }
+      })
+      .catch(error => {
         setIsLoading(false);
-        console.log(`Successfully enrolled in course ${courseID}.`);
-        Msg(`Successfully enrolled in course ${courseID}.`,"success");
-      } else {
-        setIsLoading(false);
-        console.error(`Failed to enroll in course ${courseID}.`);
-        Msg(`Failed to enroll in course ${courseID}.`,"error");
-      }
-    })
-    .catch(error => {
-      setIsLoading(false);
-      console.error(`Error enrolling in course ${courseID}: ${error}`);
-      Msg(`Failed to enroll in course ${courseID}.`,"error");
-    });
+        console.error(`Error enrolling in course ${courseID}: ${error}`);
+        Msg(`Failed to enroll in course ${courseID}`,"error");
+      });
+    }
   }
 
   return (
@@ -182,7 +186,7 @@ const CourseCatalogTable = ({ searchResults }) => {
           })}
           </tbody> 
           <Modal
-              open={open}
+              open={openModal}
               onClose={handleCloseModal}
               closeAfterTransition
               >                

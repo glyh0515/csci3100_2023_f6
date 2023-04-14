@@ -77,7 +77,7 @@ const CourseTable = () => {
                 sx={{ marginRight: '1rem' }}
               />
               <button
-                className='Delete-course-btn'
+                className='drop-course-btn'
                 onClick={() => handleDeleteCourse(index, course.CourseID)}
               >
                 Delete
