@@ -128,7 +128,7 @@ const All_user = () => {
                 sx={{ marginRight: '1rem' }}
               />
               <button
-                className='Delete-admin-btn'
+                className='drop-course-btn'
                 onClick={() => handleDeleteAdmin(index, admin.AdminID)}
               >
                 Delete Admin
