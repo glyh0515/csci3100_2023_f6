@@ -397,7 +397,35 @@ db.once('open', function () {
       res.status(500).send('Internal server error.');
     }
   });
-});
+
+  app.post('/swap-course', async (req, res) => {
+    try{
+      const { studentID, oldCourseID, newCourseID } = req.body;
+
+      const student = await User.findOnw({ StudentID: studentID });
+      const oldCourse = await Course.findOne({ CourseID: oldCourseID });
+      const newCourse = await Course.findOne ({ CourseID: newCourseID });
+
+      student.EnrolledCourse = student.EnrolledCourse.filter(course => course.toString() !== oldCourse._id.toString());
+
+      student.EnrolledCourse.push(newCourse._id);
+
+      oldCourse.EnrolledStudent = oldCourse.EnrolledStudent.filter(student => student.toString() !== student._id.toString());
+
+      newCourse.EnrolledStudent.push(student._id);
+
+      await student.save();
+      await oldCourse.save();
+      await newCourse.save();
+
+      res.status(200).json({ message: 'Course swapped successfully' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Error swapping the course' });
+    }
+  });
+
+  });
 
 // Start the server
 const server = app.listen(8080);
