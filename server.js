@@ -39,11 +39,14 @@ mongoose.connect('mongodb+srv://csci3100_2023_f6:La39HykFMfj2xPK5@cluster0.05afc
 
 // mongoose.connection is an instance of the connected DB
 const db = mongoose.connection;
+
 // Upon connection failure
 db.on('error', console.error.bind(console, 'connection error:'));
+
 // Upon opening the database successfully
 db.once('open', function () {
   console.log("Connection is open...");
+
   // Define schemas for sample models
   const UserSchema = mongoose.Schema({
     StudentID: { type: String, unique: true },
@@ -73,6 +76,7 @@ db.once('open', function () {
     Vacancy: Number,
     EnrolledStudent: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Student' }]
   });
+
   // Create models based on the schema
   const User = mongoose.model('Student', UserSchema);
   const Admin = mongoose.model('Admin', AdminSchema);
@@ -382,6 +386,7 @@ db.once('open', function () {
     }
   });
 
+  // Return course searching record based on keywords
   app.get('/search', async (req, res) => {
     try {
       const keyword = req.query.keyword;
@@ -398,6 +403,7 @@ db.once('open', function () {
     }
   });
 
+  // Swapping a course for student
   app.post('/swap-course', async (req, res) => {
     try {
       const { studentID, oldCourseID, newCourseID } = req.body;
