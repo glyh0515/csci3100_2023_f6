@@ -2,7 +2,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Description
-CUSUCS is developed by a group of students enrolling **CSCI3100 - Software Engineering** in **The Chinese University of Hong Kong** during 2022-23 Term 2. In the system, users can register their own account, searching for courses, editing their courses records and viewing their timetable. Moreover, admin can perform courses and users operations in a separate page.
+CUSUCS is developed by a group of students enrolling [CSCI3100 - Software Engineering](http://proj.cse.cuhk.edu.hk/csci3100/) in [The Chinese University of Hong Kong](https://www.cuhk.edu.hk) during 2022-23 Term 2. In the system, users can register their own account, searching for courses, editing their courses records and viewing their timetable. Moreover, admin can perform courses and users operations in a separate page.
 
 ## Available Scripts
 
