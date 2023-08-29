@@ -32,7 +32,7 @@ app.use(hpp());
 app.use(express.json());
 
 // Connect to MongoDB
-mongoose.connect('mongodb+srv://csci3100_2023_f6:La39HykFMfj2xPK5@cluster0.05afckq.mongodb.net/test', {
+mongoose.connect(process.env.DATABASE_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
